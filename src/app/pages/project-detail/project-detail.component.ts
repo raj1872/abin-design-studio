@@ -5,6 +5,8 @@ import {
   PLATFORM_ID,
   HostListener,
   OnInit,
+  ViewChildren, // ✅ ADD THIS
+  QueryList,
   AfterViewInit,
   ViewChild,
   Renderer2,
@@ -18,7 +20,9 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class ProjectDetailComponent implements OnInit, AfterViewInit {
   @ViewChild('parallaxBg', { static: true }) parallaxBg!: ElementRef;
-  
+  @ViewChildren('scalableImage', { read: ElementRef })
+  scalableImages!: QueryList<ElementRef>;
+
   isBrowser = false;
 
   private wordSpans: NodeListOf<HTMLSpanElement> = [] as any;
@@ -64,11 +68,31 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
     }
 
     this.updateWordRevealEffect();
+
+    this.scalableImages?.forEach((imgRef: ElementRef) => {
+      const imgEl = imgRef.nativeElement as HTMLElement;
+      const rect = imgEl.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight && rect.bottom > 0;
+
+      if (inView) {
+        const progress =
+          1 -
+          Math.abs(
+            (rect.top + rect.height / 2 - window.innerHeight / 2) /
+              (window.innerHeight / 2)
+          );
+        const scale = 1 + Math.max(0, Math.min(0.05, progress * 0.05)); // scale from 1 to 1.05
+        imgEl.style.transform = `scale(${scale})`;
+      } else {
+        imgEl.style.transform = 'scale(1)';
+      }
+    });
   }
 
   setupWordRevealEffect(): void {
     this.container = document.getElementById('scroll-reveal-text');
-    if (!this.container || this.container.classList.contains('words-enhanced')) return;
+    if (!this.container || this.container.classList.contains('words-enhanced'))
+      return;
 
     const words = this.container.textContent?.trim().split(' ') || [];
     this.container.innerHTML = '';
