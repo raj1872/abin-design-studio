@@ -1,0 +1,160 @@
+<div class="header-wrapper">
+
+  <div class="header-flex main-container">
+    <div class="header-logo">
+      <a href="javascript:void(0);">
+        <img src="assets/images/logo/white-logo-ads.png" alt="">
+      </a>
+    </div>
+
+    <div id="header-search-input-wrapper" class="form-card relative">
+      <div class="form-input-icon">
+        <img src="assets/images/search-white.svg" alt="">
+      </div>
+      <input type="search" class="form-control-abin-design-studio form-control-abin-design-studio-search"
+        placeholder="Search...">
+    </div>
+
+    <!-- Web bar -->
+    <div class="web-bar" (click)="toggleMenu()" [class.active]="isMenuActive">
+      <div class="bar top"></div>
+      <div class="bar middle"></div>
+      <div class="bar bottom"></div>
+    </div>
+  </div>
+</div>
+<!-- Menu (hidden/toggled) -->
+
+<div class="menu-wrapper" [class.active]="isMenuActive">
+  <ng-container>
+    <div class="menu-wrapper-web-links-grid main-container" [class.visible]="isMenuLinksVisible">
+      <div class="menu-wrapper-column">
+        <div class="inner-flex inner-flex-small">
+          <div class="section-content">
+            <p class="semibold-fonts lh1 uppercase white-color">
+              Projects
+            </p>
+          </div>
+          <div class="inner-flex inner-flex-common">
+            <div class="section-subtitle2">
+              <p class="bold-fonts white-color lh1">
+                Architure
+              </p>
+            </div>
+            <div class="inner-flex">
+              <div class="section-paragraph">
+                <a href="projects" class="white-color lh1">Educational</a>
+              </div>
+              <div class="section-paragraph">
+                <a href="projects" class="white-color lh1">Hospitality</a>
+              </div>
+              <div class="section-paragraph">
+                <a href="projects" class="white-color lh1">Public</a>
+              </div>
+              <div class="section-paragraph">
+                <a href="projects" class="white-color lh1">Homes</a>
+              </div>
+              <div class="section-paragraph">
+                <a href="projects" class="white-color lh1">Housing</a>
+              </div>
+              <div class="section-paragraph">
+                <a href="projects" class="white-color lh1">Experience</a>
+              </div>
+            </div>
+          </div>
+          <div class="inner-flex inner-flex-common">
+            <div class="section-subtitle2">
+              <p class="bold-fonts white-color lh1">
+                Interior
+              </p>
+            </div>
+            <div class="inner-flex">
+              <div class="section-paragraph">
+                <a href="projects" class="white-color lh1">Educational</a>
+              </div>
+              <div class="section-paragraph">
+                <a href="projects" class="white-color lh1">Hospitality</a>
+              </div>
+              <div class="section-paragraph">
+                <a href="projects" class="white-color lh1">Public</a>
+              </div>
+              <div class="section-paragraph">
+                <a href="projects" class="white-color lh1">Homes</a>
+              </div>
+              <div class="section-paragraph">
+                <a href="projects" class="white-color lh1">Housing</a>
+              </div>
+              <div class="section-paragraph">
+                <a href="projects" class="white-color lh1">Experience</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="menu-wrapper-column">
+        <div class="inner-flex inner-flex-common">
+          <div class="section-content">
+            <p class="semibold-fonts lh1 uppercase white-color">
+              PRACTICE
+            </p>
+          </div>
+          <div class="inner-flex">
+            <div class="section-paragraph">
+              <a href="javascript:void(0);" class="white-color lh1">About Us</a>
+            </div>
+            <div class="section-paragraph">
+              <a href="javascript:void(0);" class="white-color lh1">Our History</a>
+            </div>
+            <div class="section-paragraph">
+              <a href="javascript:void(0);" class="white-color lh1">Design Approach</a>
+            </div>
+            <div class="section-paragraph">
+              <a href="javascript:void(0);" class="white-color lh1">Our Culture</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-wrapper-column">
+        <div class="inner-flex inner-flex-common">
+          <div class="section-content">
+            <p class="semibold-fonts lh1 uppercase white-color">
+              PEOPLE
+            </p>
+          </div>
+          <div class="inner-flex">
+            <div class="section-paragraph">
+              <a href="javascript:void(0);" class="white-color lh1">Leadership</a>
+            </div>
+            <div class="section-paragraph">
+              <a href="javascript:void(0);" class="white-color lh1">Team</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-wrapper-column">
+        <div class="inner-flex inner-flex-common">
+          <div class="section-content">
+            <p class="semibold-fonts lh1 uppercase white-color">
+              PUBLICATIONS
+            </p>
+          </div>
+          <div class="inner-flex">
+            <div class="section-paragraph">
+              <a href="javascript:void(0);" class="white-color lh1">Publication 1</a>
+            </div>
+            <div class="section-paragraph">
+              <a href="javascript:void(0);" class="white-color lh1">Publication 2</a>
+            </div>
+            <div class="section-paragraph">
+              <a href="javascript:void(0);" class="white-color lh1">Publication 3</a>
+            </div>
+            <div class="section-paragraph">
+              <a href="javascript:void(0);" class="white-color lh1">Publication 4</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
