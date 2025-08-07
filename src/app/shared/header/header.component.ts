@@ -1,13 +1,31 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   isMenuActive = false;
   isMenuLinksVisible = false;
+  isProjectsPage = false;
+
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    this.checkIfProjectsPage(this.router.url);
+
+    // Listen for route changes
+    this.router.events.subscribe(() => {
+      this.checkIfProjectsPage(this.router.url);
+    });
+  }
+
+  private checkIfProjectsPage(url: string): void {
+    // Match exact `/projects` or starts with `/projects/`
+    this.isProjectsPage = /^\/projects(\/|$)/.test(url);
+  }
 
   toggleMenu(): void {
     this.isMenuActive = !this.isMenuActive;

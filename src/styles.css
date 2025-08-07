@@ -157,6 +157,7 @@
   --background-gray: #F5F5F5;
   --secondary-highlight-color: #AF2221;
   /* font-sizes */
+  --big-banner-title-font-size: 9.5rem;
   --banner-title-font-size: 4.5rem;
   --section-title-font-size: 4rem;
   --section-subtitle-font-size: 3rem;
@@ -225,6 +226,10 @@
 
 .semibold-fonts {
   font-family: var(--semibold-font-family);
+}
+
+.regular-fonts {
+  font-family: var(--regular-font-family) !important;
 }
 
 .bold-fonts {
@@ -610,6 +615,19 @@ button:focus-visible {
 
 .material-symbols-outlined {
   font-family: 'Material Symbols Outlined' !important;
+}
+
+.big-banner-title {
+  line-height: 0.9;
+}
+
+.big-banner-title h1,
+.big-banner-title h1 span,
+.big-banner-title h2,
+.big-banner-title h2 span {
+  font-size: var(--big-banner-title-font-size);
+  font-family: var(--black-font-family);
+  line-height: 0.9;
 }
 
 .banner-title h1,

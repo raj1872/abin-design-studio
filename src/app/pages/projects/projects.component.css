@@ -1,0 +1,65 @@
+#abin-design-studio-projects-page-wrapper {
+  position: relative;
+  z-index: 1;
+  /* padding: 2rem 0; */
+  background: transparent;
+}
+
+#abin-design-studio-projects-page-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url(/assets/images/plus-icon.png);
+  background-repeat: space;
+  background-attachment: fixed;
+  background-position: center;
+  opacity: 0.4;
+  /* 👈 Adjust image opacity here */
+  z-index: -1;
+  pointer-events: none;
+}
+
+
+.project-listing-grid {
+  display: grid;
+  gap: var(--small-gap-size);
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: var(--medium-gap-size);
+}
+
+.project-list-card {
+  aspect-ratio: 1;
+  background-color: #DEDEDE;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  display: block;
+  max-width: 100%;
+}
+
+.project-list-card img.project-list-hover-disable {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  aspect-ratio: 1;
+}
+
+.project-list-card img.project-list-hover-enable {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--common-transition);
+}
+
+.project-list-card:hover img.project-list-hover-enable {
+  opacity: 1;
+  z-index: 2;
+  visibility: visible;
+  transition: var(--common-transition);
+}

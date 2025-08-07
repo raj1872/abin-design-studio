@@ -1,0 +1,120 @@
+#abin-design-studio-project-detail-1 {
+  position: relative;
+  height: 100svh;
+  overflow: hidden;
+}
+
+.parallax-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url(/assets/images/projects/waterfront-pavilion/waterfront-pavilion-banner.jpg);
+  background-size: cover;
+  background-position: center;
+  transform: translateY(0);
+  will-change: transform;
+  transition: transform 0.1s ease-out;
+  z-index: -1;
+}
+
+
+#abin-design-studio-project-detail-3 {
+  position: relative;
+  height: 100svh;
+  background-image: url(/assets/images/projects/waterfront-pavilion/detail-sec3-web.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  width: 100%;
+  overflow: hidden;
+}
+
+#abin-design-studio-project-detail-4 {
+  position: relative;
+  height: 100svh;
+  background-image: url(/assets/images/projects/waterfront-pavilion/waterfront-sumner4-web.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  width: 100%;
+  overflow: hidden;
+}
+
+#abin-design-studio-project-detail-5 {
+  position: relative;
+  height: 100svh;
+  background-image: url(/assets/images/projects/waterfront-pavilion/Waterfront_Clubhouse_5-web.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  width: 100%;
+  overflow: hidden;
+}
+
+.detail-banner-abs {
+  position: absolute;
+  bottom: 8rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+}
+
+.overflowdiv {
+  overflow: hidden !important;
+}
+
+#abin-design-studio-project-detail-3 {
+  background-color: var(--primary-color);
+}
+
+.overview-flex-wrapper {
+  display: flex;
+  flex-direction: row;
+  padding-left: 80px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.overview-content-card {
+  width: calc(100% - 55%);
+  flex-basis: calc(100% - 55%);
+}
+
+.scroll-reveal-text span {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+
+.section-abs-section {
+  position: absolute;
+  bottom: 4rem;
+  left: 50%;
+  width: 100%;
+  transform: translateX(-50%);
+}
+
+.inner-abs-container {
+  width: 50%;
+}
+
+.inner-abs-container-2 {
+  width: 60%;
+}
+
+.inner-flex-sidepadding-gap {
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background-color: var(--white-color);
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}

@@ -51,6 +51,36 @@
   pointer-events: auto;
 }
 
+.black-header-logo {
+  display: none;
+}
+
+.header-wrapper.black-header-wrapper .white-header-logo {
+  display: none;
+}
+
+.header-wrapper.black-header-wrapper .black-header-logo {
+  filter: invert(1);
+  display: block;
+}
+
+.header-wrapper.black-header-wrapper .form-control-abin-design-studio.form-control-abin-design-studio-search {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.header-wrapper.black-header-wrapper .form-input-icon {
+  filter: invert(1);
+}
+
+.header-wrapper.black-header-wrapper ::placeholder {
+  color: var(--primary-color) !important;
+}
+
+.header-wrapper.black-header-wrapper .bar {
+  background-color: var(--primary-color) !important;
+}
+
 @media only screen and (max-width: 991px) {
   .header-flex {
     display: flex;
