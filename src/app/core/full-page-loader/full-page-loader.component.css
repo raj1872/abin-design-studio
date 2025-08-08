@@ -1,0 +1,67 @@
+.loader-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  background: radial-gradient(circle,
+      #1d5b94 0%,
+      #6b91b6 20%,
+      #b293aa 40%,
+      #e15c43 60%,
+      #f89b63 80%,
+      #ffe09e 100%);
+  background-size: 300% 300%;
+  animation: gradientDrift 30s ease-in-out infinite;
+}
+
+@keyframes gradientDrift {
+  0% { background-position: 0% 50%; }
+  25% { background-position: 50% 100%; }
+  50% { background-position: 100% 50%; }
+  75% { background-position: 50% 0%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* SVG text style */
+.loader-svg {
+  width: 80%;
+  max-width: 1000px;
+}
+
+.loader-svg text {
+  font-family: "Playfair Display", serif;
+  font-weight: 900;
+  font-size: 80px;
+  fill: transparent;
+  stroke: white;
+  stroke-width: 2;
+  stroke-dasharray: 1000; /* total path length */
+  stroke-dashoffset: 1000;
+  animation:
+    drawStroke 4s ease forwards,
+    fillText 2s ease forwards 1s; /* starts after stroke is done */
+}
+
+/* Draw stroke */
+@keyframes drawStroke {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Fill color after stroke */
+@keyframes fillText {
+  to {
+    fill: white;
+    stroke: transparent;
+  }
+}
+
+
+@media only screen and (max-width: 992px) {
+  .loader-svg text{
+    font-size: 140px;
+  }
+}

@@ -2,7 +2,7 @@
   <section class="abin-design-studio-section section-padding relative" id="abin-design-studio-projects-1">
     <div class="main-container">
       <div class="project-listing-grid">
-        <a class="project-list-card" href="/project-detail/" routerLink="/project-detail/" *ngFor="let project of projects">
+        <a class="project-list-card" routerLink="/project-detail/" routerLinkActive="active"*ngFor="let project of projects">
           <img [src]="project.normal" class="project-list-hover-disable" alt="">
           <img [src]="project.hover" class="project-list-hover-enable" alt="">
         </a>

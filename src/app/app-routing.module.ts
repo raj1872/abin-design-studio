@@ -1,18 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { HomeComponent } from './pages/home/home.component';
 import { ProjectsComponent } from './pages/projects/projects.component';
 import { ProjectDetailComponent } from './pages/project-detail/project-detail.component';
+import { LandingComponent } from './pages/landing/landing.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: LandingComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'projects', component: ProjectsComponent },
   { path: 'project-detail', component: ProjectDetailComponent }, // ✅ static route
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: '', pathMatch: 'full' } // ✅ ensure full match for wildcard
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { initialNavigation: 'enabledBlocking' })],
+  imports: [
+    RouterModule.forRoot(routes, {
+      initialNavigation: 'enabledBlocking', // ✅ Required for Angular Universal SSR
+      scrollPositionRestoration: 'enabled', // ✅ Scroll to top on route change
+      anchorScrolling: 'enabled' // ✅ Scroll to anchors if present in URL
+    })
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

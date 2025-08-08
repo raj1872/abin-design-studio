@@ -19,49 +19,43 @@
   z-index: -1;
 }
 
-
-#abin-design-studio-project-detail-3 {
+.bg-image-section-detail {
   position: relative;
   height: 100svh;
-  background-image: url(/assets/images/projects/waterfront-pavilion/detail-sec3-web.jpg);
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
   width: 100%;
   overflow: hidden;
+}
+
+
+.abs-click-btns {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  bottom: 22.5%;
+  left: 2rem;
+  z-index: 5;
+  align-items: flex-start;
+}
+
+#abin-design-studio-project-detail-3 {
+  background-image: url(/assets/images/projects/waterfront-pavilion/detail-sec3-web.jpg);
 }
 
 #abin-design-studio-project-detail-4 {
-  position: relative;
-  height: 100svh;
   background-image: url(/assets/images/projects/waterfront-pavilion/waterfront-sumner4-web.jpg);
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  width: 100%;
-  overflow: hidden;
 }
 
 #abin-design-studio-project-detail-7 {
-  position: relative;
-  height: 100svh;
   background-image: url(/assets/images/projects/waterfront-pavilion/clubhouse6.jpg);
-  background-size: cover;
-  background-position: center;
-  /* background-attachment: fixed; */
-  width: 100%;
-  overflow: hidden;
+  background-attachment: unset !important;
 }
 
 #abin-design-studio-project-detail-5 {
-  position: relative;
-  height: 100svh;
   background-image: url(/assets/images/projects/waterfront-pavilion/Waterfront_Clubhouse_5-web.jpg);
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  width: 100%;
-  overflow: hidden;
 }
 
 .detail-banner-abs {
@@ -151,7 +145,96 @@
   height: 100svh;
 }
 
+.publication-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: max-content;
+  z-index: 99999;
+  display: none;
+  max-width: 90vw;
+}
 
+.popup-overlay {
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -9999;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.popup-overlay.popup-overlay-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+  z-index: 9999;
+}
+
+.credits-popup {
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: var(--white-color);
+  transform: scale(0);
+  transform-origin: top right;
+  z-index: 999999;
+  transition: all 1s ease;
+}
+
+.credits-popup.credits-popup-active {
+  transition: all 1s ease;
+  transform-origin: top right;
+  transform: scale(1);
+}
+
+.inner-popup-space {
+  padding: var(--small-gap-size);
+  opacity: 0;
+  min-width: 32vw;
+  align-items: flex-end;
+  justify-content: end;
+  text-align: right;
+  z-index: 99999999;
+  visibility: hidden;
+  transition: all 1s ease;
+}
+
+.inner-popup-space.inner-popup-space-active {
+  padding: var(--small-gap-size);
+  opacity: 1;
+  visibility: visible;
+  transition: all 1s ease;
+}
+
+.publication-popup-active {
+  display: block;
+}
+
+
+.close-publications {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+}
+
+.credits-inner-flex {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: var(--medium-gap-size);
+  padding: 0 2rem 2rem 2rem;
+  align-items: flex-start;
+}
+
+.section-paragraph-credit {
+  padding-right: 2rem;
+}
 
 @media only screen and (max-width: 1152px) {
   .overview-flex-wrapper {
@@ -168,6 +251,7 @@
   .section-subtitle h4 span {
     font-size: 2.5rem !important;
   }
+
 }
 
 @media only screen and (max-width: 991px) {
@@ -183,13 +267,158 @@
     padding-top: 4rem;
   }
 
-  .inner-flex-sidepadding-gap{
-    padding: 1.5rem;
+  .inner-flex-sidepadding-gap {
+    padding: 4rem 1.5rem;
+    gap: 4rem;
+  }
+
+  .abin-sec-6-grid {
     gap: 1.5rem;
+  }
+
+  #abin-design-studio-project-detail-5 .main-container {
+    padding: 0 !important;
   }
 
   .overview-content-card {
     width: 100%;
     flex-basis: 100%;
   }
+
+  .big-banner-title h1,
+  .big-banner-title h1 span,
+  .big-banner-title h2,
+  .big-banner-title h2 span {
+    font-size: 8rem;
+  }
+
+
+  .bg-image-section-detail {
+    position: relative;
+    height: 50svh;
+    background-size: cover;
+    background-attachment: unset;
+    background-position: center;
+    width: 100%;
+    overflow: hidden;
+  }
+
+
+
+  .mobile-detail-images {
+    height: 45svh;
+    width: 100% !important;
+  }
+
+  .section-subtitle p,
+  .section-subtitle h4,
+  .section-subtitle h4 span {
+    font-size: 2.25rem !important;
+  }
+
+  .mobile-detail-images img {
+    height: 100% !important;
+  }
+
+
+  #abin-design-studio-project-detail-5,
+  #abin-design-studio-project-detail-3 {
+    background-image: unset !important;
+    height: auto !important;
+  }
+
+  #abin-design-studio-project-detail-5 .section-abs-section,
+  #abin-design-studio-project-detail-3 .section-abs-section {
+    position: relative;
+    bottom: unset;
+    left: unset;
+    width: 100%;
+    transform: unset !important;
+  }
+
+  .inner-abs-container,
+  .inner-abs-container-2 {
+    width: 100% !important;
+    padding: 2rem 0;
+  }
+
+  .inner-abs-container-2 {
+    padding-bottom: 0;
+  }
+
+  .sec-6-image img,
+  .sec-6-image {
+    height: 50svh;
+  }
+
+  .white-color.mobile-primary-white {
+    color: var(--primary-color) !important;
+  }
+
+
+  .abs-click-btns {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    bottom: unset;
+    left: unset;
+    z-index: 5;
+    align-items: center;
+    padding-bottom: 1.5rem;
+  }
+
+  .credits-inner-flex {
+    display: flex;
+    flex-direction: column;
+    gap: var(--medium-gap-size);
+    padding: 2rem 2rem;
+    align-items: flex-end;
+  }
+
+  .inner-popup-space{
+    width: 100%;
+    min-width: 100%;
+  }
+
+}
+
+
+@media only screen and (max-width: 768px) {
+  .flex-col-mobile {
+    flex-direction: column;
+    align-items: start !important;
+    gap: 1rem !important;
+  }
+
+  .big-banner-title h1,
+  .big-banner-title h1 span,
+  .big-banner-title h2,
+  .big-banner-title h2 span {
+    font-size: 4rem;
+    line-height: 1 !important;
+  }
+
+  .parallax-bg {
+    background-attachment: fixed;
+    background-position: center right 25%;
+  }
+
+
+
+  .detail-banner-abs .inner-flex.inner-flex-big {
+    gap: 2.5rem !important;
+  }
+
+  #abin-design-studio-project-detail-1 {
+    position: relative;
+    height: 70svh;
+    overflow: hidden;
+  }
+
+  .detail-banner-abs {
+    bottom: 10rem;
+  }
+
+
 }

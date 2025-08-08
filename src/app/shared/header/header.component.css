@@ -81,6 +81,9 @@
   background-color: var(--primary-color) !important;
 }
 
+
+
+
 @media only screen and (max-width: 991px) {
   .header-flex {
     display: flex;
@@ -88,9 +91,21 @@
     justify-content: space-between;
     align-items: center;
   }
-
+  
   #header-search-input-wrapper {
     display: none !important;
   }
+  .menu-wrapper-web-links-grid{
+    display: grid;
+    row-gap: 4rem;
+    grid-template-columns: repeat(2,1fr);
+  }
+}
 
+@media only screen and (max-width: 768px) {
+  .menu-wrapper-web-links-grid{
+    display: grid;
+    row-gap: 8rem;
+    /* grid-template-columns: 100%; */
+  }
 }

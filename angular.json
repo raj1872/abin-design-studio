@@ -30,7 +30,10 @@
               "node_modules/swiper/swiper.min.css",
               "node_modules/swiper/modules/pagination/pagination.min.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "aos"
+            ]
           },
           "configurations": {
             "production": {

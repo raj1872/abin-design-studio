@@ -5,7 +5,7 @@ import {
   PLATFORM_ID,
   HostListener,
   OnInit,
-  ViewChildren, // ✅ ADD THIS
+  ViewChildren,
   QueryList,
   AfterViewInit,
   ViewChild,
@@ -25,6 +25,15 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
 
   isBrowser = false;
 
+  // ===== Popup state flags =====
+  isCreditOpen = false;
+  isInnerPopupActive = false;
+  isPublicationOpen = false;
+  isOverlayActive = false;
+
+  // top offset used for fixed-position popup (value in px relative to viewport)
+  sectionTop = 0;
+
   private wordSpans: NodeListOf<HTMLSpanElement> = [] as any;
   private totalSpans = 0;
   private container: HTMLElement | null = null;
@@ -36,6 +45,11 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.isBrowser = isPlatformBrowser(this.platformId);
+
+    if (this.isBrowser) {
+      // initial compute (use rect.top — viewport-relative)
+      this.updateSectionTop();
+    }
   }
 
   ngAfterViewInit(): void {
@@ -54,13 +68,45 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
     }
   }
 
+  // Recompute sectionTop (important: use rect.top for fixed positioning)
+  private updateSectionTop(): void {
+    if (!this.isBrowser) return;
+
+    const section = document.getElementById(
+      'abin-design-studio-project-detail-2'
+    );
+    if (!section) return;
+
+    const rect = section.getBoundingClientRect();
+
+    // rect.top is the distance from the top of the viewport.
+    // clamp to >= 0 so popup doesn't go above viewport (optional).
+    const top = Math.max(0, Math.round(rect.top));
+    this.sectionTop = top;
+  }
+
+  // Keep alignment while the popup is open if the page scrolls or resizes
+  @HostListener('window:resize', [])
+  onResize(): void {
+    if (!this.isBrowser) return;
+    // recompute so fixed popup stays aligned on viewport resize
+    this.updateSectionTop();
+  }
+
   @HostListener('window:scroll', [])
   onScroll(): void {
     if (!this.isBrowser) return;
 
+    // If credits popup is open, keep recalculating sectionTop so the fixed popup
+    // visually remains on top of the section start as the page moves.
+    // (If you DON'T want it to follow while user scrolls, remove this call.)
+    if (this.isCreditOpen) {
+      this.updateSectionTop();
+    }
+
     const scrollTop = window.scrollY;
     const isMobile = window.innerWidth <= 768;
-    const parallaxSpeed = isMobile ? 0.1 : 0.4; // Less parallax on mobile
+    const parallaxSpeed = isMobile ? 0.4 : 0.4; // Less parallax on mobile
     const offset = scrollTop * parallaxSpeed;
 
     if (this.parallaxBg?.nativeElement) {
@@ -89,6 +135,44 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
     });
   }
 
+  // ===== Popup Methods =====
+  openCredits() {
+    if (this.isCreditOpen) return;
+    this.closeAll();
+
+    // compute fresh position at the moment of opening (viewport-relative)
+    if (this.isBrowser) {
+      this.updateSectionTop();
+    }
+
+    this.isCreditOpen = true;
+    this.isOverlayActive = true;
+
+    setTimeout(() => {
+      this.isInnerPopupActive = true;
+    }, 1000);
+  }
+
+  openPublication() {
+    if (this.isPublicationOpen) return;
+    this.closeAll();
+    this.isPublicationOpen = true;
+    this.isOverlayActive = true;
+  }
+
+  closeAll() {
+    this.isCreditOpen = false;
+    this.isInnerPopupActive = false;
+    this.isPublicationOpen = false;
+    this.isOverlayActive = false;
+  }
+
+  @HostListener('document:keydown.escape', ['$event'])
+  onEscKey() {
+    this.closeAll();
+  }
+
+  // ===== Word reveal & other logic (unchanged) =====
   setupWordRevealEffect(): void {
     this.container = document.getElementById('scroll-reveal-text');
     if (!this.container || this.container.classList.contains('words-enhanced'))

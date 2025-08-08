@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -10,21 +11,26 @@ export class HeaderComponent implements OnInit {
   isMenuActive = false;
   isMenuLinksVisible = false;
   isProjectsPage = false;
+  isLandingPage = false; // ✅ flag to hide header
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.checkIfProjectsPage(this.router.url);
+    this.checkPageType(this.router.url);
 
     // Listen for route changes
-    this.router.events.subscribe(() => {
-      this.checkIfProjectsPage(this.router.url);
-    });
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: any) => {
+        this.checkPageType(event.urlAfterRedirects);
+      });
   }
 
-  private checkIfProjectsPage(url: string): void {
-    // Match exact `/projects` or starts with `/projects/`
+  private checkPageType(url: string): void {
     this.isProjectsPage = /^\/projects(\/|$)/.test(url);
+
+    // ✅ detect landing page route
+    this.isLandingPage = url === '/' || url.startsWith('/landing');
   }
 
   toggleMenu(): void {

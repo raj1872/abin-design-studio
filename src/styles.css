@@ -118,6 +118,14 @@
   font-display: swap;
 }
 
+.helvetica {
+  font-family: 'Helvetica' !important;
+}
+
+.helvetica-bold {
+  font-family: 'Helvetica-Bold' !important;
+}
+
 @font-face {
   font-family: 'Satoshi-Light';
   src: url('./assets/fonts/satoshi/Satoshi-Light.woff2') format('woff2'),
@@ -548,6 +556,10 @@ button:focus-visible {
 
 .inner-flex.inner-flex-big {
   gap: var(--big-gap-size);
+}
+
+.c-pointer{
+  cursor: pointer !important;
 }
 
 .big-gap {

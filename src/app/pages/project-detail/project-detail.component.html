@@ -12,7 +12,7 @@
               <h1 class="white-color uppercase" data-aos="fade-up" data-aos-delay="500">Pavilion</h1>
             </div>
           </div>
-          <div class="flex-row flex-row-medium overflowdiv">
+          <div class="flex-row flex-row-medium flex-col-mobile overflowdiv">
             <div class="section-content">
               <p class="white-color uppercase bold-fonts" data-aos="fade-up" data-aos-delay="700">
                 ADISAPTAGRAM | WEST BENGAL
@@ -30,6 +30,58 @@
   </section>
 
   <section class="abin-design-studio-section relative" id="abin-design-studio-project-detail-2">
+    <div class="credits-popup" [ngClass]="{'credits-popup-active': isCreditOpen}" [ngStyle]="{top: sectionTop + 'px'}">
+      <div class="inner-flex inner-flex-small inner-popup-space"
+        [ngClass]="{'inner-popup-space-active': isInnerPopupActive}">
+        <div class="section-paragraph c-pointer" (click)="closeAll()">
+          <p>
+            &times;
+          </p>
+        </div>
+        <div class="section-paragraph section-paragraph-credit">
+          <p class="helvetica-bold lh1">
+            credits
+          </p>
+        </div>
+        <div class="credits-inner-flex">
+          <div class="inner-flex inner-flex-small">
+            <div class="inner-flex inner-flex-smallest section-content">
+              <p class="lh1 helvetica">
+                Architect
+              </p>
+              <p class="lh1 helvetica-bold">Abin Design Studio</p>
+            </div>
+            <div class="inner-flex inner-flex-smallest section-content">
+              <p class="lh1 helvetica">
+                Principal Designer
+              </p>
+              <p class="lh1 helvetica-bold">Abin Chauduri</p>
+            </div>
+            <div class="inner-flex inner-flex-smallest section-content">
+              <p class="lh1 helvetica">
+                Design Team
+              </p>
+              <p class="lh1 helvetica-bold">Sonia Guha</p>
+            </div>
+          </div>
+          <div class="inner-flex inner-flex-small">
+            <div class="inner-flex inner-flex-smallest section-content">
+              <p class="lh1 helvetica">
+                Site Coordination Team
+              </p>
+              <p class="lh1 helvetica-bold">Debjit Samanta, Debkishor Das</p>
+            </div>
+            <div class="inner-flex inner-flex-smallest section-content">
+              <p class="lh1 helvetica">
+                Structural Engineer
+              </p>
+              <p class="lh1 helvetica-bold">Soma Kazi</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="overview-flex-wrapper">
       <div class="overview-content-card">
         <div class="section-subtitle">
@@ -37,16 +89,33 @@
             Abin Design Studio built the Waterfront Arena in rural West Bengal as a low-cost, community-driven clubhouse
             supporting young footballers. Utilizing local materials, labor, and donations.
           </p>
-
         </div>
+
+
       </div>
-      <div class="overview-image">
+      <div class="overview-image relative">
+        <div class="abs-click-btns">
+          <div class="section-paragraph">
+            <p (click)="openCredits()" class="c-pointer semibold-fonts">+ Credits</p>
+          </div>
+          <div class="section-paragraph">
+            <p (click)="openPublication()" class="c-pointer semibold-fonts">+ Publication</p>
+          </div>
+        </div>
         <img src="./assets/images/projects/waterfront-pavilion/detail-popup-mob.png" alt="">
       </div>
     </div>
   </section>
+
+
+
   <div class="inner-flex inner-flex-sidepadding-gap">
-    <section class="abin-design-studio-section relative" id="abin-design-studio-project-detail-3">
+    <section class="abin-design-studio-section bg-image-section-detail relative"
+      id="abin-design-studio-project-detail-3">
+      <div class="visible-tab-mobile mobile-detail-images">
+        <img src="./assets/images/projects/waterfront-pavilion/detail-sec3-web.jpg" alt="">
+      </div>
+
       <div class="section-abs-section">
         <div class="main-container">
           <div class="section-subtitle inner-abs-container">
@@ -57,13 +126,18 @@
         </div>
       </div>
     </section>
-    <section class="abin-design-studio-section relative" id="abin-design-studio-project-detail-4"></section>
-    <section class="abin-design-studio-section relative" id="abin-design-studio-project-detail-5">
-      <div class="image-overlay"></div>
+    <section class="abin-design-studio-section bg-image-section-detail relative"
+      id="abin-design-studio-project-detail-4"></section>
+    <section class="abin-design-studio-section bg-image-section-detail relative"
+      id="abin-design-studio-project-detail-5">
+      <div class="visible-tab-mobile mobile-detail-images">
+        <img src=".//assets/images/projects/waterfront-pavilion/Waterfront_Clubhouse_5-web.jpg" alt="">
+      </div>
+      <div class="image-overlay hide-tab-mobile"></div>
       <div class="section-abs-section">
         <div class="main-container">
           <div class="section-subtitle inner-abs-container-2">
-            <p class="white-color regular-fonts lh1">
+            <p class="white-color mobile-primary-white regular-fonts lh1">
               Utilizing local materials, labor, and donations, the structure includes basic sanitation, multipurpose
               spaces, and a viewing deck. It symbolizes inclusive development, sustainability, and hope for a better
               community future.
@@ -82,6 +156,22 @@
         </div>
       </div>
     </section>
-    <section class="abin-design-studio-section relative" id="abin-design-studio-project-detail-7"></section>
+    <section class="abin-design-studio-section bg-image-section-detail relative"
+      id="abin-design-studio-project-detail-7"></section>
+  </div>
+</div>
+
+
+<div class="popup-overlay" [ngClass]="{'popup-overlay-active': isOverlayActive}" (click)="closeAll()">
+</div>
+
+<div class="publication-popup" [ngClass]="{'publication-popup-active': isPublicationOpen}">
+  <div class="publication-popup-img relative">
+    <div class="section-paragraph close-publications c-pointer" (click)="closeAll()">
+      <p class="white-color">
+        &times;
+      </p>
+    </div>
+    <img src="./assets/images/projects/waterfront-pavilion/publication-popup.png" alt="">
   </div>
 </div>

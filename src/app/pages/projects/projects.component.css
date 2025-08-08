@@ -63,3 +63,24 @@
   visibility: visible;
   transition: var(--common-transition);
 }
+
+@media only screen and (max-width: 991px) {
+  .project-listing-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #abin-design-studio-projects-page-wrapper{
+    padding: 6rem 0;
+  }
+
+  #abin-design-studio-projects-page-wrapper::before{
+    opacity: 0.1;
+    background-repeat: round;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .project-listing-grid {
+    grid-template-columns: 100%;
+  }
+}
