@@ -558,7 +558,7 @@ button:focus-visible {
   gap: var(--big-gap-size);
 }
 
-.c-pointer{
+.c-pointer {
   cursor: pointer !important;
 }
 
@@ -945,6 +945,16 @@ button:focus-visible {
   width: 100%;
   padding: 2rem 0;
   z-index: 999;
+}
+
+.header-wrapper.header_change {
+  transition: var(--common-transition);
+  padding: 1rem 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+}
+.header-wrapper.black-header-wrapper.header_change{
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 .header-wrapper.webmenu_hidden {

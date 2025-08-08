@@ -1,6 +1,7 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -11,9 +12,17 @@ export class HeaderComponent implements OnInit {
   isMenuActive = false;
   isMenuLinksVisible = false;
   isProjectsPage = false;
-  isLandingPage = false; // ✅ flag to hide header
+  isLandingPage = false;
 
-  constructor(private router: Router) {}
+  // Scroll state variables
+  private prevScrollTop = 0;
+  isHeaderHidden = false;
+  isHeaderChanged = false;
+
+  constructor(
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   ngOnInit(): void {
     this.checkPageType(this.router.url);
@@ -28,8 +37,6 @@ export class HeaderComponent implements OnInit {
 
   private checkPageType(url: string): void {
     this.isProjectsPage = /^\/projects(\/|$)/.test(url);
-
-    // ✅ detect landing page route
     this.isLandingPage = url === '/' || url.startsWith('/landing');
   }
 
@@ -53,7 +60,22 @@ export class HeaderComponent implements OnInit {
   }
 
   @HostListener('document:keydown.escape', ['$event'])
-  onEscape(event: KeyboardEvent): void {
+  onEscape(): void {
     this.closeMenu();
+  }
+
+  // ✅ Scroll listener (SSR-safe)
+  @HostListener('window:scroll', [])
+  onWindowScroll(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    const scrollTop = window.scrollY;
+
+    // Hide/show header like old script
+    this.isHeaderHidden = scrollTop > this.prevScrollTop && scrollTop > 0;
+    this.prevScrollTop = scrollTop;
+
+    // Add/remove "header_change"
+    this.isHeaderChanged = scrollTop > 100;
   }
 }

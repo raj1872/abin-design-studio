@@ -1,19 +1,19 @@
-<div class="header-wrapper" [class.black-header-wrapper]="isProjectsPage" *ngIf="!isLandingPage">
-
+<div class="header-wrapper" [class.black-header-wrapper]="isProjectsPage" [class.webmenu_hidden]="isHeaderHidden"
+  [class.header_change]="isHeaderChanged" *ngIf="!isLandingPage">
   <div class="header-flex main-container">
     <div class="header-logo">
       <a href="javascript:void(0);" routerLink="/home" routerLinkActive="active">
-        <img src="assets/images/logo/white-logo-ads.png" alt="" class="white-header-logo">
-        <img src="assets/images/logo/white-logo-ads.png" alt="" class="black-header-logo">
+        <img src="assets/images/logo/white-logo-ads.png" alt="" class="white-header-logo" />
+        <img src="assets/images/logo/white-logo-ads.png" alt="" class="black-header-logo" />
       </a>
     </div>
 
     <div id="header-search-input-wrapper" class="form-card relative">
       <div class="form-input-icon">
-        <img src="assets/images/search-white.svg" alt="">
+        <img src="assets/images/search-white.svg" alt="" />
       </div>
       <input type="search" class="form-control-abin-design-studio form-control-abin-design-studio-search"
-        placeholder="Search...">
+        placeholder="Search..." />
     </div>
 
     <!-- Web bar -->
@@ -24,6 +24,7 @@
     </div>
   </div>
 </div>
+
 <!-- Menu (hidden/toggled) -->
 
 <div class="menu-wrapper" [class.active]="isMenuActive">
@@ -44,22 +45,28 @@
             </div>
             <div class="inner-flex">
               <div class="section-paragraph">
-                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()" class="white-color lh1">Educational</a>
+                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()"
+                  class="white-color lh1">Educational</a>
               </div>
               <div class="section-paragraph">
-                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()" class="white-color lh1">Hospitality</a>
+                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()"
+                  class="white-color lh1">Hospitality</a>
               </div>
               <div class="section-paragraph">
-                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()" class="white-color lh1">Public</a>
+                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()"
+                  class="white-color lh1">Public</a>
               </div>
               <div class="section-paragraph">
-                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()" class="white-color lh1">Homes</a>
+                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()"
+                  class="white-color lh1">Homes</a>
               </div>
               <div class="section-paragraph">
-                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()" class="white-color lh1">Housing</a>
+                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()"
+                  class="white-color lh1">Housing</a>
               </div>
               <div class="section-paragraph">
-                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()" class="white-color lh1">Experience</a>
+                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()"
+                  class="white-color lh1">Experience</a>
               </div>
             </div>
           </div>
@@ -71,22 +78,28 @@
             </div>
             <div class="inner-flex">
               <div class="section-paragraph">
-                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()" class="white-color lh1">Educational</a>
+                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()"
+                  class="white-color lh1">Educational</a>
               </div>
               <div class="section-paragraph">
-                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()" class="white-color lh1">Hospitality</a>
+                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()"
+                  class="white-color lh1">Hospitality</a>
               </div>
               <div class="section-paragraph">
-                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()" class="white-color lh1">Public</a>
+                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()"
+                  class="white-color lh1">Public</a>
               </div>
               <div class="section-paragraph">
-                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()" class="white-color lh1">Homes</a>
+                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()"
+                  class="white-color lh1">Homes</a>
               </div>
               <div class="section-paragraph">
-                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()" class="white-color lh1">Housing</a>
+                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()"
+                  class="white-color lh1">Housing</a>
               </div>
               <div class="section-paragraph">
-                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()" class="white-color lh1">Experience</a>
+                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()"
+                  class="white-color lh1">Experience</a>
               </div>
             </div>
           </div>
