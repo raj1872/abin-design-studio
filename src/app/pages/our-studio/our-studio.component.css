@@ -1,0 +1,161 @@
+#abin-design-studio-studio-1 {
+  height: 100svh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.parallax-studio {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url(/assets/images/studio-banner.jpg);
+  background-size: cover;
+  background-position: center;
+  will-change: transform;
+  transform: translateY(0);
+  z-index: -1;
+  transition: transform 0.05s linear;
+  /* smoother on touch devices */
+}
+
+#abin-design-studio-studio-2 {
+  height: 100svh;
+  width: 100%;
+  position: relative;
+  background-image: url(/assets/images/how-we-work-banner.jpg);
+  background-attachment: fixed;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+}
+
+.parallax-studio-2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url(/assets/images/how-we-work-banner.jpg);
+  background-size: cover;
+  background-position: center;
+  will-change: transform;
+  transform: translateY(0);
+  z-index: -1;
+  transition: transform 0.05s linear;
+  /* smoother on touch devices */
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.image-overlay2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.studio-content-banner {
+  padding-top: 35vh;
+  width: 35%;
+}
+
+
+.how-work-content-banner {
+  padding-top: 35vh;
+  width: 35%;
+  margin-left: auto;
+  justify-content: flex-end;
+  align-items: flex-end;
+  position: relative;
+  z-index: 2;
+  text-align: right;
+}
+
+
+@media only screen and (max-width: 1680px) {}
+
+@media only screen and (max-width: 1450px) {
+
+  .studio-content-banner,
+  .how-work-content-banner {
+    width: 45%;
+    padding-top: 30vh;
+  }
+}
+
+@media only screen and (max-width: 1366px) {
+
+  .studio-content-banner,
+  .how-work-content-banner {
+    width: 50%;
+    padding-top: 30vh;
+  }
+}
+
+@media only screen and (max-width: 1280px) {
+
+  .studio-content-banner,
+  .how-work-content-banner {
+    width: 60%;
+    padding-top: 30vh;
+  }
+}
+
+@media only screen and (max-width: 1152px) {}
+
+@media only screen and (max-width: 1025px) {
+
+  .studio-content-banner,
+  .how-work-content-banner {
+    width: 75%;
+    padding-top: 30vh;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+
+  .studio-content-banner,
+  .how-work-content-banner {
+    width: calc(100% - 3rem);
+    margin: 0;
+    padding-top: unset;
+    position: absolute;
+    z-index: 5;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .parallax-studio {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url(/assets/images/studio-banner.jpg);
+    background-size: cover;
+    background-position: center;
+    will-change: transform;
+    transform: translateY(0);
+    z-index: -1;
+    transition: transform 0.05s linear;
+    /* smoother on mobile scroll */
+  }
+
+}
+
+@media only screen and (max-width: 768px) {}

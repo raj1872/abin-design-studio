@@ -1,5 +1,6 @@
-<div class="header-wrapper" [class.black-header-wrapper]="isProjectsPage" [class.webmenu_hidden]="isHeaderHidden"
-  [class.header_change]="isHeaderChanged" *ngIf="!isLandingPage">
+<div class="header-wrapper" [class.black-header-wrapper]="isProjectsPage || isTeamPage || projectListingTrue" [class.webmenu_hidden]="isHeaderHidden"
+  [class.header_change]="isHeaderChanged" [class.headerActiveOpen]="isMenuActive" *ngIf="!isLandingPage">
+
   <div class="header-flex main-container">
     <div class="header-logo">
       <a href="javascript:void(0);" routerLink="/home" routerLinkActive="active">
@@ -17,155 +18,178 @@
     </div>
 
     <!-- Web bar -->
-    <div class="web-bar" (click)="toggleMenu()" [class.active]="isMenuActive">
+    <div class="web-bar" (click)="toggleMenu();closeContactNav();" [class.active]="isMenuActive">
       <div class="bar top"></div>
       <div class="bar middle"></div>
       <div class="bar bottom"></div>
     </div>
   </div>
 </div>
-
+<div class="header-overlay" [class.active]="isMenuActive" (click)="closeMenu()"></div>
 <!-- Menu (hidden/toggled) -->
 
 <div class="menu-wrapper" [class.active]="isMenuActive">
-  <ng-container>
-    <div class="menu-wrapper-web-links-grid main-container" [class.visible]="isMenuLinksVisible">
-      <div class="menu-wrapper-column">
-        <div class="inner-flex inner-flex-small">
-          <div class="section-content">
-            <p class="semibold-fonts lh1 uppercase white-color">
-              Projects
-            </p>
-          </div>
-          <div class="inner-flex inner-flex-common">
-            <div class="section-subtitle2">
-              <p class="bold-fonts white-color lh1">
-                Architure
+  <ng-container id="header-navigation-main" *ngIf="!isContactNavActive">
+    <div class="main-nav-flex">
+      <div class="menu-wrapper-web-links-grid main-container" [class.visible]="isMenuLinksVisible">
+        <div class="menu-wrapper-column">
+          <div class="inner-flex inner-flex-small main-nav-flex-project">
+            <div class="section-content">
+              <p class="semibold-fonts lh1 uppercase ">
+                Projects
               </p>
             </div>
-            <div class="inner-flex">
-              <div class="section-paragraph">
-                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()"
-                  class="white-color lh1">Educational</a>
+            <div class="inner-flex inner-flex-common">
+              <div class="section-subtitle2">
+                <p class="bold-fonts  lh1">
+                  Architure
+                </p>
               </div>
-              <div class="section-paragraph">
-                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()"
-                  class="white-color lh1">Hospitality</a>
-              </div>
-              <div class="section-paragraph">
-                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()"
-                  class="white-color lh1">Public</a>
-              </div>
-              <div class="section-paragraph">
-                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()"
-                  class="white-color lh1">Homes</a>
-              </div>
-              <div class="section-paragraph">
-                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()"
-                  class="white-color lh1">Housing</a>
-              </div>
-              <div class="section-paragraph">
-                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()"
-                  class="white-color lh1">Experience</a>
-              </div>
-            </div>
-          </div>
-          <div class="inner-flex inner-flex-common">
-            <div class="section-subtitle2">
-              <p class="bold-fonts white-color lh1">
-                Interior
-              </p>
-            </div>
-            <div class="inner-flex">
-              <div class="section-paragraph">
-                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()"
-                  class="white-color lh1">Educational</a>
-              </div>
-              <div class="section-paragraph">
-                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()"
-                  class="white-color lh1">Hospitality</a>
-              </div>
-              <div class="section-paragraph">
-                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()"
-                  class="white-color lh1">Public</a>
-              </div>
-              <div class="section-paragraph">
-                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()"
-                  class="white-color lh1">Homes</a>
-              </div>
-              <div class="section-paragraph">
-                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()"
-                  class="white-color lh1">Housing</a>
-              </div>
-              <div class="section-paragraph">
-                <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()"
-                  class="white-color lh1">Experience</a>
+              <div class="inner-flex">
+                <div class="section-paragraph">
+                  <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()" class=" lh1">Educational</a>
+                </div>
+                <div class="section-paragraph">
+                  <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()" class=" lh1">Hospitality</a>
+                </div>
+                <div class="section-paragraph">
+                  <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()" class=" lh1">Public</a>
+                </div>
+                <div class="section-paragraph">
+                  <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()" class=" lh1">Homes</a>
+                </div>
+                <div class="section-paragraph">
+                  <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()" class=" lh1">Housing</a>
+                </div>
+                <div class="section-paragraph">
+                  <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()" class=" lh1">Experience</a>
+                </div>
               </div>
             </div>
-          </div>
+            <div class="inner-flex inner-flex-common">
+              <div class="section-subtitle2">
+                <p class="bold-fonts  lh1">
+                  Interior
+                </p>
+              </div>
+              <div class="inner-flex">
+                <div class="section-paragraph">
+                  <a routerLink="/projects-svg" routerLinkActive="active" (click)="closeMenu()" class=" lh1">Educational</a>
+                </div>
+                <div class="section-paragraph">
+                  <a routerLink="/projects-svg" routerLinkActive="active" (click)="closeMenu()" class=" lh1">Hospitality</a>
+                </div>
+                <div class="section-paragraph">
+                  <a routerLink="/projects-svg" routerLinkActive="active" (click)="closeMenu()" class=" lh1">Public</a>
+                </div>
+                <div class="section-paragraph">
+                  <a routerLink="/projects-svg" routerLinkActive="active" (click)="closeMenu()" class=" lh1">Homes</a>
+                </div>
+                <div class="section-paragraph">
+                  <a routerLink="/projects-svg" routerLinkActive="active" (click)="closeMenu()" class=" lh1">Housing</a>
+                </div>
+                <div class="section-paragraph">
+                  <a routerLink="/projects-svg" routerLinkActive="active" (click)="closeMenu()" class=" lh1">Experience</a>
+                </div>
+              </div>
+            </div>
 
-        </div>
-      </div>
-      <div class="menu-wrapper-column">
-        <div class="inner-flex inner-flex-common">
-          <div class="section-content">
-            <p class="semibold-fonts lh1 uppercase white-color">
-              PRACTICE
-            </p>
-          </div>
-          <div class="inner-flex">
-            <div class="section-paragraph">
-              <a href="javascript:void(0);" class="white-color lh1">About Us</a>
-            </div>
-            <div class="section-paragraph">
-              <a href="javascript:void(0);" class="white-color lh1">Our History</a>
-            </div>
-            <div class="section-paragraph">
-              <a href="javascript:void(0);" class="white-color lh1">Design Approach</a>
-            </div>
-            <div class="section-paragraph">
-              <a href="javascript:void(0);" class="white-color lh1">Our Culture</a>
-            </div>
           </div>
         </div>
-      </div>
-      <div class="menu-wrapper-column">
-        <div class="inner-flex inner-flex-common">
-          <div class="section-content">
-            <p class="semibold-fonts lh1 uppercase white-color">
-              PEOPLE
-            </p>
-          </div>
-          <div class="inner-flex">
-            <div class="section-paragraph">
-              <a href="javascript:void(0);" class="white-color lh1">Leadership</a>
+        <div class="menu-wrapper-column">
+          <div class="inner-flex inner-flex-common">
+            <div class="section-content">
+              <p class="semibold-fonts lh1 uppercase ">
+                PRACTICE
+              </p>
             </div>
-            <div class="section-paragraph">
-              <a href="javascript:void(0);" class="white-color lh1">Team</a>
+            <div class="inner-flex">
+              <div class="section-paragraph">
+                <a href="javascript:void(0);" class=" lh1">History</a>
+              </div>
+              <div class="section-paragraph">
+                <a routerLink="/studio" routerLinkActive="active" (click)="closeMenu()" class=" lh1">Studio</a>
+              </div>
+              <div class="section-paragraph">
+                <a routerLink="/our-team" routerLinkActive="active" (click)="closeMenu()" class=" lh1">People</a>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="menu-wrapper-column">
-        <div class="inner-flex inner-flex-common">
-          <div class="section-content">
-            <p class="semibold-fonts lh1 uppercase white-color">
-              PUBLICATIONS
+      <div class="header-bottom-links" [class.active]="isMenuLinksVisible">
+        <ul>
+          <li>
+            <a href="" class="section-paragraph">
+              <p class="semibold-fonts">Instagram</p>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0);" class="section-paragraph" id="contact-detail-navigation" (click)="openContactNav()">
+              <p class="semibold-fonts">Contact</p>
+            </a>
+          </li>
+          <li>
+            <a href="" class="section-paragraph">
+              <p class="semibold-fonts">News</p>
+            </a>
+          </li>
+          <li>
+            <a href="" class="section-paragraph">
+              <p class="semibold-fonts">Careers</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container id="header-navigation-contact" *ngIf="isContactNavActive">
+    <div class="contact-navigation-wrapper relative">
+      <div class="contact-nav-close-click"  (click)="closeContactNav();">
+        <img src="./assets/images/back-icon.svg" alt="">
+      </div>
+      <div class="inner-flex inner-flex-medium inner-end-flex">
+        <div class="section-subtitle2">
+          <p class="semibold-fonts">
+            Contact
+          </p>
+        </div>
+        <div class="inner-flex inner-flex-smallest section-paragraph">
+          <p class="lh1">
+            For project & media related inquiries:
+          </p>
+          <a href="mailto:" target="_blank">
+            <p class="lh1">
+              contact@abindesignstudio.com
+            </p>
+          </a>
+        </div>
+        <div class="inner-flex inner-flex-smallest section-paragraph">
+          <p class="lh1">
+            For Employment:
+          </p>
+          <a href="mailto:" target="_blank">
+            <p class="lh1">
+              click <span class="semibold-fonts" style="color: var(--primary-color) !important;">HERE</span> to apply
+            </p>
+          </a>
+        </div>
+        <div class="inner-flex inner-flex-small inner-end-flex">
+          <div class="section-subtitle2">
+            <p class="uppercase semibold-fonts">
+              Abin Design Studio
             </p>
           </div>
-          <div class="inner-flex">
-            <div class="section-paragraph">
-              <a href="javascript:void(0);" class="white-color lh1">Publication 1</a>
-            </div>
-            <div class="section-paragraph">
-              <a href="javascript:void(0);" class="white-color lh1">Publication 2</a>
-            </div>
-            <div class="section-paragraph">
-              <a href="javascript:void(0);" class="white-color lh1">Publication 3</a>
-            </div>
-            <div class="section-paragraph">
-              <a href="javascript:void(0);" class="white-color lh1">Publication 4</a>
-            </div>
+          <div class="inner-flex inner-flex-smallest section-paragraph">
+            <p class="">
+              62/2, Hindustan Park Rd,<br class="hide-tab-mobile"> Golpark, Hindustan Park, Gariahat, <br
+                class="hide-tab-mobile">Kolkata, West Bengal 700029
+            </p>
+            <a href="tel:+91-03324666191">
+              <p class="">
+                Phone : 033 2466 6191
+              </p>
+            </a>
           </div>
         </div>
       </div>

@@ -233,7 +233,7 @@
 }
 
 .semibold-fonts {
-  font-family: var(--semibold-font-family);
+  font-family: var(--semibold-font-family) !important;
 }
 
 .regular-fonts {
@@ -508,6 +508,12 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+}
+
+.inner-end-flex {
+  align-items: end;
+  justify-content: end;
+  text-align: right;
 }
 
 .wfc {
@@ -953,7 +959,8 @@ button:focus-visible {
   background-color: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(5px);
 }
-.header-wrapper.black-header-wrapper.header_change{
+
+.header-wrapper.black-header-wrapper.header_change {
   background-color: rgba(255, 255, 255, 0.3);
 }
 
@@ -1127,6 +1134,9 @@ button:focus-visible {
   transform: translateY(-11px) rotate(-45deg);
 }
 
+.main-pages-wrapper-content{
+  min-height: 90svh;
+}
 
 
 @media only screen and (max-width: 1680px) {

@@ -5,11 +5,17 @@ import { HomeComponent } from './pages/home/home.component';
 import { ProjectsComponent } from './pages/projects/projects.component';
 import { ProjectDetailComponent } from './pages/project-detail/project-detail.component';
 import { LandingComponent } from './pages/landing/landing.component';
+import { OurStudioComponent } from './pages/our-studio/our-studio.component';
+import { TeamComponent } from './pages/team/team.component';
+import { ProjectListSvgComponent } from './pages/project-list-svg/project-list-svg.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'home', component: HomeComponent },
   { path: 'projects', component: ProjectsComponent },
+  { path: 'projects-svg', component: ProjectListSvgComponent },
+  { path: 'studio', component: OurStudioComponent },
+  { path: 'our-team', component: TeamComponent },
   { path: 'project-detail', component: ProjectDetailComponent }, // ✅ static route
   { path: '**', redirectTo: '', pathMatch: 'full' } // ✅ ensure full match for wildcard
 ];

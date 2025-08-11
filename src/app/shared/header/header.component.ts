@@ -1,4 +1,10 @@
-import { Component, HostListener, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  OnInit,
+  Inject,
+  PLATFORM_ID,
+} from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';
@@ -12,10 +18,13 @@ export class HeaderComponent implements OnInit {
   isMenuActive = false;
   isMenuLinksVisible = false;
   isProjectsPage = false;
+  projectListingTrue = false;
   isLandingPage = false;
+  isTeamPage = false;
+  isContactNavActive = false;
 
-  // Scroll state variables
   private prevScrollTop = 0;
+  private scrollYBeforeLock = 0; // For iOS-safe scroll lock
   isHeaderHidden = false;
   isHeaderChanged = false;
 
@@ -27,7 +36,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.checkPageType(this.router.url);
 
-    // Listen for route changes
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: any) => {
@@ -38,11 +46,48 @@ export class HeaderComponent implements OnInit {
   private checkPageType(url: string): void {
     this.isProjectsPage = /^\/projects(\/|$)/.test(url);
     this.isLandingPage = url === '/' || url.startsWith('/landing');
+    this.isTeamPage = /^\/our-team(\/|$)/.test(url);
+    this.projectListingTrue = /^\/projects-svg(\/|$)/.test(url);
+  }
+
+  private lockScroll(lock: boolean): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    const body = document.body;
+    const html = document.documentElement;
+
+    if (lock) {
+      // Store scroll position
+      this.scrollYBeforeLock = window.scrollY;
+
+      // Lock scroll
+      body.style.position = 'fixed';
+      body.style.top = `-${this.scrollYBeforeLock}px`;
+      body.style.left = '0';
+      body.style.right = '0';
+      body.style.overflow = 'hidden';
+      body.style.height = '100%';
+
+      html.style.overflow = 'hidden';
+    } else {
+      // Unlock scroll
+      body.style.position = '';
+      body.style.top = '';
+      body.style.left = '';
+      body.style.right = '';
+      body.style.overflow = '';
+      body.style.height = '';
+
+      html.style.overflow = '';
+
+      // Restore scroll position
+      window.scrollTo(0, this.scrollYBeforeLock);
+    }
   }
 
   toggleMenu(): void {
     this.isMenuActive = !this.isMenuActive;
-    document.body.style.overflow = this.isMenuActive ? 'hidden' : 'auto';
+    this.lockScroll(this.isMenuActive);
 
     if (this.isMenuActive) {
       setTimeout(() => {
@@ -56,7 +101,15 @@ export class HeaderComponent implements OnInit {
   closeMenu(): void {
     this.isMenuActive = false;
     this.isMenuLinksVisible = false;
-    document.body.style.overflow = 'auto';
+    this.lockScroll(false);
+  }
+
+  openContactNav(): void {
+    this.isContactNavActive = true;
+  }
+
+  closeContactNav(): void {
+    this.isContactNavActive = false;
   }
 
   @HostListener('document:keydown.escape', ['$event'])
@@ -64,18 +117,15 @@ export class HeaderComponent implements OnInit {
     this.closeMenu();
   }
 
-  // ✅ Scroll listener (SSR-safe)
   @HostListener('window:scroll', [])
   onWindowScroll(): void {
     if (!isPlatformBrowser(this.platformId)) return;
 
     const scrollTop = window.scrollY;
 
-    // Hide/show header like old script
     this.isHeaderHidden = scrollTop > this.prevScrollTop && scrollTop > 0;
     this.prevScrollTop = scrollTop;
 
-    // Add/remove "header_change"
     this.isHeaderChanged = scrollTop > 100;
   }
 }

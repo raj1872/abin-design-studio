@@ -1,0 +1,20 @@
+#abin-design-studio-team-page-wrapper {
+  min-height: 100svh;
+}
+
+.team-wrapper {
+  display: grid;
+  grid-template-columns: calc(100% - 55% - 1.5rem) calc(100% - 55% - 1.5rem);
+  gap: 3rem;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+@media only screen and (max-width: 992px) {
+  .team-wrapper {
+    grid-template-columns: 100%;
+    align-items: flex-start;
+    padding-top: 8rem;
+    justify-content: flex-start;
+  }
+}
