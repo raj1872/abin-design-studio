@@ -14,6 +14,10 @@ import { HomeComponent } from './pages/home/home.component';
 import { ProjectsComponent } from './pages/projects/projects.component';
 import { ProjectDetailComponent } from './pages/project-detail/project-detail.component';
 import { LandingComponent } from './pages/landing/landing.component';
+import { CommonModule } from '@angular/common';
+import { PublicationsComponent } from './pages/publications/publications.component';
+import { NewsComponent } from './pages/news/news.component';
+import { NewsDetailComponent } from './pages/news-detail/news-detail.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,10 @@ import { LandingComponent } from './pages/landing/landing.component';
     HeaderComponent,
     FooterComponent,
     FullPageLoaderComponent,
+    PublicationsComponent,
     LandingComponent,
+    NewsComponent,
+    NewsDetailComponent,
     HomeComponent,
     ProjectsComponent,
     ProjectDetailComponent
@@ -31,6 +38,7 @@ import { LandingComponent } from './pages/landing/landing.component';
     RouterModule,       // ✅ Needed for routerLink / routerLinkActive
     SwiperModule,
     FormsModule,
+    CommonModule,
     AppRoutingModule
   ],
   providers: [],

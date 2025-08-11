@@ -1,0 +1,121 @@
+#abin-design-studio-publications-1 {
+  min-height: 95svh;
+  max-height: 95svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem 0 1rem 0;
+  align-items: flex-end;
+}
+
+.publications-horizontal-scroll-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: var(--medium-gap-size);
+  align-items: flex-start;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  padding: 0 80px 20px 80px;
+  width: 100vw;
+  /* viewport width */
+  height: 100%;
+  /* optional */
+  scroll-behavior: smooth;
+  /* fallback */
+}
+
+.publications-card-list {
+  flex: 0 0 auto;
+  /* keep items from shrinking */
+  max-width: 25vw;
+}
+
+
+@media only screen and (max-width: 1760px) {
+  .publications-card-list {
+    flex: 0 0 auto;
+    /* keep items from shrinking */
+    max-width: 28vw;
+  }
+}
+
+@media only screen and (max-width: 1680px) {
+  .publications-card-list {
+    flex: 0 0 auto;
+    /* keep items from shrinking */
+    max-width: 30vw;
+  }
+}
+
+@media only screen and (max-width: 1450px) {
+  .publications-card-list {
+    flex: 0 0 auto;
+    /* keep items from shrinking */
+    max-width: 33vw;
+  }
+}
+
+@media only screen and (max-width: 1366px) {
+  .publications-card-list {
+    flex: 0 0 auto;
+    /* keep items from shrinking */
+    max-width: 38vw;
+  }
+}
+
+@media only screen and (max-width: 1280px) {
+  .publications-card-list {
+    flex: 0 0 auto;
+    /* keep items from shrinking */
+    max-width: 40vw;
+  }
+}
+
+@media only screen and (max-width: 1152px) {
+  .publications-card-list {
+    flex: 0 0 auto;
+    /* keep items from shrinking */
+    max-width: 42.5vw;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .publications-card-list {
+    flex: 0 0 auto;
+    /* keep items from shrinking */
+    max-width: 50vw;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .publications-mobile-grid {
+    display: grid;
+    padding: 6rem 0;
+    grid-template-columns: repeat(2,1fr);
+    gap: 4rem;
+  }
+
+  #abin-design-studio-publications-1 {
+    min-height: unset;
+    max-height: unset;
+    display: block;
+    flex-direction: unset;
+    justify-content: flex-end;
+    padding: 2rem 0 1rem 0;
+    align-items: flex-end;
+  }
+
+  .publications-card-list {
+    flex: unset;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .publications-mobile-grid {
+    display: grid;
+    padding: 6rem 0;
+    grid-template-columns: 100%;
+    gap: 4rem;
+  }
+}

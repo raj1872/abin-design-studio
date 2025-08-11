@@ -19,8 +19,11 @@ export class HeaderComponent implements OnInit {
   isMenuLinksVisible = false;
   isProjectsPage = false;
   projectListingTrue = false;
+  isNewsPage = false;
+  isNewsDetailPage = false;
   isLandingPage = false;
   isTeamPage = false;
+  isPublicationsPage = false;
   isContactNavActive = false;
 
   private prevScrollTop = 0;
@@ -47,6 +50,9 @@ export class HeaderComponent implements OnInit {
     this.isProjectsPage = /^\/projects(\/|$)/.test(url);
     this.isLandingPage = url === '/' || url.startsWith('/landing');
     this.isTeamPage = /^\/our-team(\/|$)/.test(url);
+    this.isPublicationsPage = /^\/publications(\/|$)/.test(url); // ✅ matches /publications or /publications/*
+    this.isNewsPage = /^\/news(\/|$)/.test(url); // ✅ matches /publications or /publications/*
+    this.isNewsDetailPage = /^\/news-detail(\/|$)/.test(url); // ✅ matches /publications or /publications/*
     this.projectListingTrue = /^\/projects-svg(\/|$)/.test(url);
   }
 

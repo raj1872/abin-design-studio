@@ -1,0 +1,56 @@
+<div id="abin-design-studio-news-page-wrapper" class="abin-design-studio-page-wrapper">
+  <section class="abin-design-studio-section section-padding relative parallax-section" id="abin-design-studio-news-1">
+    <div class="main-container">
+      <ng-container *ngIf="isMobile">
+        <div *ngIf="isMobile" class="news-category-dropdown-wrapper">
+          <div class="dropdown-selected" (click)="dropdownOpen = !dropdownOpen">
+            {{ activeCategory }}
+            <span class="arrow" [class.open]="dropdownOpen"></span>
+          </div>
+          <div class="dropdown-list" *ngIf="dropdownOpen" (click)="$event.stopPropagation()">
+            <div class="dropdown-item" *ngFor="let cat of categories"
+              (click)="setActiveCategory(cat, $event); dropdownOpen = false">
+              {{ cat }}
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="!isMobile">
+        <div class="news-category-tabs">
+          <div class="news-tabs" *ngFor="let cat of categories" (click)="setActiveCategory(cat)"
+            [class.active]="activeCategory === cat">
+            {{ cat }}
+          </div>
+        </div>
+      </ng-container>
+      <div class="news-list">
+        <div class="news-card inner-flex inner-flex-small" *ngFor="let news of filteredNews">
+          <div class="news-card-image relative">
+            <img [src]="news.image" alt="{{ news.title }}" class="news-image" />
+            <div class="cat-label-news">
+              {{ news.category }}
+            </div>
+          </div>
+          <div class="news-content inner-flex inner-flex-common">
+            <div class="section-content news-title">
+              <p class="semibold-fonts">
+                {{ news.title }}
+              </p>
+            </div>
+            <div class="readmore-link-flex-blog" routerLink="/news-detail" routerLinkActive="active">
+              <div class="section-content">
+                <p>
+                  {{ news.date }}
+                </p>
+              </div>
+              <div class="readmore-link-img">
+                <img src="./assets/images/projects/next-project.svg" alt="">
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,4 +1,4 @@
-<div class="header-wrapper" [class.black-header-wrapper]="isProjectsPage || isTeamPage || projectListingTrue" [class.webmenu_hidden]="isHeaderHidden"
+<div class="header-wrapper" [class.black-header-wrapper]="isProjectsPage || isNewsDetailPage || isNewsPage || isTeamPage || projectListingTrue || isPublicationsPage" [class.webmenu_hidden]="isHeaderHidden"
   [class.header_change]="isHeaderChanged" [class.headerActiveOpen]="isMenuActive" *ngIf="!isLandingPage">
 
   <div class="header-flex main-container">
@@ -113,6 +113,9 @@
               <div class="section-paragraph">
                 <a routerLink="/our-team" routerLinkActive="active" (click)="closeMenu()" class=" lh1">People</a>
               </div>
+              <div class="section-paragraph">
+                <a routerLink="/publications" routerLinkActive="active" (click)="closeMenu()" class=" lh1">Publications</a>
+              </div>
             </div>
           </div>
         </div>
@@ -130,7 +133,7 @@
             </a>
           </li>
           <li>
-            <a href="" class="section-paragraph">
+            <a routerLink="/news" routerLinkActive="active" (click)="closeMenu()" class="section-paragraph">
               <p class="semibold-fonts">News</p>
             </a>
           </li>

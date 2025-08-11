@@ -1139,6 +1139,10 @@ button:focus-visible {
 }
 
 
+.abin-design-studio-page-wrapper{
+  min-height: 95svh;
+}
+
 @media only screen and (max-width: 1680px) {
   html {
     font-size: 14px;
