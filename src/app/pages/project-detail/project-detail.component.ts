@@ -21,7 +21,6 @@ import { ApiService } from '../../services/api.service'; // 👈 adjust path as 
   styleUrls: ['./project-detail.component.css'],
 })
 export class ProjectDetailComponent implements OnInit, AfterViewInit {
-  
   @ViewChild('parallaxBg', { static: true }) parallaxBg!: ElementRef;
   @ViewChildren('autoVideo', { read: ElementRef }) autoVideos!: QueryList<
     ElementRef<HTMLVideoElement>
@@ -130,6 +129,9 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
 
   private fetchProjectDetail(slug: string) {
     this.loading = true;
+    const minLoadingTime = 1500; // milliseconds
+    const startTime = Date.now();
+
     this.apiService.getProjectBySlug(slug).subscribe({
       next: (res: any) => {
         const projectData =
@@ -139,10 +141,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
           sections: projectData?.sections || [],
         };
 
-        // ✅ Preserve order of sections exactly as API gives
-        // We can later *ngFor directly in HTML using projectDetailObj.sections
-
-        // ✅ Optional: pick banner image if exists
+        // Pick banner image if exists
         const bannerSection = this.projectDetailObj.sections.find(
           (section: any) => section.type === 'banner-block'
         );
@@ -150,14 +149,47 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
           this.bannerImageUrl = bannerSection.content.image_view;
         }
 
-        // Wait for DOM update before running word reveal
-        setTimeout(() => {
-          if (this.isBrowser) {
-            this.setupWordRevealEffect();
-          }
-        }, 0);
+        if (this.isBrowser) {
+          // Collect all image URLs from sections
+          const imageUrls: string[] = [];
+          this.projectDetailObj.sections.forEach((section: any) => {
+            if (section.content?.image_view) {
+              imageUrls.push(section.content.image_view);
+            }
+          });
 
-        this.loading = false;
+          const finishLoading = () => {
+            const elapsed = Date.now() - startTime;
+            const remaining = minLoadingTime - elapsed;
+            setTimeout(
+              () => {
+                this.loading = false;
+                this.setupWordRevealEffect();
+              },
+              remaining > 0 ? remaining : 0
+            );
+          };
+
+          if (imageUrls.length > 0) {
+            let loadedCount = 0;
+            imageUrls.forEach((url) => {
+              const img = new window.Image();
+              img.src = url;
+              img.onload = img.onerror = () => {
+                loadedCount++;
+                if (loadedCount === imageUrls.length) {
+                  finishLoading();
+                }
+              };
+            });
+          } else {
+            // No images, just wait for minimum time
+            finishLoading();
+          }
+        } else {
+          // SSR or non-browser: stop loading immediately
+          this.loading = false;
+        }
       },
       error: (err: any) => {
         console.error('Error fetching project detail:', err);
