@@ -3,6 +3,8 @@
   "extends": "./tsconfig.app.json",
   "compilerOptions": {
     "outDir": "./out-tsc/server",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "types": [
       "node"
     ]

@@ -11,19 +11,42 @@ import { ProjectListSvgComponent } from './pages/project-list-svg/project-list-s
 import { PublicationsComponent } from './pages/publications/publications.component';
 import { NewsComponent } from './pages/news/news.component';
 import { NewsDetailComponent } from './pages/news-detail/news-detail.component';
+import { ProjectsResolver } from './pages/resolvers/projects.resolver';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'projects', component: ProjectsComponent },
+
+  // ✅ Static routes first
   { path: 'projects-svg', component: ProjectListSvgComponent },
   { path: 'publications', component: PublicationsComponent },
   { path: 'news', component: NewsComponent },
   { path: 'news-detail', component: NewsDetailComponent },
   { path: 'studio', component: OurStudioComponent },
   { path: 'our-team', component: TeamComponent },
-  { path: 'project-detail', component: ProjectDetailComponent }, // ✅ static route
-  { path: '**', redirectTo: '', pathMatch: 'full' }, // ✅ ensure full match for wildcard
+
+  // ✅ Category & Subcategory lists
+  {
+    path: 'projects',
+    component: ProjectsComponent,
+    resolve: { projectsData: ProjectsResolver },
+  },
+  {
+    path: 'projects/:category_slug',
+    component: ProjectsComponent,
+    resolve: { projectsData: ProjectsResolver },
+  },
+  {
+    path: 'projects/:category_slug/:sub_category_slug',
+    component: ProjectsComponent,
+    resolve: { projectsData: ProjectsResolver },
+  },
+
+  // ✅ Project detail — last generic route
+  { path: ':slug', component: ProjectDetailComponent },
+
+  // Wildcard last
+  { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
 @NgModule({

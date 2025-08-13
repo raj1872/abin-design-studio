@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Data } from '@angular/router';
 
 @Component({
   selector: 'app-projects',
@@ -6,42 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./projects.component.css']
 })
 export class ProjectsComponent implements OnInit {
-  projects: { normal: string; hover: string }[] = [];
+  projects: any[] = [];
+  loading = true;
+
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.projects = [
-      {
-        normal: './assets/images/projects/listing-1.png',
-        hover: './assets/images/projects/listing-hover-1.png'
-      },
-      {
-        normal: './assets/images/projects/listing-2.png',
-        hover: './assets/images/projects/listing-2.png'
-      },
-      {
-        normal: './assets/images/projects/listing-3.png',
-        hover: './assets/images/projects/listing-3.png'
-      },
-      {
-        normal: 'https://dummyimage.com/700x700/000/000',
-        hover: 'https://dummyimage.com/700x700/4C4C4C/4C4C4C'
-      },
-      {
-        normal: 'https://dummyimage.com/700x700/000/000',
-        hover: 'https://dummyimage.com/700x700/4C4C4C/4C4C4C'
-      },
-      {
-        normal: 'https://dummyimage.com/700x700/000/000',
-        hover: 'https://dummyimage.com/700x700/4C4C4C/4C4C4C'
-      },
-      {
-        normal: 'https://dummyimage.com/700x700/000/000',
-        hover: 'https://dummyimage.com/700x700/4C4C4C/4C4C4C'
-      },
-      {
-        normal: 'https://dummyimage.com/700x700/000/000',
-        hover: 'https://dummyimage.com/700x700/4C4C4C/4C4C4C'
-      }
-    ];
+    this.loading = true;
+
+    // Subscribe to resolver data changes
+    this.route.data.subscribe((data: Data) => {
+      this.projects = data['projectsData']?.list || [];
+      this.loading = false;
+    });
   }
 }

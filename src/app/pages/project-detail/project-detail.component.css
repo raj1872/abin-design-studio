@@ -10,7 +10,6 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url(/assets/images/projects/waterfront-pavilion/waterfront-pavilion-banner.jpg);
   background-size: cover;
   background-position: center;
   transform: translateY(0);
@@ -56,6 +55,11 @@
 
 #abin-design-studio-project-detail-5 {
   background-image: url(/assets/images/projects/waterfront-pavilion/Waterfront_Clubhouse_5-web.jpg);
+}
+
+::ng-deep .section-abs-section .section-subtitle p.white-color p {
+  color: var(--white-color) !important;
+  font-family: var(--regular-font-family) !important;
 }
 
 .detail-banner-abs {
@@ -175,6 +179,11 @@
   visibility: visible;
   pointer-events: all;
   z-index: 9999;
+}
+
+
+.detail-video-section{
+  background-color: #DEDEDE !important;
 }
 
 .credits-popup {
@@ -315,7 +324,7 @@
 
   .inner-flex-sidepadding-gap {
     padding: 4rem 1.5rem 1.5rem 1.5rem;
-    gap: 4rem;
+    gap: 2.5rem;
   }
 
   .abin-sec-6-grid {
@@ -341,18 +350,23 @@
 
   .bg-image-section-detail {
     position: relative;
-    height: 50svh;
+    height: auto;
     background-size: cover;
     background-attachment: unset;
     background-position: center;
     width: 100%;
-    overflow: hidden;
+    overflow: visible;
+    background-image: unset !important;
   }
 
+  .section-abs-section .main-container {
+    padding: 0 !important;
+  }
 
-
+  .detail-video-section,
   .mobile-detail-images {
-    height: 45svh;
+    height: 50svh;
+    background-color: #DEDEDE !important;
     width: 100% !important;
   }
 
@@ -385,7 +399,7 @@
   .inner-abs-container,
   .inner-abs-container-2 {
     width: 100% !important;
-    padding: 2rem 0;
+    padding: 2rem 0 0 0 !important;
   }
 
   .inner-abs-container-2 {
@@ -440,10 +454,23 @@
     width: 2.5rem;
   }
 
-  .project-click-flex{
+  .project-click-flex {
     gap: 0.75rem !important;
   }
 
+  .section-abs-section {
+    position: relative;
+    bottom: unset;
+    left: unset;
+    width: unset;
+    transform: unset;
+  }
+
+  ::ng-deep .section-abs-section .section-subtitle p.white-color p {
+    color: var(--primary-color) !important;
+    font-size: 1.75rem !important;
+    font-family: var(--regular-font-family) !important;
+  }
 }
 
 
@@ -475,7 +502,7 @@
 
   #abin-design-studio-project-detail-1 {
     position: relative;
-    height: 70svh;
+    height: 100svh;
     overflow: hidden;
   }
 

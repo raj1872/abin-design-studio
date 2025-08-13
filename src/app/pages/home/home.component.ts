@@ -240,7 +240,7 @@ export class HomeComponent implements AfterViewInit, OnInit {
     } else {
       images = this.projects[this.activeTab]?.[this.activeYear] || [];
     }
-    console.log('🖼️ Filtered images for year', this.activeYear, ':', images);
+    // console.log('🖼️ Filtered images for year', this.activeYear, ':', images);
     return images;
   }
 
@@ -276,7 +276,7 @@ export class HomeComponent implements AfterViewInit, OnInit {
           : this.projects[this.activeTab]?.[year]?.length || 0;
       if (index < runningIndex + count) {
         if (this.activeYear !== year) {
-          console.log('✅ Active year updated to:', year);
+          // console.log('✅ Active year updated to:', year);
           this.activeYear = year;
         }
         break;
@@ -302,14 +302,14 @@ export class HomeComponent implements AfterViewInit, OnInit {
     const imageWidth = imageEls[0].offsetWidth + 16;
     const scrollTo = targetIndex * imageWidth;
     strip.scrollTo({ left: scrollTo, behavior: 'smooth' });
-    console.log(
-      '🧭 Scrolling to year:',
-      year,
-      'Index:',
-      targetIndex,
-      'Scroll Left:',
-      scrollTo
-    );
+    // console.log(
+    //   '🧭 Scrolling to year:',
+    //   year,
+    //   'Index:',
+    //   targetIndex,
+    //   'Scroll Left:',
+    //   scrollTo
+    // );
   }
 
   onImageClick(img: string): void {

@@ -8,6 +8,7 @@ import {
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-header',
@@ -15,6 +16,8 @@ import { isPlatformBrowser } from '@angular/common';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
+  categories: any[] = [];
+
   isMenuActive = false;
   isMenuLinksVisible = false;
   isProjectsPage = false;
@@ -27,13 +30,14 @@ export class HeaderComponent implements OnInit {
   isContactNavActive = false;
 
   private prevScrollTop = 0;
-  private scrollYBeforeLock = 0; // For iOS-safe scroll lock
+  private scrollYBeforeLock = 0;
   isHeaderHidden = false;
   isHeaderChanged = false;
 
   constructor(
     private router: Router,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private apiService: ApiService
   ) {}
 
   ngOnInit(): void {
@@ -44,15 +48,30 @@ export class HeaderComponent implements OnInit {
       .subscribe((event: any) => {
         this.checkPageType(event.urlAfterRedirects);
       });
+
+    // ✅ Fetch categories safely
+    // ✅ Fetch categories on init (SSR + browser safe)
+    this.apiService.getCategories().subscribe({
+      next: (res) => {
+        if (res && Array.isArray(res.list)) {
+          this.categories = res.list || [];
+        } else {
+          console.warn('Categories API did not return an array:', res);
+          this.categories = [];
+        }
+        // console.log('Header categories:', this.categories);
+      },
+      error: (err) => console.error('Error fetching categories:', err),
+    });
   }
 
   private checkPageType(url: string): void {
     this.isProjectsPage = /^\/projects(\/|$)/.test(url);
     this.isLandingPage = url === '/' || url.startsWith('/landing');
     this.isTeamPage = /^\/our-team(\/|$)/.test(url);
-    this.isPublicationsPage = /^\/publications(\/|$)/.test(url); // ✅ matches /publications or /publications/*
-    this.isNewsPage = /^\/news(\/|$)/.test(url); // ✅ matches /publications or /publications/*
-    this.isNewsDetailPage = /^\/news-detail(\/|$)/.test(url); // ✅ matches /publications or /publications/*
+    this.isPublicationsPage = /^\/publications(\/|$)/.test(url);
+    this.isNewsPage = /^\/news(\/|$)/.test(url);
+    this.isNewsDetailPage = /^\/news-detail(\/|$)/.test(url);
     this.projectListingTrue = /^\/projects-svg(\/|$)/.test(url);
   }
 
@@ -63,30 +82,22 @@ export class HeaderComponent implements OnInit {
     const html = document.documentElement;
 
     if (lock) {
-      // Store scroll position
       this.scrollYBeforeLock = window.scrollY;
-
-      // Lock scroll
       body.style.position = 'fixed';
       body.style.top = `-${this.scrollYBeforeLock}px`;
       body.style.left = '0';
       body.style.right = '0';
       body.style.overflow = 'hidden';
       body.style.height = '100%';
-
       html.style.overflow = 'hidden';
     } else {
-      // Unlock scroll
       body.style.position = '';
       body.style.top = '';
       body.style.left = '';
       body.style.right = '';
       body.style.overflow = '';
       body.style.height = '';
-
       html.style.overflow = '';
-
-      // Restore scroll position
       window.scrollTo(0, this.scrollYBeforeLock);
     }
   }
@@ -128,10 +139,8 @@ export class HeaderComponent implements OnInit {
     if (!isPlatformBrowser(this.platformId)) return;
 
     const scrollTop = window.scrollY;
-
     this.isHeaderHidden = scrollTop > this.prevScrollTop && scrollTop > 0;
     this.prevScrollTop = scrollTop;
-
     this.isHeaderChanged = scrollTop > 100;
   }
 }

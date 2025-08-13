@@ -1,12 +1,55 @@
 <div id="abin-design-studio-projects-page-wrapper" class="abin-design-studio-page-wrapper">
   <section class="abin-design-studio-section section-padding relative" id="abin-design-studio-projects-1">
     <div class="main-container">
-      <div class="project-listing-grid">
-        <a class="project-list-card" routerLink="/project-detail/" routerLinkActive="active" *ngFor="let project of projects">
-          <img [src]="project.normal" class="project-list-hover-disable" alt="">
-          <img [src]="project.hover" class="project-list-hover-enable" alt="">
-        </a>
-      </div>
+      <ng-container *ngIf="loading">
+        <div class="loading-container">
+          <div class="project-listing-grid">
+            <a class="project-list-card shimmer">
+              <img src="https://dummyimage.com/1080x1080/DEDEDE/DEDEDE" style="opacity: 0;visibility: hidden;"
+                class="project-list-hover-disable">
+              <img src="https://dummyimage.com/1080x1080/000000/000000" style="opacity: 0;visibility: hidden;"
+                class="project-list-hover-enable">
+            </a>
+            <a class="project-list-card shimmer">
+              <img src="https://dummyimage.com/1080x1080/DEDEDE/DEDEDE" style="opacity: 0;visibility: hidden;"
+                class="project-list-hover-disable">
+              <img src="https://dummyimage.com/1080x1080/000000/000000" style="opacity: 0;visibility: hidden;"
+                class="project-list-hover-enable">
+            </a>
+            <a class="project-list-card shimmer">
+              <img src="https://dummyimage.com/1080x1080/DEDEDE/DEDEDE" style="opacity: 0;visibility: hidden;"
+                class="project-list-hover-disable">
+              <img src="https://dummyimage.com/1080x1080/000000/000000" style="opacity: 0;visibility: hidden;"
+                class="project-list-hover-enable">
+            </a>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="!loading && projects.length === 0">
+        <div class="loading-container">No projects found...</div>
+      </ng-container>
+      <ng-container *ngIf="!loading && projects.length > 0">
+        <div class="project-listing-grid">
+          <a class="project-list-card shimmer" routerLink="/{{project.slug}}/" routerLinkActive="active"
+            *ngFor="let project of projects">
+
+            <!-- First image (hover disabled) -->
+            <!-- <img [src]="project.featured_images?.[0]?.image_view" class="project-list-hover-disable"
+              alt="{{ project.title || '' }}"> -->
+
+            <!-- Second image (hover enabled) -->
+            <!-- <img [src]="project.featured_images?.[1]?.image_view" class="project-list-hover-enable"
+              alt="{{ project.title || '' }}"> -->
+
+            <img [src]="project.featured_images?.[0]?.image_full + '&w=1080&h=1080&q=100'"
+              class="project-list-hover-disable" alt="{{ project.title || '' }}">
+            <img [src]="project.featured_images?.[1]?.image_full + '&w=1080&h=1080&q=100'"
+              class="project-list-hover-enable" alt="{{ project.title || '' }}">
+
+          </a>
+        </div>
+
+      </ng-container>
     </div>
   </section>
 </div>

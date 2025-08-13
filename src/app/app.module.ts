@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router'; // ✅ Import this
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +18,7 @@ import { LandingComponent } from './pages/landing/landing.component';
 import { CommonModule } from '@angular/common';
 import { PublicationsComponent } from './pages/publications/publications.component';
 import { NewsComponent } from './pages/news/news.component';
+
 import { NewsDetailComponent } from './pages/news-detail/news-detail.component';
 
 @NgModule({
@@ -39,7 +41,8 @@ import { NewsDetailComponent } from './pages/news-detail/news-detail.component';
     SwiperModule,
     FormsModule,
     CommonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

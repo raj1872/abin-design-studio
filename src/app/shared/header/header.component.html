@@ -1,5 +1,7 @@
-<div class="header-wrapper" [class.black-header-wrapper]="isProjectsPage || isNewsDetailPage || isNewsPage || isTeamPage || projectListingTrue || isPublicationsPage" [class.webmenu_hidden]="isHeaderHidden"
-  [class.header_change]="isHeaderChanged" [class.headerActiveOpen]="isMenuActive" *ngIf="!isLandingPage">
+<div class="header-wrapper"
+  [class.black-header-wrapper]="isProjectsPage || isNewsDetailPage || isNewsPage || isTeamPage || projectListingTrue || isPublicationsPage"
+  [class.webmenu_hidden]="isHeaderHidden" [class.header_change]="isHeaderChanged"
+  [class.headerActiveOpen]="isMenuActive" *ngIf="!isLandingPage">
 
   <div class="header-flex main-container">
     <div class="header-logo">
@@ -39,60 +41,22 @@
                 Projects
               </p>
             </div>
-            <div class="inner-flex inner-flex-common">
+            <div class="inner-flex inner-flex-common" *ngFor="let category of categories">
               <div class="section-subtitle2">
-                <p class="bold-fonts  lh1">
-                  Architure
+                <p class="bold-fonts lh1">
+                  {{ category.name }}
                 </p>
               </div>
-              <div class="inner-flex">
-                <div class="section-paragraph">
-                  <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()" class=" lh1">Educational</a>
-                </div>
-                <div class="section-paragraph">
-                  <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()" class=" lh1">Hospitality</a>
-                </div>
-                <div class="section-paragraph">
-                  <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()" class=" lh1">Public</a>
-                </div>
-                <div class="section-paragraph">
-                  <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()" class=" lh1">Homes</a>
-                </div>
-                <div class="section-paragraph">
-                  <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()" class=" lh1">Housing</a>
-                </div>
-                <div class="section-paragraph">
-                  <a routerLink="/projects" routerLinkActive="active" (click)="closeMenu()" class=" lh1">Experience</a>
+              <div class="inner-flex" *ngIf="category.child_categories?.length">
+                <div class="section-paragraph" *ngFor="let child of category.child_categories">
+                  <a routerLink="/projects/{{category.slug}}/{{child.slug}}" routerLinkActive="active" (click)="closeMenu()"
+                    class="lh1">
+                    {{ child.name }}
+                  </a>
                 </div>
               </div>
             </div>
-            <div class="inner-flex inner-flex-common">
-              <div class="section-subtitle2">
-                <p class="bold-fonts  lh1">
-                  Interior
-                </p>
-              </div>
-              <div class="inner-flex">
-                <div class="section-paragraph">
-                  <a routerLink="/projects-svg" routerLinkActive="active" (click)="closeMenu()" class=" lh1">Educational</a>
-                </div>
-                <div class="section-paragraph">
-                  <a routerLink="/projects-svg" routerLinkActive="active" (click)="closeMenu()" class=" lh1">Hospitality</a>
-                </div>
-                <div class="section-paragraph">
-                  <a routerLink="/projects-svg" routerLinkActive="active" (click)="closeMenu()" class=" lh1">Public</a>
-                </div>
-                <div class="section-paragraph">
-                  <a routerLink="/projects-svg" routerLinkActive="active" (click)="closeMenu()" class=" lh1">Homes</a>
-                </div>
-                <div class="section-paragraph">
-                  <a routerLink="/projects-svg" routerLinkActive="active" (click)="closeMenu()" class=" lh1">Housing</a>
-                </div>
-                <div class="section-paragraph">
-                  <a routerLink="/projects-svg" routerLinkActive="active" (click)="closeMenu()" class=" lh1">Experience</a>
-                </div>
-              </div>
-            </div>
+
 
           </div>
         </div>
@@ -114,7 +78,8 @@
                 <a routerLink="/our-team" routerLinkActive="active" (click)="closeMenu()" class=" lh1">People</a>
               </div>
               <div class="section-paragraph">
-                <a routerLink="/publications" routerLinkActive="active" (click)="closeMenu()" class=" lh1">Publications</a>
+                <a routerLink="/publications" routerLinkActive="active" (click)="closeMenu()"
+                  class=" lh1">Publications</a>
               </div>
             </div>
           </div>
@@ -128,7 +93,8 @@
             </a>
           </li>
           <li>
-            <a href="javascript:void(0);" class="section-paragraph" id="contact-detail-navigation" (click)="openContactNav()">
+            <a href="javascript:void(0);" class="section-paragraph" id="contact-detail-navigation"
+              (click)="openContactNav()">
               <p class="semibold-fonts">Contact</p>
             </a>
           </li>
@@ -148,7 +114,7 @@
   </ng-container>
   <ng-container id="header-navigation-contact" *ngIf="isContactNavActive">
     <div class="contact-navigation-wrapper relative">
-      <div class="contact-nav-close-click"  (click)="closeContactNav();">
+      <div class="contact-nav-close-click" (click)="closeContactNav();">
         <img src="./assets/images/back-icon.svg" alt="">
       </div>
       <div class="inner-flex inner-flex-medium inner-end-flex">
