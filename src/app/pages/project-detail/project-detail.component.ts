@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { ApiService } from '../../services/api.service'; // 👈 adjust path as needed
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-project-detail',
@@ -21,12 +21,9 @@ import { ApiService } from '../../services/api.service'; // 👈 adjust path as 
   styleUrls: ['./project-detail.component.css'],
 })
 export class ProjectDetailComponent implements OnInit, AfterViewInit {
-  @ViewChild('parallaxBg', { static: true }) parallaxBg!: ElementRef;
-  @ViewChildren('autoVideo', { read: ElementRef }) autoVideos!: QueryList<
-    ElementRef<HTMLVideoElement>
-  >;
-  @ViewChildren('scalableImage', { read: ElementRef })
-  scalableImages!: QueryList<ElementRef>;
+  @ViewChild('parallaxBg', { static: false }) parallaxBg!: ElementRef;
+  @ViewChildren('autoVideo', { read: ElementRef }) autoVideos!: QueryList<ElementRef<HTMLVideoElement>>;
+  @ViewChildren('scalableImage', { read: ElementRef }) scalableImages!: QueryList<ElementRef>;
 
   isBrowser = false;
 
@@ -36,12 +33,15 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
   isPublicationOpen = false;
   isOverlayActive = false;
 
-  // top offset used for fixed-position popup
   sectionTop = 0;
 
   private wordSpans: NodeListOf<HTMLSpanElement> = [] as any;
   private totalSpans = 0;
   private container: HTMLElement | null = null;
+
+  projectDetailObj: any = {};
+  loading = true;
+  bannerImageUrl: string = '';
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -57,7 +57,6 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
       this.updateSectionTop();
     }
 
-    // ✅ Get slug from route and fetch details
     this.route.paramMap.subscribe((params) => {
       const slug = params.get('slug');
       if (slug) {
@@ -68,24 +67,31 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     if (this.isBrowser) {
-      this.onScroll();
-      // this.setupWordRevealEffect();
-
-      import('aos').then((AOS: any) => {
-        AOS.init({
-          duration: 800,
-          easing: 'ease-in-out',
-          once: true,
-        });
-      });
-      // Initial setup
-      this.setupVideoAutoplay();
-
-      // Handle any new videos added later (e.g., *ngIf)
-      this.autoVideos.changes.subscribe(() => {
-        this.setupVideoAutoplay();
-      });
+      this.initScrollEffects();
     }
+  }
+
+  // ========= Centralized initialization =========
+  private initScrollEffects(): void {
+    if (!this.isBrowser) return;
+
+    this.setupWordRevealEffect();
+    this.setupVideoAutoplay();
+
+    this.autoVideos.changes.subscribe(() => {
+      this.setupVideoAutoplay();
+    });
+
+    import('aos').then((AOS: any) => {
+      AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true,
+      });
+      AOS.refresh();
+    });
+
+    this.onScroll();
   }
 
   private setupVideoAutoplay(): void {
@@ -96,52 +102,37 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
         entries.forEach((entry) => {
           const videoEl = entry.target as HTMLVideoElement;
           if (entry.isIntersecting) {
-            // Ensure proper iOS Safari autoplay
             videoEl.muted = true;
             videoEl.playsInline = true;
             videoEl.loop = true;
-            videoEl.load(); // reload video
-            videoEl
-              .play()
-              .then(() => console.log('Video playing:', videoEl.src))
-              .catch((err) =>
-                console.warn('Video play blocked:', videoEl.src, err)
-              );
+            videoEl.load();
+            videoEl.play().catch(() => {});
           } else {
             videoEl.pause();
-            console.log('Video paused:', videoEl.src);
           }
         });
       },
-      { threshold: 0.5 } // play when 50% visible
+      { threshold: 0.5 }
     );
 
-    // Observe all videos
     this.autoVideos.forEach((videoRef) => {
       observer.observe(videoRef.nativeElement);
     });
   }
 
-  projectDetailObj: any = {};
-  loading = true;
-
-  bannerImageUrl: string = '';
-
   private fetchProjectDetail(slug: string) {
     this.loading = true;
-    const minLoadingTime = 1500; // milliseconds
+    const minLoadingTime = 1500;
     const startTime = Date.now();
 
     this.apiService.getProjectBySlug(slug).subscribe({
       next: (res: any) => {
-        const projectData =
-          Array.isArray(res?.list) && res.list.length ? res.list[0] : res || {};
+        const projectData = Array.isArray(res?.list) && res.list.length ? res.list[0] : res || {};
         this.projectDetailObj = {
           ...projectData,
           sections: projectData?.sections || [],
         };
 
-        // Pick banner image if exists
         const bannerSection = this.projectDetailObj.sections.find(
           (section: any) => section.type === 'banner-block'
         );
@@ -150,7 +141,6 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
         }
 
         if (this.isBrowser) {
-          // Collect all image URLs from sections
           const imageUrls: string[] = [];
           this.projectDetailObj.sections.forEach((section: any) => {
             if (section.content?.image_view) {
@@ -161,13 +151,11 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
           const finishLoading = () => {
             const elapsed = Date.now() - startTime;
             const remaining = minLoadingTime - elapsed;
-            setTimeout(
-              () => {
-                this.loading = false;
-                this.setupWordRevealEffect();
-              },
-              remaining > 0 ? remaining : 0
-            );
+
+            setTimeout(() => {
+              this.loading = false;
+              setTimeout(() => this.initScrollEffects());
+            }, remaining > 0 ? remaining : 0);
           };
 
           if (imageUrls.length > 0) {
@@ -183,11 +171,9 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
               };
             });
           } else {
-            // No images, just wait for minimum time
             finishLoading();
           }
         } else {
-          // SSR or non-browser: stop loading immediately
           this.loading = false;
         }
       },
@@ -200,9 +186,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
 
   private updateSectionTop(): void {
     if (!this.isBrowser) return;
-    const section = document.getElementById(
-      'abin-design-studio-project-detail-2'
-    );
+    const section = document.getElementById('abin-design-studio-project-detail-2');
     if (!section) return;
     const rect = section.getBoundingClientRect();
     const top = Math.max(0, Math.round(rect.top));
@@ -228,13 +212,18 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
     const parallaxSpeed = isMobile ? 0.4 : 0.4;
     const offset = scrollTop * parallaxSpeed;
 
-    if (this.parallaxBg?.nativeElement) {
+    if (this.parallaxBg && this.parallaxBg.nativeElement) {
       this.parallaxBg.nativeElement.style.transform = `translate3d(0, ${offset}px, 0)`;
     }
 
     this.updateWordRevealEffect();
+    this.applyScalableImages();
+  }
 
-    this.scalableImages?.forEach((imgRef: ElementRef) => {
+  private applyScalableImages(): void {
+    if (!this.scalableImages) return;
+
+    this.scalableImages.forEach((imgRef: ElementRef) => {
       const imgEl = imgRef.nativeElement as HTMLElement;
       const rect = imgEl.getBoundingClientRect();
       const inView = rect.top < window.innerHeight && rect.bottom > 0;
@@ -262,7 +251,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
       this.updateSectionTop();
     }
     this.isCreditOpen = true;
-    this.isOverlayActive = true;
+    // this.isOverlayActive = true;
     setTimeout(() => {
       this.isInnerPopupActive = true;
     }, 1000);
@@ -288,7 +277,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
   }
 
   setupWordRevealEffect(): void {
-    if (!this.isBrowser) return; // ✅ Prevents SSR crash
+    if (!this.isBrowser) return;
 
     this.container = document.getElementById('scroll-reveal-text');
     if (!this.container || this.container.classList.contains('words-enhanced'))

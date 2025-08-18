@@ -2,6 +2,7 @@ import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { ApiService } from './api.service';
 import { TransferState, makeStateKey } from '@angular/platform-browser';
 import { isPlatformServer } from '@angular/common';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ProjectsPreloadService {
@@ -11,28 +12,46 @@ export class ProjectsPreloadService {
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
-  preloadAllProjects(categories: string[], subCategoriesMap: { [cat: string]: string[] }) {
+  async preloadAllProjects(
+    categories: string[],
+    subCategoriesMap: { [cat: string]: string[] }
+  ) {
     if (!isPlatformServer(this.platformId)) return;
 
-    const promises: Promise<any>[] = [];
+    const promises: Promise<void>[] = [];
 
     for (const cat of categories) {
-      const subCats = subCategoriesMap[cat] || ['all'];
+      const subCats = subCategoriesMap[cat] || [];
 
-      for (const sub of subCats) {
-        // ✅ Wrap string key using makeStateKey
-        const key = makeStateKey<any>(`projects-${cat}-${sub}`);
+      if (subCats.length === 0) {
+        // 🔹 Only category
+        const key = makeStateKey<any>(cat);
+        if (!this.state.hasKey(key)) {
+          const p = firstValueFrom(this.apiService.getProjects(cat))
+            .then((data) => this.state.set(key, data))
+            .catch((err) =>
+              console.error(`❌ Error preloading projects for ${cat}:`, err)
+            );
+          promises.push(p);
+        }
+      } else {
+        // 🔹 Category + Subcategories
+        for (const sub of subCats) {
+          if (!sub || sub.toLowerCase() === 'all') continue; // 🚫 skip "all"
 
-        if (this.state.hasKey(key)) continue;
+          const key = makeStateKey<any>(`${cat}-${sub}`);
+          if (this.state.hasKey(key)) continue;
 
-        promises.push(
-          this.apiService.getProjects(cat, sub).toPromise().then(data => {
-            this.state.set(key, data);
-          })
-        );
+          const p = firstValueFrom(this.apiService.getProjects(cat, sub))
+            .then((data) => this.state.set(key, data))
+            .catch((err) =>
+              console.error(`❌ Error preloading projects for ${cat}/${sub}:`, err)
+            );
+          promises.push(p);
+        }
       }
     }
 
-    return Promise.all(promises);
+    await Promise.all(promises);
   }
 }

@@ -154,6 +154,55 @@
 }
 
 
+
+@font-face {
+  font-family: 'Helvetica Neue Medium';
+  src: url('./assets/fonts/HelveticaNeue/HelveticaNeue-Medium.woff2') format('woff2'),
+    url('./assets/fonts/HelveticaNeue/HelveticaNeue-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue Light';
+  src: url('./assets/fonts/HelveticaNeue/HelveticaNeue-Light.woff2') format('woff2'),
+    url('./assets/fonts/HelveticaNeue/HelveticaNeue-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue Bold';
+  src: url('./assets/fonts/HelveticaNeue/HelveticaNeue-Bold.woff2') format('woff2'),
+    url('./assets/fonts/HelveticaNeue/HelveticaNeue-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue Thin';
+  src: url('./assets/fonts/HelveticaNeue/HelveticaNeue-Thin.woff2') format('woff2'),
+    url('./assets/fonts/HelveticaNeue/HelveticaNeue-Thin.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue Roman';
+  src: url('./assets/fonts/HelveticaNeue/HelveticaNeue-Roman.woff2') format('woff2'),
+    url('./assets/fonts/HelveticaNeue/HelveticaNeue-Roman.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+
+
 :root {
   /* colors */
   --primary-color: #000000;
@@ -167,7 +216,7 @@
   /* font-sizes */
   --big-banner-title-font-size: 9.5rem;
   --banner-title-font-size: 4.5rem;
-  --section-title-font-size: 4rem;
+  --section-title-font-size: 2.25rem;
   --section-subtitle-font-size: 3rem;
   --section-subtitle-font-size2: 2rem;
   --paragraph-font-size: 1.5rem;
@@ -175,12 +224,12 @@
   --link-font-size: 1rem;
   --text-font-size: 1rem;
   /* font-families */
-  --light-font-family: 'Satoshi-Light';
-  --regular-font-family: 'Satoshi-Light';
-  --medium-font-family: 'Satoshi-Light';
-  --semibold-font-family: 'Helvetica-Bold';
-  --bold-font-family: 'Satoshi-Bold';
-  --black-font-family: 'Satoshi-Black';
+  --light-font-family: 'Helvetica Neue Light';
+  --regular-font-family: 'Helvetica Neue Roman';
+  --medium-font-family: 'Helvetica Neue Medium';
+  --semibold-font-family: 'Helvetica Neue Bold';
+  --bold-font-family: 'Helvetica Neue Bold';
+  --black-font-family: 'Helvetica Neue Bold';
   /* other */
   --common-transition: all 0.6s ease;
   --web-border-radius: 0.625rem;
@@ -238,6 +287,14 @@
 
 .regular-fonts {
   font-family: var(--regular-font-family) !important;
+}
+
+.light-fonts{
+  font-family: var(--light-font-family) !important;
+}
+
+.medium-fonts {
+  font-family: var(--medium-font-family) !important;
 }
 
 .bold-fonts {
@@ -969,12 +1026,10 @@ button:focus-visible {
 }
 
 .header-flex {
-  display: grid;
-  justify-content: center;
-  gap: var(--small-gap-size);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  padding-right: 0;
-  grid-template-columns: repeat(3, 1fr);
 }
 
 .header-links-ul ul {
@@ -1134,12 +1189,12 @@ button:focus-visible {
   transform: translateY(-11px) rotate(-45deg);
 }
 
-.main-pages-wrapper-content{
+.main-pages-wrapper-content {
   min-height: 90svh;
 }
 
 
-.abin-design-studio-page-wrapper{
+.abin-design-studio-page-wrapper {
   min-height: 95svh;
 }
 

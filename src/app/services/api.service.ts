@@ -18,7 +18,10 @@ export class ApiService {
   ) {}
 
   // ===== Helper for SSR caching =====
-  private getWithTransferState<T>(keyStr: string, apiCall: Observable<T>): Observable<T> {
+  private getWithTransferState<T>(
+    keyStr: string,
+    apiCall: Observable<T>
+  ): Observable<T> {
     const key = makeStateKey<T>(keyStr);
 
     if (this.state.hasKey(key)) {
@@ -36,22 +39,44 @@ export class ApiService {
 
   // ===== API Functions =====
   getCategories(): Observable<any> {
-    return this.getWithTransferState('categories', this.http.post(`${this.baseUrl}/categories`, {}));
+    return this.getWithTransferState(
+      'categories',
+      this.http.post(`${this.baseUrl}/categories`, {})
+    );
   }
 
-  getProjects(category_slug?: string, sub_category_slug?: string): Observable<any> {
+  getProjects(
+    category_slug?: string,
+    sub_category_slug?: string
+  ): Observable<any> {
     const payload: any = {};
-    if (category_slug) payload.category_slug = category_slug;
-    if (sub_category_slug) payload.sub_category_slug = sub_category_slug;
+
+    if (category_slug) {
+      payload.category_slug = category_slug;
+    }
+
+    if (sub_category_slug && sub_category_slug.trim() !== '') {
+      payload.sub_category_slug = sub_category_slug;
+    }
+
+    // 🔹 Build cache key only from slugs
+    let cacheKey = '';
+    if (category_slug) cacheKey = category_slug;
+    if (sub_category_slug && sub_category_slug.trim() !== '') {
+      cacheKey = cacheKey ? `${cacheKey}-${sub_category_slug}` : sub_category_slug;
+    }
 
     return this.getWithTransferState(
-      `projects-${category_slug || 'all'}-${sub_category_slug || 'all'}`,
+      cacheKey,
       this.http.post(`${this.baseUrl}/projects`, payload)
     );
   }
 
   getProjectBySlug(slug: string): Observable<any> {
     const payload: any = { slug };
-    return this.getWithTransferState(`project-${slug}`, this.http.post(`${this.baseUrl}/projects`, payload));
+    return this.getWithTransferState(
+      slug,
+      this.http.post(`${this.baseUrl}/projects`, payload)
+    );
   }
 }

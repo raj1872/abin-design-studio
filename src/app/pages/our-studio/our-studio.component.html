@@ -1,42 +1,29 @@
-<div id="abin-design-studio-studio-page-wrapper" class="abin-design-studio-page-wrapper">
-  <section class="abin-design-studio-section relative parallax-section" id="abin-design-studio-studio-1">
-    <div class="parallax-studio"></div>
-    <div class="image-overlay"></div>
+<div id="abin-design-studio-studio-page-wrapper" class="abin-design-studio-page-wrapper relative">
+  <div class="overlay"></div>
+  <section class="abin-design-studio-section section-padding-2 relative" id="abin-design-studio-studio-1">
     <div class="main-container">
-      <div class="inner-flex inner-flex-small studio-content-banner">
-        <div class="section-title lh1">
-          <h1 class="white-color lh1">
-            Our Studio
-          </h1>
-        </div>
-        <div class="section-paragraph">
-          <p class="white-color">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque, tenetur quaerat beatae magnam facilis
-            aspernatur. In, neque cupiditate? Placeat, rerum? Doloribus voluptatem tempora, dolor commodi consequuntur
-            delectus accusantium saepe vel!
-          </p>
+      <div class="about-flex-wrapper">
+        <div class="about-swiper-flex">
+          <section class="our-studio">
+            <div #swiperContainer class="swiper">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide" *ngFor="let img of images">
+                  <img [src]="img" alt="Our Studio" class="studio-image" />
+                </div>
+              </div>
+
+              <!-- Pagination -->
+              <div class="swiper-pagination swiper-pagination-studio"></div>
+            </div>
+          </section>
+
+
+
+
+
         </div>
       </div>
     </div>
   </section>
-  <section class="abin-design-studio-section relative parallax-section" id="abin-design-studio-studio-2">
-    <!-- <div class="parallax-studio-2"></div> -->
-    <div class="image-overlay2"></div>
-    <div class="main-container">
-      <div class="inner-flex inner-flex-small how-work-content-banner">
-        <div class="section-title lh1">
-          <h1 class="white-color lh1">
-            How we work?
-          </h1>
-        </div>
-        <div class="section-paragraph">
-          <p class="white-color">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque, tenetur quaerat beatae magnam facilis
-            aspernatur. In, neque cupiditate? Placeat, rerum? Doloribus voluptatem tempora, dolor commodi consequuntur
-            delectus accusantium saepe vel!
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <section class="abin-design-studio-section section-padding relative" id="abin-design-studio-studio-2"></section>
 </div>

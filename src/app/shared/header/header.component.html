@@ -11,13 +11,13 @@
       </a>
     </div>
 
-    <div id="header-search-input-wrapper" class="form-card relative">
+    <!-- <div id="header-search-input-wrapper" class="form-card relative">
       <div class="form-input-icon">
         <img src="assets/images/search-white.svg" alt="" />
       </div>
       <input type="search" class="form-control-abin-design-studio form-control-abin-design-studio-search"
         placeholder="Search..." />
-    </div>
+    </div> -->
 
     <!-- Web bar -->
     <div class="web-bar" (click)="toggleMenu();closeContactNav();" [class.active]="isMenuActive">
@@ -33,7 +33,65 @@
 <div class="menu-wrapper" [class.active]="isMenuActive">
   <ng-container id="header-navigation-main" *ngIf="!isContactNavActive">
     <div class="main-nav-flex">
-      <div class="menu-wrapper-web-links-grid main-container" [class.visible]="isMenuLinksVisible">
+      <div class="header-links-flex inner-flex inner-flex-medium inner-flex-center">
+        <div class="section-paragraph">
+          <p class="uppercase bold-fonts lh1" (click)="closeMenu()">Search</p>
+        </div>
+        <div class="section-paragraph">
+          <p class="uppercase bold-fonts lh1" (click)="closeMenu()">Projects</p>
+
+          <ng-container>
+            <div class="inner-flex project-header-links inner-flex-small">
+              <div class="projects-link-flex-row" *ngFor="let category of categories; let i = index">
+
+                <!-- Category -->
+                <div class="section-paragraph">
+                  <p class="regular-fonts c-pointer category-click lh1" (click)="toggleCategory(i)">
+                    {{ category.name }}
+                  </p>
+                </div>
+
+                <!-- Child Categories -->
+                <ng-container>
+                  <div class="inner-project-flex-row" #childContainer
+                    [style.width.px]="activeCategory === i ? childContainer.scrollWidth : 0"
+                    [style.opacity]="activeCategory === i ? 1 : 0"
+                    [style.transition]="'width 0.2s ease, opacity 0.2s ease'">
+
+                    <div class="section-paragraph c-pointer" *ngFor="let child of category.child_categories">
+                      <a routerLink="/projects/{{category.slug}}/{{child.slug}}" routerLinkActive="active"
+                        (click)="closeMenu()" class="lh1 light-fonts">
+                        {{ child.name }}
+                      </a>
+                    </div>
+                  </div>
+
+                </ng-container>
+
+              </div>
+            </div>
+          </ng-container>
+        </div>
+
+        <div class="section-paragraph">
+          <p class="uppercase bold-fonts lh1" routerLink="/studio" routerLinkActive="active" (click)="closeMenu()" >Practice</p>
+        </div>
+        <div class="section-paragraph">
+          <p class="uppercase bold-fonts lh1" (click)="closeMenu()">News</p>
+        </div>
+        <div class="section-paragraph">
+          <p class="uppercase bold-fonts lh1" (click)="closeMenu()">Contact</p>
+        </div>
+        <div class="section-text">
+          <a href="https://maps.app.goo.gl/DfwBigGrbSbFzM749" target="_blank" class="text-center light-fonts" (click)="closeMenu()">
+            62/2, Hindustan Park Rd, <br class="hide-tab-mobile">
+            Golpark, Hindustan Park, <br class="hide-tab-mobile">
+            Gariahat, Kolkata, <br class="hide-tab-mobile">
+            West Bengal 700029.
+          </a>
+        </div>
+      </div>
+      <!-- <div class="menu-wrapper-web-links-grid main-container" [class.visible]="isMenuLinksVisible">
         <div class="menu-wrapper-column">
           <div class="inner-flex inner-flex-small main-nav-flex-project">
             <div class="section-content">
@@ -109,7 +167,7 @@
             </a>
           </li>
         </ul>
-      </div>
+      </div> -->
     </div>
   </ng-container>
   <ng-container id="header-navigation-contact" *ngIf="isContactNavActive">

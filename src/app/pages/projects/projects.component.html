@@ -1,6 +1,22 @@
 <div id="abin-design-studio-projects-page-wrapper" class="abin-design-studio-page-wrapper">
   <section class="abin-design-studio-section section-padding relative" id="abin-design-studio-projects-1">
     <div class="main-container">
+      <div class="all-categories-link-tabs">
+        <div *ngIf="!loading">
+          <div class="section-paragraph">
+            <p class="semibold-fonts">
+              {{ selectedCategory.name }}
+            </p>
+          </div>
+          <ul class="all-sub-flex">
+            <li *ngFor="let child of childCategories" class="section-paragraph">
+              <a [routerLink]="['/projects', selectedCategory.slug, child.slug]">
+                {{ child.name }}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
       <ng-container *ngIf="loading">
         <div class="loading-container">
           <div class="project-listing-grid">
@@ -30,7 +46,7 @@
       </ng-container>
       <ng-container *ngIf="!loading && projects.length > 0">
         <div class="project-listing-grid">
-          <a class="project-list-card shimmer" routerLink="/{{project.slug}}/" routerLinkActive="active"
+          <a class="project-list-card" routerLink="/{{project.slug}}/" routerLinkActive="active"
             *ngFor="let project of projects">
 
             <!-- First image (hover disabled) -->
@@ -41,10 +57,10 @@
             <!-- <img [src]="project.featured_images?.[1]?.image_view" class="project-list-hover-enable"
               alt="{{ project.title || '' }}"> -->
 
-            <img [src]="project.featured_images?.[0]?.image_full + '&w=1080&h=1080&q=100'"
-              class="project-list-hover-disable" alt="{{ project.title || '' }}">
-            <img [src]="project.featured_images?.[1]?.image_full + '&w=1080&h=1080&q=100'"
-              class="project-list-hover-enable" alt="{{ project.title || '' }}">
+            <img [src]="project.featured_icon_image" class="project-list-hover-disable project-icon-image"
+              alt="{{ project.title || '' }}">
+            <img [src]="project.featured_image_full + '&w=1080&h=1080&q=100'" class="project-list-hover-enable"
+              alt="{{ project.title || '' }}">
 
           </a>
         </div>

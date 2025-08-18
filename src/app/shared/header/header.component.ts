@@ -55,8 +55,9 @@ export class HeaderComponent implements OnInit {
       next: (res) => {
         if (res && Array.isArray(res.list)) {
           this.categories = res.list || [];
+          // console.log(this.categories);
         } else {
-          console.warn('Categories API did not return an array:', res);
+          // console.log('Categories API did not return an array:', res);
           this.categories = [];
         }
         // console.log('Header categories:', this.categories);
@@ -119,6 +120,12 @@ export class HeaderComponent implements OnInit {
     this.isMenuActive = false;
     this.isMenuLinksVisible = false;
     this.lockScroll(false);
+  }
+
+  activeCategory: number | null = null;
+
+  toggleCategory(index: number): void {
+    this.activeCategory = this.activeCategory === index ? null : index;
   }
 
   openContactNav(): void {

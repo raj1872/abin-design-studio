@@ -40,7 +40,6 @@
   left: 50%;
   transform: translateX(-50%);
   max-width: 1760px;
-  padding-right: 15%;
 }
 
 
@@ -306,6 +305,10 @@
   transition: left 0.3s ease;
 }
 
+.section-title-home-container {
+  width: 55%;
+}
+
 .year-labels {
   display: flex;
   justify-content: space-between;
@@ -328,6 +331,60 @@
   opacity: 0.75;
   user-select: none;
   font-size: 0.85rem;
+}
+
+
+.home-redirect-links {
+  padding-bottom: 0.5rem;
+  position: relative;
+  cursor: pointer;
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+.home-redirect-links::after {
+  width: 0%;
+  transition: var(--common-transition);
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background-color: var(--white-color);
+}
+
+.home-redirect-links:hover::after {
+  transition: var(--common-transition);
+  width: 100%;
+}
+
+.flex-row-home-banners {
+  display: flex;
+  flex-direction: row;
+  gap: var(--medium-gap-size);
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.home-redirect-links p {
+  font-size: 1.25rem;
+  color: var(--white-color);
+  display: block;
+}
+
+.home-redirect-links .arrow-outword {
+  width: 0.75rem;
+  transform: translate(0px,0px);
+  transition: var(--common-transition);
+}
+
+.home-redirect-links:hover .arrow-outword {
+  transform: translate(4px, -4px);
+  transition: var(--common-transition);
 }
 
 .year-labels span:hover,

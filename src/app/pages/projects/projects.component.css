@@ -9,7 +9,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url(/assets/images/plus-icon.png);
+  /* background-image: url(/assets/images/plus-icon.png); */
   background-repeat: space;
   background-attachment: fixed;
   background-position: center;
@@ -57,13 +57,14 @@
 .project-listing-grid {
   display: grid;
   gap: var(--small-gap-size);
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(5, 1fr);
+  padding-top: 4.5rem;
   row-gap: var(--medium-gap-size);
 }
 
 .project-list-card {
-  aspect-ratio: 1;
-  background-color: #DEDEDE;
+  aspect-ratio: 16/9;
+  background-color: #FFFFFF;
   width: 100%;
   position: relative;
   overflow: hidden;
@@ -75,7 +76,19 @@
   position: relative;
   height: 100%;
   width: 100%;
-  aspect-ratio: 1;
+  aspect-ratio: 16/9;
+}
+
+.all-sub-flex{
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.project-icon-image{
+  height: auto !important;
+  object-fit: contain;
 }
 
 .project-list-card img.project-list-hover-enable {
@@ -84,7 +97,7 @@
   width: 100%;
   top: 50%;
   left: 50%;
-  aspect-ratio: 1;
+  aspect-ratio: 16/9;
   transform: translate(-50%, -50%);
   opacity: 0;
   visibility: hidden;
