@@ -21,6 +21,7 @@ import { NewsComponent } from './pages/news/news.component';
 
 import { NewsDetailComponent } from './pages/news-detail/news-detail.component';
 import { OurStudioComponent } from './pages/our-studio/our-studio.component';
+import { ContactComponent } from './pages/contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { OurStudioComponent } from './pages/our-studio/our-studio.component';
     LandingComponent,
     NewsComponent,
     NewsDetailComponent,
+    ContactComponent,
     OurStudioComponent,
     HomeComponent,
     ProjectsComponent,

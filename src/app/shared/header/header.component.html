@@ -1,5 +1,5 @@
 <div class="header-wrapper"
-  [class.black-header-wrapper]="isProjectsPage || isNewsDetailPage || isNewsPage || isTeamPage || projectListingTrue || isPublicationsPage"
+  [class.black-header-wrapper]="isProjectsPage || isNewsDetailPage || isTeamPage || projectListingTrue || isPublicationsPage"
   [class.webmenu_hidden]="isHeaderHidden" [class.header_change]="isHeaderChanged"
   [class.headerActiveOpen]="isMenuActive" *ngIf="!isLandingPage">
 
@@ -35,10 +35,10 @@
     <div class="main-nav-flex">
       <div class="header-links-flex inner-flex inner-flex-medium inner-flex-center">
         <div class="section-paragraph">
-          <p class="uppercase bold-fonts lh1" (click)="closeMenu()">Search</p>
+          <p class="uppercase bold-fonts c-pointer lh1" (click)="closeMenu()">Search</p>
         </div>
         <div class="section-paragraph">
-          <p class="uppercase bold-fonts lh1" (click)="closeMenu()">Projects</p>
+          <p class="uppercase bold-fonts c-pointer lh1" (click)="closeMenu()">Projects</p>
 
           <ng-container>
             <div class="inner-flex project-header-links inner-flex-small">
@@ -53,43 +53,44 @@
 
                 <!-- Child Categories -->
                 <ng-container>
-                  <div class="inner-project-flex-row" #childContainer
-                    [style.width.px]="activeCategory === i ? childContainer.scrollWidth : 0"
-                    [style.opacity]="activeCategory === i ? 1 : 0"
-                    [style.transition]="'width 0.2s ease, opacity 0.2s ease'">
-
-                    <div class="section-paragraph c-pointer" *ngFor="let child of category.child_categories">
-                      <a routerLink="/projects/{{category.slug}}/{{child.slug}}" routerLinkActive="active"
-                        (click)="closeMenu()" class="lh1 light-fonts">
-                        {{ child.name }}
-                      </a>
-                    </div>
-                  </div>
+                 <div class="inner-project-flex-row" #childContainer
+     [class.active]="activeCategory === i">
+  <div class="section-paragraph c-pointer" *ngFor="let child of category.child_categories">
+    <a routerLink="/projects/{{category.slug}}/{{child.slug}}" routerLinkActive="active"
+       (click)="closeMenu()" class="lh1 light-fonts">
+      {{ child.name }}
+    </a>
+  </div>
+</div>
 
                 </ng-container>
 
               </div>
             </div>
           </ng-container>
+
         </div>
 
         <div class="section-paragraph">
-          <p class="uppercase bold-fonts lh1" routerLink="/studio" routerLinkActive="active" (click)="closeMenu()" >Practice</p>
+          <p class="uppercase bold-fonts c-pointer lh1" routerLink="/studio" routerLinkActive="active"
+            (click)="closeMenu()">Practice</p>
         </div>
         <div class="section-paragraph">
-          <p class="uppercase bold-fonts lh1" (click)="closeMenu()">News</p>
+          <p class="uppercase bold-fonts c-pointer lh1" routerLink="/news" routerLinkActive="active"
+            (click)="closeMenu()">News</p>
         </div>
         <div class="section-paragraph">
-          <p class="uppercase bold-fonts lh1" (click)="closeMenu()">Contact</p>
+          <p class="uppercase bold-fonts c-pointer lh1" routerLink="/contact" routerLinkActive="active"
+            (click)="closeMenu()">Contact</p>
         </div>
-        <div class="section-text">
-          <a href="https://maps.app.goo.gl/DfwBigGrbSbFzM749" target="_blank" class="text-center light-fonts" (click)="closeMenu()">
-            62/2, Hindustan Park Rd, <br class="hide-tab-mobile">
-            Golpark, Hindustan Park, <br class="hide-tab-mobile">
-            Gariahat, Kolkata, <br class="hide-tab-mobile">
-            West Bengal 700029.
+        <div class="section-content address-header">
+          <a [href]="addressLink" target="_blank" class="text-center light-fonts" (click)="closeMenu()">
+            <p>
+              {{ address }}
+            </p>
           </a>
         </div>
+
       </div>
       <!-- <div class="menu-wrapper-web-links-grid main-container" [class.visible]="isMenuLinksVisible">
         <div class="menu-wrapper-column">

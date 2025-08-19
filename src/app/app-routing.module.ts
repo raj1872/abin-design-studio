@@ -12,10 +12,12 @@ import { PublicationsComponent } from './pages/publications/publications.compone
 import { NewsComponent } from './pages/news/news.component';
 import { NewsDetailComponent } from './pages/news-detail/news-detail.component';
 import { ProjectsResolver } from './pages/resolvers/projects.resolver';
+import { ContactComponent } from './pages/contact/contact.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'contact', component: ContactComponent },
 
   // ✅ Static routes first
   { path: 'projects-svg', component: ProjectListSvgComponent },

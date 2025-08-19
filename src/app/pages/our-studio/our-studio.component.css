@@ -1,8 +1,9 @@
 /* Enable vertical scroll snapping on the wrapper */
 #abin-design-studio-studio-page-wrapper {
   min-height: 100svh;
-  width: 100%;       /* smooth scrolling */
-  
+  width: 100%;
+  /* smooth scrolling */
+
   background-image: url('/assets/images/about/about-bg-banner.jpg');
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -10,14 +11,15 @@
   background-position: center;
 }
 
-.section-padding-2{
-    padding: 8rem 0 5rem 0;
+.section-padding-2 {
+  padding: 8rem 0 5rem 0;
 }
 
 /* Each section should snap */
 .abin-design-studio-section {
-  height: 100svh;             /* snap each section at start */
-  position: relative;            /* keep overlay aligned */
+  /* snap each section at start */
+  position: relative;
+  /* keep overlay aligned */
 }
 
 /* Keep overlay covering each section */
@@ -31,18 +33,94 @@
 }
 
 
-.about-flex-wrapper{
+.about-flex-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 5rem;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.about-detail-para {
+  padding-bottom: 2.5rem;
+}
+
+.about-detail-para,
+.about-swiper-flex {
+  width: calc(100% - 60% - 2.5rem);
+  flex-basis: calc(100% - 60% - 2.5rem);
+}
+
+.team-wrapper {
+  display: grid;
+  grid-template-columns: calc(100% - 60% - 2.5rem) calc(100% - 60% - 2.5rem);
+  gap: 5rem;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.team-detail-para {
+  position: sticky;
+  top: 65%;
+  margin-top: 65%;
+}
+
+.team-flex-columns {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+}
+
+::ng-deep .swiper-pagination.swiper-pagination-studio {
+  position: relative;
+  top: unset;
+  bottom: unset;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  margin-top: 2rem;
+  left: unset;
+  transform: unset;
+}
+
+::ng-deep .swiper-pagination.swiper-pagination-studio .swiper-pagination-bullet {
+  background-color: #FFF !important;
+}
+
+@media only screen and (max-width: 991px) {
+  .team-detail-para {
+    position: relative;
+    top: unset;
+    margin-top: unset;
+  }
+
+  .team-wrapper {
+    display: grid;
+    grid-template-columns: 100%;
+    gap: 2.5rem;
+    justify-content: start;
+    align-items: flex-start;
+  }
+
+
+  .about-flex-wrapper {
     display: flex;
-    flex-direction: row;
-    gap: 5rem;
-    align-items: flex-end;
-}
+    flex-direction: column;
+    gap: 2.5rem;
+    justify-content: start;
+    align-items: flex-start;
+  }
 
-.about-swiper-flex{
-    width: calc(100% - 60% - 2.5rem);
-    flex-basis: calc(100% - 60% - 2.5rem);
-}
+  .about-detail-para {
+    padding-bottom: 0.5rem;
+  }
 
-#abin-design-studio-studio-2{
-    height: 100vh;
+  .about-detail-para,
+  .about-swiper-flex {
+    width: 100%;
+    flex-basis: 100%;
+  }
 }

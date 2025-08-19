@@ -1,0 +1,47 @@
+<div id="abin-design-studio-contact-page-wrapper" class="abin-design-studio-page-wrapper">
+  <section class="abin-design-studio-section section-padding relative" id="abin-design-studio-contact-1">
+    <div class="main-container">
+      <div class="contact-wrapper-flex">
+        <div class="contact-banner-img">
+          <img src="./assets/images/contact/contact.png" alt="">
+        </div>
+        <div class="contact-details-lin">
+          <div class="inner-flex inner-flex-medium inner-flex-center">
+
+            <div class="inner-flex inner-flex-small inner-flex-center">
+              <a [href]="whatsappLink" target="_blank" class="flex-row-contact-link section-paragraph">
+                <p class="uppercase">Work with Us</p>
+                <div class="link-icon-contact">
+                  <img src="./assets/images/icons/arrow_outward_black.svg" alt="">
+                </div>
+              </a>
+
+              <a [href]="instagramLink" target="_blank" class="flex-row-contact-link section-paragraph">
+                <p class="uppercase">Instagram</p>
+                <div class="link-icon-contact">
+                  <img src="./assets/images/icons/arrow_outward_black.svg" alt="">
+                </div>
+              </a>
+            </div>
+
+            <div class="section-paragraph inner-flex inner-flex-common inner-flex-center">
+              <a [href]="'tel:' + phone" class="lh1 link-bottom-border">
+                {{ phone }}
+              </a>
+              <a [href]="'mailto:' + email" class="lh1 link-bottom-border">
+                {{ email }}
+              </a>
+            </div>
+
+            <a [href]="addressLink" target="_blank" class="section-paragraph link-text inner-flex inner-flex-center">
+              <p [innerHTML]="address"></p>
+            </a>
+
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div>

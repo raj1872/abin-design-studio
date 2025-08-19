@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Title, Meta } from '@angular/platform-browser';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-home',
@@ -22,10 +23,11 @@ export class HomeComponent implements AfterViewInit, OnInit {
   @ViewChild('imageStrip', { static: false }) imageStripRef!: ElementRef;
   @ViewChild('imageStripContainer', { static: false })
   imageStripContainerRef!: ElementRef;
-
+  homeBanner: any = null;
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private titleService: Title,
+    private apiService: ApiService,
     private metaService: Meta
   ) {}
 
@@ -56,6 +58,21 @@ export class HomeComponent implements AfterViewInit, OnInit {
     this.metaService.updateTag({ property: 'og:image', content: '' });
     this.metaService.updateTag({ property: 'og:type', content: 'website' });
     this.metaService.updateTag({ property: 'og:url', content: '' });
+
+    this.apiService.getBanners().subscribe({
+      next: (res) => {
+        if (res?.banners?.length) {
+          // ✅ Find only the banner with page_name === "Home"
+          const home = res.banners.find(
+            (b: any) => b.page_name.toLowerCase() === 'home'
+          );
+          this.homeBanner = home || null;
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching banners:', err);
+      },
+    });
   }
 
   ngAfterViewInit(): void {
@@ -240,7 +257,6 @@ export class HomeComponent implements AfterViewInit, OnInit {
     } else {
       images = this.projects[this.activeTab]?.[this.activeYear] || [];
     }
-    // console.log('🖼️ Filtered images for year', this.activeYear, ':', images);
     return images;
   }
 
@@ -276,7 +292,6 @@ export class HomeComponent implements AfterViewInit, OnInit {
           : this.projects[this.activeTab]?.[year]?.length || 0;
       if (index < runningIndex + count) {
         if (this.activeYear !== year) {
-          // console.log('✅ Active year updated to:', year);
           this.activeYear = year;
         }
         break;
@@ -302,14 +317,6 @@ export class HomeComponent implements AfterViewInit, OnInit {
     const imageWidth = imageEls[0].offsetWidth + 16;
     const scrollTo = targetIndex * imageWidth;
     strip.scrollTo({ left: scrollTo, behavior: 'smooth' });
-    // console.log(
-    //   '🧭 Scrolling to year:',
-    //   year,
-    //   'Index:',
-    //   targetIndex,
-    //   'Scroll Left:',
-    //   scrollTo
-    // );
   }
 
   onImageClick(img: string): void {

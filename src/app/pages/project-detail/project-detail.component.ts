@@ -251,7 +251,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
       this.updateSectionTop();
     }
     this.isCreditOpen = true;
-    // this.isOverlayActive = true;
+    this.isOverlayActive = true;
     setTimeout(() => {
       this.isInnerPopupActive = true;
     }, 1000);

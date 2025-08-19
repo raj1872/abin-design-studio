@@ -1,23 +1,43 @@
 <div id="abin-design-studio-home-page-wrapper" class="abin-design-studio-page-wrapper">
   <section class="abin-design-studio-section abin-design-studio-section-home-single-screen relative"
-    style="background-image: url('assets/images/home/banner-1.jpg');" id="abin-design-studio-home-1">
+    id="abin-design-studio-home-1">
     <div class="overlay-section"></div>
+
+    <!-- Show IMAGE banner -->
+    <ng-container *ngIf="homeBanner?.media?.[0]?.media_type === 'image'">
+      <div class="banner-bg-image" [ngStyle]="{
+      'background-image':
+        'url(' + homeBanner.media[0].media_full + '&w=2560&h=1440&q=100' + ')'
+    }">
+      </div>
+    </ng-container>
+
+    <!-- ✅ Show VIDEO banner -->
+    <ng-container *ngIf="homeBanner?.media?.[0]?.media_type === 'video'">
+      <video autoplay muted loop playsinline class="banner-video">
+        <source [src]="homeBanner.media[0].media_full" type="video/mp4" />
+      </video>
+    </ng-container>
+
+    <!-- ✅ Your static content -->
     <div class="home-content-wrapper-abs-for-all-section">
       <div class="flex-row-home-banners">
         <div class="section-title section-title-home-container">
           <h2>
-            ADS is a collaborative design practice whose work expands the context of built and natural landscapes.
+            ADS is a collaborative design practice whose work expands the context
+            of built and natural landscapes.
           </h2>
         </div>
         <a class="home-redirect-links">
           <p>Sanctuary Pavilion</p>
           <div class="arrow-outword">
-            <img src="./assets/images/icons/arrow_outward.svg" alt="">
+            <img src="./assets/images/icons/arrow_outward.svg" alt="" />
           </div>
         </a>
       </div>
     </div>
   </section>
+
   <section class="abin-design-studio-section abin-design-studio-section-home-single-screen relative"
     style="background-image: url('assets/images/home/banner-2.jpg');" id="abin-design-studio-home-2">
     <div class="overlay-section"></div>
@@ -58,9 +78,9 @@
 
   </section>
   <section class="abin-design-studio-section abin-design-studio-section-home-single-screen relative"
-    style="background-image: url('assets/images/home/banner-4.jpg');" id="abin-design-studio-home-4">
+    style="background-image: url('assets/images/home/banner-4.jpg');background-position: bottom center;" id="abin-design-studio-home-4">
     <div class="overlay-section"></div>
-     <div class="home-content-wrapper-abs-for-all-section">
+    <div class="home-content-wrapper-abs-for-all-section">
       <div class="flex-row-home-banners">
         <div class="section-title section-title-home-container">
           <h2>

@@ -10,11 +10,13 @@
           </div>
           <ul class="all-sub-flex">
             <li *ngFor="let child of childCategories" class="section-paragraph">
-              <a [routerLink]="['/projects', selectedCategory.slug, child.slug]">
+              <a [routerLink]="['/projects', selectedCategory.slug, child.slug]" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }">
                 {{ child.name }}
               </a>
             </li>
           </ul>
+
         </div>
       </div>
       <ng-container *ngIf="loading">

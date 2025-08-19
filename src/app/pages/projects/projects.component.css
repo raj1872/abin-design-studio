@@ -79,14 +79,30 @@
   aspect-ratio: 16/9;
 }
 
-.all-sub-flex{
+.all-sub-flex {
   display: flex;
+  width: fit-content;
   flex-direction: row;
   gap: 1.5rem;
   align-items: flex-start;
 }
 
-.project-icon-image{
+.all-sub-flex:hover li {
+  opacity: 0.5;
+}
+
+.all-sub-flex li:hover {
+  opacity: 1 !important;
+}
+.all-sub-flex li a {
+  opacity: 0.85;
+}
+.all-sub-flex li a.active {
+  font-family: var(--medium-font-family);
+  opacity: 1
+}
+
+.project-icon-image {
   height: auto !important;
   object-fit: contain;
 }
@@ -114,6 +130,7 @@
 @media only screen and (max-width: 991px) {
   .project-listing-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 0;
   }
 
   #abin-design-studio-projects-page-wrapper {
@@ -124,10 +141,24 @@
     opacity: 0.1;
     background-repeat: round;
   }
-}
 
-@media only screen and (max-width: 768px) {
-  .project-listing-grid {
-    grid-template-columns: 100%;
+
+  .all-sub-flex {
+    display: flex;
+    width: -moz-fit-content;
+    width: 85vw;
+    flex-direction: row;
+    gap: 1.5rem;
+    row-gap: 1.5rem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    row-gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .project-list-card img.project-list-hover-disable,
+  .project-list-card,
+  .project-list-card img.project-list-hover-disable {
+    aspect-ratio: 1;
   }
 }

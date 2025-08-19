@@ -28,6 +28,9 @@ export class HeaderComponent implements OnInit {
   isTeamPage = false;
   isPublicationsPage = false;
   isContactNavActive = false;
+  contactInfo: any;
+  address: string = '';
+  addressLink: string = '';
 
   private prevScrollTop = 0;
   private scrollYBeforeLock = 0;
@@ -63,6 +66,19 @@ export class HeaderComponent implements OnInit {
         // console.log('Header categories:', this.categories);
       },
       error: (err) => console.error('Error fetching categories:', err),
+    });
+    this.apiService.getContactInfo().subscribe({
+      next: (res) => {
+        if (res && res.data) {
+          this.contactInfo = res.data;
+          this.address = res.data.address;
+          // Use the address_link from API if available, else default Google Maps link
+          this.addressLink =
+            res.data.address_link?.trim() ||
+            'https://maps.app.goo.gl/DfwBigGrbSbFzM749';
+        }
+      },
+      error: (err) => console.error('Error fetching contact info', err),
     });
   }
 

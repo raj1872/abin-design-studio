@@ -1,0 +1,113 @@
+#abin-design-studio-contact-page-wrapper {
+  min-height: 100svh;
+  background-color: #FADD94;
+}
+
+.contact-wrapper-flex {
+  display: grid;
+  grid-template-columns: calc(100% - 60% - 2.5rem) calc(100% - 60% - 2.5rem);
+  gap: 5rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-row-contact-link p {
+  line-height: 1 !important;
+}
+
+.flex-row-contact-link {
+  padding-bottom: 0.25rem;
+  position: relative;
+  display: flex;
+  width: fit-content;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.contact-banner-img {
+  aspect-ratio: 540 / 539;
+}
+
+.flex-row-contact-link:hover .link-icon-contact {
+  transform: translate(5px, -5px);
+  transition: var(--common-transition);
+}
+
+.link-text p {
+  transition: var(--common-transition);
+}
+
+.link-text:hover p {
+  transition: var(--common-transition);
+  text-decoration: underline;
+}
+
+.link-icon-contact {
+  transform: translate(0px, 0px);
+  transition: var(--common-transition);
+  width: 1rem;
+}
+
+.link-bottom-border {
+  padding-bottom: 0.25rem;
+  position: relative;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.link-bottom-border::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: var(--common-transition);
+  background-color: var(--primary-color);
+  height: 1px;
+  left: 0;
+}
+
+.link-bottom-border:hover::after {
+  transform: scaleX(1);
+  transform-origin: center;
+  transition: var(--common-transition);
+}
+
+.flex-row-contact-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: center;
+  transition: var(--common-transition);
+}
+
+.flex-row-contact-link::after {
+  content: "";
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: var(--common-transition);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: var(--primary-color);
+  height: 1px;
+  left: 0;
+}
+
+@media only screen and (max-width: 991px) {
+  .contact-wrapper-flex {
+    display: grid;
+    grid-template-columns: 100%;
+    gap: 5rem;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .section-paragraph a {
+    font-size: 18px;
+  }
+
+  #abin-design-studio-contact-page-wrapper {
+    padding: 8rem 0 4rem 0;
+  }
+}

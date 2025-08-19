@@ -55,8 +55,7 @@
 
         </div>
         <div class="overview-image relative">
-          <!-- <div class="popup-overlay" [ngClass]="{'popup-overlay-active': isOverlayActive}" (click)="closeAll()">
-          </div> -->
+
           <div class="publication-popup" *ngIf="projectDetailObj?.publication_details?.length"
             [ngClass]="{'publication-popup-active': isPublicationOpen}">
             <div class="publicatiuon-popup-card" *ngFor="let pub of projectDetailObj.publication_details">
@@ -228,30 +227,44 @@
     <section class="abin-design-studio-section bg-image-section-detail relative"
       id="abin-design-studio-project-detail-7"></section>
   </div> -->
-    <section class="abin-design-studio-section section-padding-small relative" id="abin-design-studio-project-detail-8">
-      <div class="main-container">
-        <div class="next-prev-div">
-          <div class="prev-project-click project-click-flex">
-            <div class="project-np-click">
-              <img src="./assets/images/projects/prev-project.svg" alt="">
-            </div>
+    <section class="abin-design-studio-section relative" id="abin-design-studio-project-detail-8">
+      <div class="nex-prev-grid">
+        <a routerLink="/{{projectDetailObj.previous_projects.slug}}/" routerLinkActive="active" class="prev-div-wrapper relative">
+          <div class="prev-nex-img-div">
+            <img src="{{projectDetailObj.previous_projects.featured_image_full}}&w=1080&h=1080&q=100" alt="">
+            <div class="overlay-next-rev"></div>
+          </div>
+          <div class="prev-abs-wrapper prev-next-abs-wrapper">
             <div class="section-subtitle2">
-              <p class="helvetica-bold">
-                Prev. Project
+              <p class="semibold-fonts white-color lh1">
+                {{projectDetailObj.previous_projects.project}}
+              </p>
+            </div>
+            <div class="section-content">
+              <p class="white-color lh1">
+                Previous Project
               </p>
             </div>
           </div>
-          <div class="next-project-click project-click-flex">
+        </a>
+        <a routerLink="/{{projectDetailObj.previous_projects.slug}}/" routerLinkActive="active" class="next-div-wrapper relative">
+          <div class="prev-nex-img-div">
+            <img src="{{projectDetailObj.next_project.featured_image_full}}&w=1080&h=1080&q=100" alt="">
+            <div class="overlay-next-rev"></div>
+          </div>
+          <div class="next-abs-wrapper prev-next-abs-wrapper">
             <div class="section-subtitle2">
-              <p class="helvetica-bold">
+              <p class="semibold-fonts white-color lh1">
+                {{projectDetailObj.next_project.project}}
+              </p>
+            </div>
+            <div class="section-content">
+              <p class="white-color lh1">
                 Next Project
               </p>
             </div>
-            <div class="project-np-click">
-              <img src="./assets/images/projects/next-project.svg" alt="">
-            </div>
           </div>
-        </div>
+        </a>
       </div>
     </section>
   </div>
@@ -262,3 +275,6 @@
 
 
 </ng-container>
+<div class="popup-overlay visible-tab-mobile" [ngClass]="{'popup-overlay-active': isOverlayActive}"
+  (click)="closeAll()">
+</div>

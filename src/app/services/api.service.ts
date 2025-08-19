@@ -63,7 +63,9 @@ export class ApiService {
     let cacheKey = '';
     if (category_slug) cacheKey = category_slug;
     if (sub_category_slug && sub_category_slug.trim() !== '') {
-      cacheKey = cacheKey ? `${cacheKey}-${sub_category_slug}` : sub_category_slug;
+      cacheKey = cacheKey
+        ? `${cacheKey}-${sub_category_slug}`
+        : sub_category_slug;
     }
 
     return this.getWithTransferState(
@@ -77,6 +79,21 @@ export class ApiService {
     return this.getWithTransferState(
       slug,
       this.http.post(`${this.baseUrl}/projects`, payload)
+    );
+  }
+  // ✅ NEW: Banners
+  getBanners(): Observable<any> {
+    return this.getWithTransferState(
+      'banners',
+      this.http.post(`${this.baseUrl}/banners`, {})
+    );
+  }
+
+  // contactInfo
+  getContactInfo(): Observable<any> {
+    return this.getWithTransferState(
+      'contact_info', // transfer state key
+      this.http.post(`${this.baseUrl}/contact_info`, {}) // API call
     );
   }
 }

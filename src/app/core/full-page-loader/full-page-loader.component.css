@@ -6,12 +6,11 @@
   align-items: center;
   z-index: 9999;
   background: radial-gradient(circle,
-      #1d5b94 0%,
-      #6b91b6 20%,
-      #b293aa 40%,
-      #e15c43 60%,
-      #f89b63 80%,
-      #ffe09e 100%);
+      #993b2f 0%,
+      #607e59 25%,
+      #2f5e9d 50%,
+      #c49c3b 75%,
+      #993b2f 100%);;
   background-size: 300% 300%;
   animation: gradientDrift 30s ease-in-out infinite;
 }
