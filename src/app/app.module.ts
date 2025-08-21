@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router'; // ✅ Import this
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { SwiperModule } from 'swiper/angular';
-import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
@@ -15,10 +15,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { ProjectsComponent } from './pages/projects/projects.component';
 import { ProjectDetailComponent } from './pages/project-detail/project-detail.component';
 import { LandingComponent } from './pages/landing/landing.component';
-import { CommonModule } from '@angular/common';
 import { PublicationsComponent } from './pages/publications/publications.component';
 import { NewsComponent } from './pages/news/news.component';
-
 import { NewsDetailComponent } from './pages/news-detail/news-detail.component';
 import { OurStudioComponent } from './pages/our-studio/our-studio.component';
 import { ContactComponent } from './pages/contact/contact.component';
@@ -40,15 +38,14 @@ import { ContactComponent } from './pages/contact/contact.component';
     ProjectDetailComponent
   ],
   imports: [
-    BrowserModule,
-    RouterModule,       // ✅ Needed for routerLink / routerLinkActive
+    BrowserModule.withServerTransition({ appId: 'serverApp' }), // ✅ SSR safe
+    RouterModule,
     SwiperModule,
     FormsModule,
-    CommonModule,
     AppRoutingModule,
     HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

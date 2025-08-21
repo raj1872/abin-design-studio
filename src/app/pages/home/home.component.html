@@ -1,7 +1,7 @@
 <div id="abin-design-studio-home-page-wrapper" class="abin-design-studio-page-wrapper">
   <section class="abin-design-studio-section abin-design-studio-section-home-single-screen relative"
     id="abin-design-studio-home-1">
-    <div class="overlay-section"></div>
+    
 
     <!-- Show IMAGE banner -->
     <ng-container *ngIf="homeBanner?.media?.[0]?.media_type === 'image'">
@@ -10,14 +10,16 @@
         'url(' + homeBanner.media[0].media_full + '&w=2560&h=1440&q=100' + ')'
     }">
       </div>
+
     </ng-container>
 
-    <!-- ✅ Show VIDEO banner -->
     <ng-container *ngIf="homeBanner?.media?.[0]?.media_type === 'video'">
-      <video autoplay muted loop playsinline class="banner-video">
-        <source [src]="homeBanner.media[0].media_full" type="video/mp4" />
+      <video #bannerVideo autoplay muted loop playsinline preload="auto" class="banner-video"
+        [attr.src]="homeBanner.media[0].media_url">
       </video>
+
     </ng-container>
+<div class="overlay-section"></div>
 
     <!-- ✅ Your static content -->
     <div class="home-content-wrapper-abs-for-all-section">
@@ -78,7 +80,8 @@
 
   </section>
   <section class="abin-design-studio-section abin-design-studio-section-home-single-screen relative"
-    style="background-image: url('assets/images/home/banner-4.jpg');background-position: bottom center;" id="abin-design-studio-home-4">
+    style="background-image: url('assets/images/home/banner-4.jpg');background-position: bottom center;"
+    id="abin-design-studio-home-4">
     <div class="overlay-section"></div>
     <div class="home-content-wrapper-abs-for-all-section">
       <div class="flex-row-home-banners">

@@ -23,6 +23,8 @@ export class HomeComponent implements AfterViewInit, OnInit {
   @ViewChild('imageStrip', { static: false }) imageStripRef!: ElementRef;
   @ViewChild('imageStripContainer', { static: false })
   imageStripContainerRef!: ElementRef;
+
+  @ViewChild('bannerVideo') bannerVideo!: ElementRef<HTMLVideoElement>;
   homeBanner: any = null;
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -77,6 +79,12 @@ export class HomeComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
+      const video = this.bannerVideo.nativeElement;
+      video.muted = true; // ensure muted
+      video.play().catch((err) => {
+        console.warn('Autoplay blocked by browser:', err);
+        // 👉 fallback: show play button or poster
+      });
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
