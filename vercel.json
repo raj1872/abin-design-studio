@@ -1,19 +1,10 @@
 {
   "version": 2,
   "builds": [
-    {
-      "src": "dist/abin-design-studio/server/main.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "dist/abin-design-studio/browser/**",
-      "use": "@vercel/static"
-    }
+    { "src": "server.js", "use": "@vercel/node" },
+    { "src": "dist/abin-design-studio/browser/**", "use": "@vercel/static" }
   ],
   "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "dist/abin-design-studio/server/main.js"
-    }
+    { "src": "/(.*)", "dest": "server.js" }
   ]
 }
