@@ -8,6 +8,8 @@ import {
   ViewChildren,
   ViewChild,
   OnInit,
+  OnDestroy,
+  Renderer2,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Title, Meta } from '@angular/platform-browser';
@@ -18,20 +20,34 @@ import { ApiService } from '../../services/api.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent implements AfterViewInit, OnInit {
+export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
   @ViewChildren('animateUnderline') underlineElements!: QueryList<ElementRef>;
   @ViewChild('imageStrip', { static: false }) imageStripRef!: ElementRef;
   @ViewChild('imageStripContainer', { static: false })
   imageStripContainerRef!: ElementRef;
-
   @ViewChild('bannerVideo') bannerVideo!: ElementRef<HTMLVideoElement>;
-  homeBanner: any = null;
+
+  // ✅ API banners
+  homePageDetails: any[] = [];
+  // Inside HomeComponent class
+  isLoading = true; // default true
+
+  // ✅ Add this line
+  isBrowser = false;
+
+  private loadingTimeout: any;
+
+  private scrollListener: (() => void) | null = null;
+
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private titleService: Title,
     private apiService: ApiService,
-    private metaService: Meta
-  ) {}
+    private metaService: Meta,
+    private renderer: Renderer2
+  ) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+  }
 
   ngOnInit(): void {
     this.titleService.setTitle('Home | Abin Design Studio');
@@ -61,73 +77,66 @@ export class HomeComponent implements AfterViewInit, OnInit {
     this.metaService.updateTag({ property: 'og:type', content: 'website' });
     this.metaService.updateTag({ property: 'og:url', content: '' });
 
-    this.apiService.getBanners().subscribe({
-      next: (res) => {
-        if (res?.banners?.length) {
-          // ✅ Find only the banner with page_name === "Home"
-          const home = res.banners.find(
-            (b: any) => b.page_name.toLowerCase() === 'home'
-          );
-          this.homeBanner = home || null;
+    this.apiService.getHomePage().subscribe({
+      next: (res: any) => {
+        if (res?.success && res?.list) {
+          this.homePageDetails = res.list;
         }
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 500);
       },
       error: (err) => {
-        console.error('Error fetching banners:', err);
+        console.error('API error:', err);
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 500);
       },
     });
   }
 
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      const video = this.bannerVideo.nativeElement;
-      video.muted = true; // ensure muted
-      video.play().catch((err) => {
-        console.warn('Autoplay blocked by browser:', err);
-        // 👉 fallback: show play button or poster
+      const videoEl = this.bannerVideo?.nativeElement;
+      if (videoEl) {
+        videoEl.muted = true; // must be muted
+        videoEl.playsInline = true;
+        videoEl.autoplay = true;
+
+        // Try to play
+        videoEl.play().catch((err) => {
+          console.warn('Autoplay blocked, showing poster instead:', err);
+        });
+      }
+      // ✅ Parallax scroll effect (images + videos)
+      this.scrollListener = this.renderer.listen('window', 'scroll', () => {
+        const parallaxEls = document.querySelectorAll<HTMLElement>(
+          '.parallax-section .banner-bg-image, .parallax-section .banner-video'
+        );
+        const speed = 0.3;
+        parallaxEls.forEach((el) => {
+          const offset = window.scrollY * speed;
+          this.renderer.setStyle(el, 'transform', `translateY(${offset}px)`);
+        });
       });
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            const underline = entry.target.querySelector(
-              '.animated-underline'
-            ) as HTMLElement;
-            if (underline) {
-              if (entry.isIntersecting) {
-                underline.classList.add('reveal');
-              } else {
-                underline.classList.remove('reveal');
-              }
-            }
-          });
-        },
-        { threshold: 0.5 }
-      );
-
-      this.underlineElements.forEach((el) =>
-        observer.observe(el.nativeElement)
-      );
-
-      this.imageStripRef.nativeElement.addEventListener(
-        'scroll',
-        this.onImageScroll.bind(this),
-        { passive: true }
-      );
-
-      const container = this.imageStripContainerRef
-        .nativeElement as HTMLElement;
-      container.addEventListener(
-        'wheel',
-        (event: WheelEvent) => {
-          if (event.deltaY !== 0) {
-            event.preventDefault();
-            container.scrollLeft += event.deltaY;
-          }
-        },
-        { passive: false }
-      );
     }
   }
 
+  ngOnDestroy(): void {
+    // ✅ Clear timeout on destroy
+    if (this.loadingTimeout) {
+      clearTimeout(this.loadingTimeout);
+    }
+    // ✅ Remove scroll listener
+    if (this.scrollListener) {
+      this.scrollListener();
+      this.scrollListener = null;
+    }
+  }
+
+  // ------------------------------
+  // ⭐ Existing timeline logic kept below (unchanged)
+  // ------------------------------
   activeTab: 'architecture' | 'interior' | 'all' = 'architecture';
   activeYear = '2010';
   currentIndex = 0;

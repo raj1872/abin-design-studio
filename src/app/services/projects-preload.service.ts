@@ -24,7 +24,6 @@ export class ProjectsPreloadService {
       const subCats = subCategoriesMap[cat] || [];
 
       if (subCats.length === 0) {
-        // 🔹 Only category
         const key = makeStateKey<any>(cat);
         if (!this.state.hasKey(key)) {
           const p = firstValueFrom(this.apiService.getProjects(cat))
@@ -35,9 +34,8 @@ export class ProjectsPreloadService {
           promises.push(p);
         }
       } else {
-        // 🔹 Category + Subcategories
         for (const sub of subCats) {
-          if (!sub || sub.toLowerCase() === 'all') continue; // 🚫 skip "all"
+          if (!sub || sub.toLowerCase() === 'all') continue; 
 
           const key = makeStateKey<any>(`${cat}-${sub}`);
           if (this.state.hasKey(key)) continue;

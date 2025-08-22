@@ -17,7 +17,6 @@ export class ApiService {
     private state: TransferState
   ) {}
 
-  // ===== Helper for SSR caching =====
   private getWithTransferState<T>(
     keyStr: string,
     apiCall: Observable<T>
@@ -37,7 +36,6 @@ export class ApiService {
     );
   }
 
-  // ===== API Functions =====
   getCategories(): Observable<any> {
     return this.getWithTransferState(
       'categories',
@@ -59,7 +57,6 @@ export class ApiService {
       payload.sub_category_slug = sub_category_slug;
     }
 
-    // 🔹 Build cache key only from slugs
     let cacheKey = '';
     if (category_slug) cacheKey = category_slug;
     if (sub_category_slug && sub_category_slug.trim() !== '') {
@@ -81,15 +78,21 @@ export class ApiService {
       this.http.post(`${this.baseUrl}/projects`, payload)
     );
   }
-  // ✅ NEW: Banners
+  
   getBanners(): Observable<any> {
     return this.getWithTransferState(
       'banners',
       this.http.post(`${this.baseUrl}/banners`, {})
     );
   }
+  getHomePage(): Observable<any> {
+    return this.getWithTransferState(
+      'banners',
+      this.http.post(`${this.baseUrl}/home_banners`, {})
+    );
+  }
 
-  // contactInfo
+  
   getContactInfo(): Observable<any> {
     return this.getWithTransferState(
       'contact_info', // transfer state key

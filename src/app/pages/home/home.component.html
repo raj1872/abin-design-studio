@@ -1,139 +1,79 @@
-<div id="abin-design-studio-home-page-wrapper" class="abin-design-studio-page-wrapper">
-  <section class="abin-design-studio-section abin-design-studio-section-home-single-screen relative"
-    id="abin-design-studio-home-1">
-    
+<ng-container *ngIf="isLoading">
+  <div class="skeleton-wrapper">
+    <div class="skeleton-banner shimmer"></div>
+    <!-- <div class="skeleton-section shimmer" *ngFor="let i of [1,2,3,4]"></div> -->
+  </div>
+</ng-container>
+<ng-container *ngIf="!isLoading">
+  <div id="abin-design-studio-home-page-wrapper" class="abin-design-studio-page-wrapper">
+    <section *ngFor="let banner of homePageDetails; let i = index" class="abin-design-studio-section-home-single-screen"
+      [ngClass]="{ 'parallax-section': i === 0 }" [ngStyle]="{
+    'background-image':
+      banner.show_video === '0'
+        ? 'url(' + banner.banner_web_full + '&w=2560&h=1440&q=100' + ')'
+        : 'none'
+  }">
+      <!-- VIDEO ONLY for first section -->
+      <ng-container *ngIf="banner.show_video == '1' && i === 0">
+        <video #bannerVideo *ngIf="isBrowser" autoplay muted loop playsinline preload="auto" class="banner-video"
+          poster="./assets/images/home/banner-1.jpg" src="{{ banner.video_web }}"></video>
+      </ng-container>
 
-    <!-- Show IMAGE banner -->
-    <ng-container *ngIf="homeBanner?.media?.[0]?.media_type === 'image'">
-      <div class="banner-bg-image" [ngStyle]="{
-      'background-image':
-        'url(' + homeBanner.media[0].media_full + '&w=2560&h=1440&q=100' + ')'
-    }">
-      </div>
+      <!-- Overlay -->
+      <div class="overlay-section"></div>
 
-    </ng-container>
-
-    <ng-container *ngIf="homeBanner?.media?.[0]?.media_type === 'video'">
-      <video #bannerVideo autoplay muted loop playsinline preload="auto" class="banner-video"
-        [attr.src]="homeBanner.media[0].media_url">
-      </video>
-
-    </ng-container>
-<div class="overlay-section"></div>
-
-    <!-- ✅ Your static content -->
-    <div class="home-content-wrapper-abs-for-all-section">
-      <div class="flex-row-home-banners">
-        <div class="section-title section-title-home-container">
-          <h2>
-            ADS is a collaborative design practice whose work expands the context
-            of built and natural landscapes.
-          </h2>
-        </div>
-        <a class="home-redirect-links">
-          <p>Sanctuary Pavilion</p>
-          <div class="arrow-outword">
-            <img src="./assets/images/icons/arrow_outward.svg" alt="" />
+      <!-- Content -->
+      <div class="home-content-wrapper-abs-for-all-section">
+        <div class="flex-row-home-banners">
+          <div class="section-title section-title-home-container">
+            <h2>{{ banner.title }}</h2>
           </div>
-        </a>
+          <a class="home-redirect-links" [routerLink]="'/' + banner.link">
+            <p>{{ banner.link_lable }}</p>
+            <div class="arrow-outword">
+              <img src="./assets/images/icons/arrow_outward.svg" alt="" />
+            </div>
+          </a>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="abin-design-studio-section abin-design-studio-section-home-single-screen relative"
-    style="background-image: url('assets/images/home/banner-2.jpg');" id="abin-design-studio-home-2">
-    <div class="overlay-section"></div>
-    <div class="home-content-wrapper-abs-for-all-section">
-      <div class="flex-row-home-banners">
-        <div class="section-title section-title-home-container">
-          <h2>
-            ADS is a team with an outsider's perspective, founded in Kolkata, West Bengal.
-          </h2>
-        </div>
-        <a class="home-redirect-links">
-          <p>Learn about our practice.</p>
-          <div class="arrow-outword">
-            <img src="./assets/images/icons/arrow_outward.svg" alt="">
-          </div>
-        </a>
+    <section class="abin-design-studio-section relative" id="abin-design-studio-home-5">
+      <div class="tab-change-image-width" style="position: relative;z-index: 5;">
+        <img src="./assets/images/tabs-image.jpg" alt="" id="timeline-image-updated" width="1920" height="456">
       </div>
-    </div>
-  </section>
-  <section class="abin-design-studio-section abin-design-studio-section-home-single-screen relative"
-    style="background-image: url('assets/images/home/banner-3.jpg');" id="abin-design-studio-home-3">
-    <div class="overlay-section"></div>
-    <div class="home-content-wrapper-abs-for-all-section">
-      <div class="flex-row-home-banners">
-        <div class="section-title section-title-home-container">
-          <h2>
-            We design for people, place, and experience, balancing rational and intuitive thinking.
-          </h2>
+      <div class="main-container" style="position: relative;z-index: 5;">
+        <!-- Tabs -->
+        <div class="tabs">
+          <span [class.active]="activeTab === 'architecture'" (click)="setTab('architecture')">ARCHITECTURE</span>
+          <span [class.active]="activeTab === 'interior'" (click)="setTab('interior')">INTERIOR</span>
+          <span (click)="setTab('all')">ALL PROJECTS</span>
         </div>
-        <a class="home-redirect-links">
-          <p>View our projects.</p>
-          <div class="arrow-outword">
-            <img src="./assets/images/icons/arrow_outward.svg" alt="">
+        <!-- Image Strip -->
+        <div class="image-stirp-container" #imageStripContainer>
+          <div #imageStrip class="image-strip">
+            <div class="image-stip-card-img" *ngFor="let img of filteredImages; let i = index">
+              <img [src]="img" [class.active]="i === currentIndex" [attr.alt]="'Project Image ' + (i + 1)"
+                (click)="onImageClick(img)" id="timeline-image-thumbnail" />
+            </div>
           </div>
-        </a>
-      </div>
-    </div>
+        </div>
 
-  </section>
-  <section class="abin-design-studio-section abin-design-studio-section-home-single-screen relative"
-    style="background-image: url('assets/images/home/banner-4.jpg');background-position: bottom center;"
-    id="abin-design-studio-home-4">
-    <div class="overlay-section"></div>
-    <div class="home-content-wrapper-abs-for-all-section">
-      <div class="flex-row-home-banners">
-        <div class="section-title section-title-home-container">
-          <h2>
-            We embrace the tension between collaboration and autonomy, shared adventure, and independent exploration.
-          </h2>
-        </div>
-        <a class="home-redirect-links">
-          <p>Meet our team.</p>
-          <div class="arrow-outword">
-            <img src="./assets/images/icons/arrow_outward.svg" alt="">
+
+        <!-- Timeline -->
+        <div class="timeline-container">
+          <div class="timeline-track">
+            <img src="./assets/images/home/swiper-bottom-line.svg" alt="">
+            <div class="timeline-pointer" [style.left.%]="getPointerLeftPercent()"></div>
           </div>
-        </a>
-      </div>
-    </div>
-  </section>
-  <section class="abin-design-studio-section relative" id="abin-design-studio-home-5">
-    <div class="tab-change-image-width" style="position: relative;z-index: 5;">
-      <img src="./assets/images/tabs-image.jpg" alt="" id="timeline-image-updated" width="1920" height="456">
-    </div>
-    <div class="main-container" style="position: relative;z-index: 5;">
-      <!-- Tabs -->
-      <div class="tabs">
-        <span [class.active]="activeTab === 'architecture'" (click)="setTab('architecture')">ARCHITECTURE</span>
-        <span [class.active]="activeTab === 'interior'" (click)="setTab('interior')">INTERIOR</span>
-        <span (click)="setTab('all')">ALL PROJECTS</span>
-      </div>
-      <!-- Image Strip -->
-      <div class="image-stirp-container" #imageStripContainer>
-        <div #imageStrip class="image-strip">
-          <div class="image-stip-card-img" *ngFor="let img of filteredImages; let i = index">
-            <img [src]="img" [class.active]="i === currentIndex" [attr.alt]="'Project Image ' + (i + 1)"
-              (click)="onImageClick(img)" id="timeline-image-thumbnail" />
+          <div class="year-labels">
+            <span *ngFor="let year of years" [class.active]="activeYear === year" (click)="scrollToYear(year)">
+              {{ year }}
+            </span>
           </div>
         </div>
       </div>
+    </section>
 
-
-      <!-- Timeline -->
-      <div class="timeline-container">
-        <div class="timeline-track">
-          <img src="./assets/images/home/swiper-bottom-line.svg" alt="">
-          <div class="timeline-pointer" [style.left.%]="getPointerLeftPercent()"></div>
-        </div>
-        <div class="year-labels">
-          <span *ngFor="let year of years" [class.active]="activeYear === year" (click)="scrollToYear(year)">
-            {{ year }}
-          </span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-</div>
+  </div>
+</ng-container>

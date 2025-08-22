@@ -168,13 +168,24 @@
   display: none;
 }
 
+.header-wrapper.headerActiveOpen .white-header-logo {
+  display: none !important;
+}
+
+.header-wrapper.headerActiveOpen .black-header-logo {
+  display: block !important;
+}
+
 .header-wrapper.black-header-wrapper .white-header-logo {
   display: none;
 }
 
 .header-wrapper.black-header-wrapper .black-header-logo {
-  filter: invert(1);
   display: block;
+}
+
+.header-wrapper.black-header-wrapper .web-bar span {
+  color: var(--primary-color) !important;
 }
 
 .header-wrapper.black-header-wrapper .form-control-abin-design-studio.form-control-abin-design-studio-search {

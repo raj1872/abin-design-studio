@@ -14,6 +14,7 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../services/api.service';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-project-detail',
@@ -22,8 +23,11 @@ import { ApiService } from '../../services/api.service';
 })
 export class ProjectDetailComponent implements OnInit, AfterViewInit {
   @ViewChild('parallaxBg', { static: false }) parallaxBg!: ElementRef;
-  @ViewChildren('autoVideo', { read: ElementRef }) autoVideos!: QueryList<ElementRef<HTMLVideoElement>>;
-  @ViewChildren('scalableImage', { read: ElementRef }) scalableImages!: QueryList<ElementRef>;
+  @ViewChildren('autoVideo', { read: ElementRef }) autoVideos!: QueryList<
+    ElementRef<HTMLVideoElement>
+  >;
+  @ViewChildren('scalableImage', { read: ElementRef })
+  scalableImages!: QueryList<ElementRef>;
 
   isBrowser = false;
 
@@ -47,7 +51,9 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
     @Inject(PLATFORM_ID) private platformId: Object,
     private renderer: Renderer2,
     private route: ActivatedRoute,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private meta: Meta,
+    private title: Title
   ) {}
 
   ngOnInit(): void {
@@ -71,7 +77,6 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
     }
   }
 
-  // ========= Centralized initialization =========
   private initScrollEffects(): void {
     if (!this.isBrowser) return;
 
@@ -127,7 +132,8 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
 
     this.apiService.getProjectBySlug(slug).subscribe({
       next: (res: any) => {
-        const projectData = Array.isArray(res?.list) && res.list.length ? res.list[0] : res || {};
+        const projectData =
+          Array.isArray(res?.list) && res.list.length ? res.list[0] : res || {};
         this.projectDetailObj = {
           ...projectData,
           sections: projectData?.sections || [],
@@ -136,6 +142,63 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
         const bannerSection = this.projectDetailObj.sections.find(
           (section: any) => section.type === 'banner-block'
         );
+        // Set dynamic SEO meta tags (SSR-friendly)
+        this.title.setTitle(
+          this.projectDetailObj.page_title || 'Abin Design Studio'
+        );
+
+        this.meta.updateTag({
+          name: 'description',
+          content: this.projectDetailObj.meta_description || '',
+        });
+
+        this.meta.updateTag({
+          name: 'keywords',
+          content: this.projectDetailObj.meta_keywords || '',
+        });
+
+        // OpenGraph (for social sharing)
+        this.meta.updateTag({
+          property: 'og:title',
+          content: this.projectDetailObj.page_title || '',
+        });
+
+        this.meta.updateTag({
+          property: 'og:description',
+          content: this.projectDetailObj.meta_description || '',
+        });
+
+        this.meta.updateTag({
+          property: 'og:image',
+          content: this.projectDetailObj.seo_image_view || '',
+        });
+
+        this.meta.updateTag({
+          property: 'og:url',
+          content: typeof window !== 'undefined' ? window.location.href : '',
+        });
+
+        // Twitter card
+        this.meta.updateTag({
+          name: 'twitter:card',
+          content: 'summary_large_image',
+        });
+
+        this.meta.updateTag({
+          name: 'twitter:title',
+          content: this.projectDetailObj.page_title || '',
+        });
+
+        this.meta.updateTag({
+          name: 'twitter:description',
+          content: this.projectDetailObj.meta_description || '',
+        });
+
+        this.meta.updateTag({
+          name: 'twitter:image',
+          content: this.projectDetailObj.seo_image_view || '',
+        });
+
         if (bannerSection?.content?.image_view) {
           this.bannerImageUrl = bannerSection.content.image_view;
         }
@@ -152,10 +215,13 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
             const elapsed = Date.now() - startTime;
             const remaining = minLoadingTime - elapsed;
 
-            setTimeout(() => {
-              this.loading = false;
-              setTimeout(() => this.initScrollEffects());
-            }, remaining > 0 ? remaining : 0);
+            setTimeout(
+              () => {
+                this.loading = false;
+                setTimeout(() => this.initScrollEffects());
+              },
+              remaining > 0 ? remaining : 0
+            );
           };
 
           if (imageUrls.length > 0) {
@@ -186,7 +252,9 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
 
   private updateSectionTop(): void {
     if (!this.isBrowser) return;
-    const section = document.getElementById('abin-design-studio-project-detail-2');
+    const section = document.getElementById(
+      'abin-design-studio-project-detail-2'
+    );
     if (!section) return;
     const rect = section.getBoundingClientRect();
     const top = Math.max(0, Math.round(rect.top));
@@ -243,7 +311,6 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
     });
   }
 
-  // ===== Popup Methods =====
   openCredits() {
     if (this.isCreditOpen) return;
     this.closeAll();

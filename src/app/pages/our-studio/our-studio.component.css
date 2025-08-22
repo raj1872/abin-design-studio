@@ -53,7 +53,7 @@
 
 .team-wrapper {
   display: grid;
-  grid-template-columns: calc(100% - 60% - 2.5rem) calc(100% - 60% - 2.5rem);
+  grid-template-columns: calc(100% - 53% - 2.5rem) calc(100% - 60% - 2.5rem);
   gap: 5rem;
   justify-content: space-between;
   align-items: flex-start;

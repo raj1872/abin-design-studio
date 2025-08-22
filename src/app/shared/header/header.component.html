@@ -6,8 +6,10 @@
   <div class="header-flex main-container">
     <div class="header-logo">
       <a href="javascript:void(0);" routerLink="/home" routerLinkActive="active">
-        <img src="assets/images/logo/white-logo-ads.png" alt="" class="white-header-logo" />
-        <img src="assets/images/logo/white-logo-ads.png" alt="" class="black-header-logo" />
+        <h1 class="white-color bold-fonts white-header-logo">Abin Design Studio</h1>
+        <h1 class="black-header-logo bold-fonts">Abin Design Studio</h1>
+        <!-- <img src="assets/images/logo/white-logo-ads.png" alt=""  />
+        <img src="assets/images/logo/white-logo-ads.png" alt="" /> -->
       </a>
     </div>
 
@@ -20,11 +22,13 @@
     </div> -->
 
     <!-- Web bar -->
-    <div class="web-bar" (click)="toggleMenu();closeContactNav();" [class.active]="isMenuActive">
-      <div class="bar top"></div>
-      <div class="bar middle"></div>
-      <div class="bar bottom"></div>
+    <div class="web-bar" (click)="toggleMenu(); closeContactNav();" [class.active]="isMenuActive">
+
+      <span *ngIf="!isMenuActive">Menu</span>
+      <span *ngIf="isMenuActive">Close</span>
+
     </div>
+
   </div>
 </div>
 <div class="header-overlay" [class.active]="isMenuActive" (click)="closeMenu()"></div>
@@ -53,15 +57,14 @@
 
                 <!-- Child Categories -->
                 <ng-container>
-                 <div class="inner-project-flex-row" #childContainer
-     [class.active]="activeCategory === i">
-  <div class="section-paragraph c-pointer" *ngFor="let child of category.child_categories">
-    <a routerLink="/projects/{{category.slug}}/{{child.slug}}" routerLinkActive="active"
-       (click)="closeMenu()" class="lh1 light-fonts">
-      {{ child.name }}
-    </a>
-  </div>
-</div>
+                  <div class="inner-project-flex-row" #childContainer [class.active]="activeCategory === i">
+                    <div class="section-paragraph c-pointer" *ngFor="let child of category.child_categories">
+                      <a routerLink="/projects/{{category.slug}}/{{child.slug}}" routerLinkActive="active"
+                        (click)="closeMenu()" class="lh1 light-fonts">
+                        {{ child.name }}
+                      </a>
+                    </div>
+                  </div>
 
                 </ng-container>
 

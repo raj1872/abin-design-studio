@@ -11,7 +11,6 @@ export class ProjectsResolver implements Resolve<any> {
     const category = route.paramMap.get('category_slug') || undefined;
     const subCategory = route.paramMap.get('sub_category_slug') || undefined;
 
-    // 🚫 Do not ever send "all"
     if (subCategory && subCategory.toLowerCase() === 'all') {
       return this.apiService.getProjects(category);
     }

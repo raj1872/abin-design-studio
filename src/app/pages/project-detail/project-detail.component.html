@@ -16,24 +16,55 @@
       <div class="detail-banner-abs">
         <div class="main-container">
           <div class="inner-flex inner-flex-big">
-            <div *ngIf="projectDetailObj.project">
-              <div class="big-banner-title overflowdiv"
-                *ngFor="let word of projectDetailObj?.project?.split(' '); let i = index">
-                <h1 class="white-color uppercase" data-aos="fade-up" [attr.data-aos-delay]="300 + (i * 200)">
-                  {{ word }}
-                </h1>
+            <div class="inner-flex inner-flex-small">
+              <div *ngIf="projectDetailObj.project">
+                <div class="big-banner-title overflowdiv"
+                  *ngFor="let word of projectDetailObj?.project?.split(' '); let i = index">
+                  <h1 class="white-color uppercase" data-aos="fade-up" [attr.data-aos-delay]="300 + (i * 200)">
+                    {{ word }}
+                  </h1>
+                </div>
+              </div>
+              <div class="overflowdiv section-subtitle2 lh1" *ngIf="projectDetailObj.tagline">
+                <p class="white-color bold-fonts lh1" data-aos="fade-up" data-aos-delay="600">
+                  {{ projectDetailObj.tagline }}
+                </p>
               </div>
             </div>
-
-            <div class="flex-row flex-row-medium flex-col-mobile overflowdiv">
-              <div class="section-content" *ngIf="projectDetailObj.location">
-                <p class="white-color uppercase bold-fonts" data-aos="fade-up" data-aos-delay="700">
+            <div class="flex-row flex-row-small flex-col-mobile overflowdiv">
+              <div class="section-content lh1" *ngIf="projectDetailObj.location">
+                <p class="white-color uppercase lh1 regular-fonts" data-aos="fade-up" data-aos-delay="700">
                   {{projectDetailObj.location}}
                 </p>
               </div>
-              <div class="section-content" *ngIf="projectDetailObj.year">
-                <p class="white-color uppercase bold-fonts" data-aos="fade-up" data-aos-delay="800">
+              <div class="section-content lh1" *ngIf="projectDetailObj.year">
+                <p class="white-color uppercase lh1 regular-fonts" data-aos="fade-up" data-aos-delay="800">
+                  /
+                </p>
+              </div>
+              <div class="section-content lh1" *ngIf="projectDetailObj.year">
+                <p class="white-color uppercase lh1 regular-fonts" data-aos="fade-up" data-aos-delay="800">
                   {{ projectDetailObj.year }}
+                </p>
+              </div>
+              <div class="section-content lh1" *ngIf="projectDetailObj.area">
+                <p class="white-color uppercase lh1 regular-fonts" data-aos="fade-up" data-aos-delay="900">
+                  /
+                </p>
+              </div>
+              <div class="section-content lh1" *ngIf="projectDetailObj.area">
+                <p class="white-color uppercase lh1 regular-fonts" data-aos="fade-up" data-aos-delay="900">
+                  {{ projectDetailObj.area }}
+                </p>
+              </div>
+              <div class="section-content lh1" *ngIf="projectDetailObj.type">
+                <p class="white-color uppercase lh1 regular-fonts" data-aos="fade-up" data-aos-delay="1000">
+                  /
+                </p>
+              </div>
+              <div class="section-content lh1" *ngIf="projectDetailObj.type">
+                <p class="white-color uppercase lh1 regular-fonts" data-aos="fade-up" data-aos-delay="1000">
+                  {{ projectDetailObj.type }}
                 </p>
               </div>
             </div>
@@ -106,10 +137,12 @@
             </div>
           </div>
           <div class="abs-click-btns">
-            <div class="section-paragraph" *ngIf="projectDetailObj?.credits_content?.length">
+            <div class="section-paragraph" data-aos="fade-up" data-aos-delay="400"
+              *ngIf="projectDetailObj?.credits_content?.length">
               <p (click)="openCredits()" class="c-pointer semibold-fonts">+ Credits</p>
             </div>
-            <div class="section-paragraph">
+            <div class="section-paragraph" data-aos="fade-up" data-aos-delay="600"
+              *ngIf="projectDetailObj?.publication_details?.length">
               <p (click)="openPublication()" class="c-pointer semibold-fonts">+ Publication</p>
             </div>
           </div>
@@ -133,10 +166,10 @@
             <div class="visible-tab-mobile mobile-detail-images">
               <img [src]="section.content.image_view" alt="">
             </div>
-
+            <div class="image-overlay"></div>
             <div class="section-abs-section">
               <div class="main-container">
-                <div class="section-subtitle inner-abs-container">
+                <div class="section-subtitle inner-abs-container" data-aos="fade-up" data-aos-delay="400">
                   <p class="white-color regular-fonts lh1" [innerHTML]="section.content.text"></p>
                 </div>
               </div>
@@ -176,60 +209,10 @@
 
       </ng-container>
     </div>
-
-    <!-- <div class="inner-flex inner-flex-sidepadding-gap">
-    <section class="abin-design-studio-section bg-image-section-detail relative"
-      id="abin-design-studio-project-detail-3">
-      <div class="visible-tab-mobile mobile-detail-images">
-        <img src="./assets/images/projects/waterfront-pavilion/detail-sec3-web.jpg" alt="">
-      </div>
-
-      <div class="section-abs-section">
-        <div class="main-container">
-          <div class="section-subtitle inner-abs-container">
-            <p class="white-color regular-fonts lh1">The story of Adisaptagram's football club and the construction of a
-              clubhouse by Abin
-              Design Studio is a compelling narrative of community-driven development.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="abin-design-studio-section bg-image-section-detail relative"
-      id="abin-design-studio-project-detail-4"></section>
-    <section class="abin-design-studio-section bg-image-section-detail relative"
-      id="abin-design-studio-project-detail-5">
-      <div class="visible-tab-mobile mobile-detail-images">
-        <img src=".//assets/images/projects/waterfront-pavilion/Waterfront_Clubhouse_5-web.jpg" alt="">
-      </div>
-      <div class="image-overlay hide-tab-mobile"></div>
-      <div class="section-abs-section">
-        <div class="main-container">
-          <div class="section-subtitle inner-abs-container-2">
-            <p class="white-color mobile-primary-white regular-fonts lh1">
-              Utilizing local materials, labor, and donations, the structure includes basic sanitation, multipurpose
-              spaces, and a viewing deck. It symbolizes inclusive development, sustainability, and hope for a better
-              community future.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="abin-design-studio-section relative" id="abin-design-studio-project-detail-6">
-      <div class="abin-sec-6-grid">
-        <div class="sec-6-image">
-          <img #scalableImage src="./assets/images/projects/waterfront-pavilion/clubhouse5_2-web.jpg" alt="">
-        </div>
-        <div class="sec-6-image">
-          <img #scalableImage src="./assets/images/projects/waterfront-pavilion/clubhouse5_1.jpg" alt="">
-        </div>
-      </div>
-    </section>
-    <section class="abin-design-studio-section bg-image-section-detail relative"
-      id="abin-design-studio-project-detail-7"></section>
-  </div> -->
     <section class="abin-design-studio-section relative" id="abin-design-studio-project-detail-8">
       <div class="nex-prev-grid">
-        <a routerLink="/{{projectDetailObj.previous_projects.slug}}/" routerLinkActive="active" class="prev-div-wrapper relative">
+        <a routerLink="/{{projectDetailObj.previous_projects.slug}}/" routerLinkActive="active"
+          class="prev-div-wrapper relative">
           <div class="prev-nex-img-div">
             <img src="{{projectDetailObj.previous_projects.featured_image_full}}&w=1080&h=1080&q=100" alt="">
             <div class="overlay-next-rev"></div>
@@ -247,7 +230,8 @@
             </div>
           </div>
         </a>
-        <a routerLink="/{{projectDetailObj.previous_projects.slug}}/" routerLinkActive="active" class="next-div-wrapper relative">
+        <a routerLink="/{{projectDetailObj.previous_projects.slug}}/" routerLinkActive="active"
+          class="next-div-wrapper relative">
           <div class="prev-nex-img-div">
             <img src="{{projectDetailObj.next_project.featured_image_full}}&w=1080&h=1080&q=100" alt="">
             <div class="overlay-next-rev"></div>

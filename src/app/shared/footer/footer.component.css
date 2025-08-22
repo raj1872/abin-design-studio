@@ -23,7 +23,7 @@
 
 
 #abin-footer {
-  padding: 1rem 0;
+  padding: 0.5rem 0;
   background-color: var(--primary-color);
 }
 
@@ -31,7 +31,7 @@
 .policy-flex p,
 .powered-by p,
 .powered-by a {
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   color: var(--white-color);
   display: block;
   letter-spacing: 1px;

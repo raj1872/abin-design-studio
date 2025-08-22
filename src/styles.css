@@ -289,7 +289,7 @@
   font-family: var(--regular-font-family) !important;
 }
 
-.light-fonts{
+.light-fonts {
   font-family: var(--light-font-family) !important;
 }
 
@@ -1057,7 +1057,18 @@ button:focus-visible {
 }
 
 .header-logo {
-  width: 8rem;
+  width: max-content;
+}
+
+.header-logo a {
+  display: block;
+  font-size: 2rem;
+  line-height: 1 !important;
+}
+
+.header-logo a h1 {
+  font-size: 2rem;
+  line-height: 1 !important;
 }
 
 @keyframes shimmer {
@@ -1161,6 +1172,17 @@ button:focus-visible {
   gap: .6rem;
   justify-self: flex-end;
   cursor: pointer;
+}
+
+
+.web-bar.active span {
+  color: var(--primary-color);
+}
+
+.web-bar span {
+  font-size: 1.5rem;
+  color: var(--white-color);
+  font-family: var(--medium-font-family);
 }
 
 .bar {
