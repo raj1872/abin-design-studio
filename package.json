@@ -9,7 +9,6 @@
     "test": "ng test",
     "dev:ssr": "ng run abin-design-studio:serve-ssr",
     "serve:ssr": "node dist/abin-design-studio/server/main.js",
-    "vercel-build": "npm run build:ssr",
     "build:ssr": "ng build && ng run abin-design-studio:server",
     "prerender": "ng run abin-design-studio:prerender"
   },
