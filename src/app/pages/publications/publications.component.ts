@@ -1,5 +1,6 @@
 import { Component, AfterViewInit, Inject, PLATFORM_ID, OnInit, HostListener } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { ApiService } from '../../services/api.service';
 import Lenis from '@studio-freight/lenis';
 
 @Component({
@@ -9,13 +10,25 @@ import Lenis from '@studio-freight/lenis';
 })
 export class PublicationsComponent implements OnInit, AfterViewInit {
   isMobile = false;
+  publications: any[] = [];
 
-  constructor(@Inject(PLATFORM_ID) private platformId: any) {}
+   constructor(
+      @Inject(PLATFORM_ID) private platformId: Object,
+      private apiService: ApiService
+    ) {}
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       this.checkIsMobile();
+      this.apiService.getPublications().subscribe({
+        next: (res) => {
+          this.publications = res.list || res;
+          console.log(this.publications);
+        },
+        error: (err) => console.error('Error fetching publications:', err)
+      });
     }
+    // ✅ Call publications API globally (SSR + Browser safe)
   }
 
   @HostListener('window:resize')

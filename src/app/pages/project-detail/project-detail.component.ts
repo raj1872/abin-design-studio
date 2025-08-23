@@ -30,6 +30,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
   scalableImages!: QueryList<ElementRef>;
 
   isBrowser = false;
+  isMobile = false; // ✅ added
 
   // ===== Popup state flags =====
   isCreditOpen = false;
@@ -60,6 +61,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
     this.isBrowser = isPlatformBrowser(this.platformId);
 
     if (this.isBrowser) {
+      this.checkIsMobile(); // ✅ check on init
       this.updateSectionTop();
     }
 
@@ -75,6 +77,11 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
     if (this.isBrowser) {
       this.initScrollEffects();
     }
+  }
+
+  private checkIsMobile(): void {
+    if (!this.isBrowser) return;
+    this.isMobile = window.innerWidth <= 768;
   }
 
   private initScrollEffects(): void {
@@ -264,6 +271,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
   @HostListener('window:resize', [])
   onResize(): void {
     if (!this.isBrowser) return;
+    this.checkIsMobile(); // ✅ keep updated
     this.updateSectionTop();
   }
 
@@ -276,8 +284,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
     }
 
     const scrollTop = window.scrollY;
-    const isMobile = window.innerWidth <= 768;
-    const parallaxSpeed = isMobile ? 0.4 : 0.4;
+    const parallaxSpeed = this.isMobile ? 0.4 : 0.4;
     const offset = scrollTop * parallaxSpeed;
 
     if (this.parallaxBg && this.parallaxBg.nativeElement) {
@@ -378,7 +385,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
       const scrollTop = window.scrollY;
       const elementStart = scrollTop + rect.top;
       const scrollDistance = scrollTop - (elementStart - window.innerHeight);
-      const vhMultiplier = window.innerWidth < 768 ? 1.15 : 0.75;
+      const vhMultiplier = this.isMobile ? 1.15 : 0.75; // ✅ using class property
       const revealRange = window.innerHeight * vhMultiplier;
       const revealStep = revealRange / this.totalSpans;
 

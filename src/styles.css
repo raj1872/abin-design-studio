@@ -526,6 +526,11 @@ img {
   display: none;
 }
 
+.wfc{
+  width: fit-content !important;
+  display: block;
+}
+
 .hover-disable {
   display: inline-block;
 }

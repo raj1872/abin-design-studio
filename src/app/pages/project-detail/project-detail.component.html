@@ -37,7 +37,7 @@
                   {{projectDetailObj.location}}
                 </p>
               </div>
-              <div class="section-content lh1" *ngIf="projectDetailObj.year">
+              <div class="section-content lh1" *ngIf="projectDetailObj.year && !isMobile">
                 <p class="white-color uppercase lh1 regular-fonts" data-aos="fade-up" data-aos-delay="800">
                   /
                 </p>
@@ -47,7 +47,7 @@
                   {{ projectDetailObj.year }}
                 </p>
               </div>
-              <div class="section-content lh1" *ngIf="projectDetailObj.area">
+              <div class="section-content lh1" *ngIf="projectDetailObj.area && !isMobile">
                 <p class="white-color uppercase lh1 regular-fonts" data-aos="fade-up" data-aos-delay="900">
                   /
                 </p>
@@ -57,7 +57,7 @@
                   {{ projectDetailObj.area }}
                 </p>
               </div>
-              <div class="section-content lh1" *ngIf="projectDetailObj.type">
+              <div class="section-content lh1" *ngIf="projectDetailObj.type && !isMobile">
                 <p class="white-color uppercase lh1 regular-fonts" data-aos="fade-up" data-aos-delay="1000">
                   /
                 </p>
@@ -219,36 +219,42 @@
           </div>
           <div class="prev-abs-wrapper prev-next-abs-wrapper">
             <div class="section-subtitle2">
-              <p class="semibold-fonts white-color lh1">
+              <p class="semibold-fonts  lh1"
+                [ngStyle]="{'color': projectDetailObj.previous_projects.prev_next_text_color, 'important': true}">
                 {{projectDetailObj.previous_projects.project}}
               </p>
             </div>
             <div class="section-content">
-              <p class="white-color lh1">
+              <p class=" lh1" [ngStyle]="{'color': projectDetailObj.previous_projects.prev_next_text_color, 'important': true}">
                 Previous Project
               </p>
             </div>
           </div>
         </a>
-        <a routerLink="/{{projectDetailObj.previous_projects.slug}}/" routerLinkActive="active"
+        <a [routerLink]="'/' + projectDetailObj.previous_projects.slug + '/'" routerLinkActive="active"
           class="next-div-wrapper relative">
+
           <div class="prev-nex-img-div">
-            <img src="{{projectDetailObj.next_project.featured_image_full}}&w=1080&h=1080&q=100" alt="">
+            <img [src]="projectDetailObj.next_project.featured_image_full + '&w=1080&h=1080&q=100'" alt="">
             <div class="overlay-next-rev"></div>
           </div>
+
           <div class="next-abs-wrapper prev-next-abs-wrapper">
             <div class="section-subtitle2">
-              <p class="semibold-fonts white-color lh1">
-                {{projectDetailObj.next_project.project}}
+              <p class="semibold-fonts lh1"
+                [ngStyle]="{'color': projectDetailObj.next_project.prev_next_text_color, 'important': true}">
+                {{ projectDetailObj.next_project.project }}
               </p>
             </div>
+
             <div class="section-content">
-              <p class="white-color lh1">
+              <p class="lh1" [ngStyle]="{'color': projectDetailObj.next_project.prev_next_text_color, 'important': true}">
                 Next Project
               </p>
             </div>
           </div>
         </a>
+
       </div>
     </section>
   </div>

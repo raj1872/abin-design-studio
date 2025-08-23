@@ -173,6 +173,7 @@
 .overview-content-card {
   width: calc(100% - 55%);
   flex-basis: calc(100% - 55%);
+  padding: 4rem 0;
 }
 
 ::ng-deep #scroll-reveal-text span {
@@ -484,6 +485,9 @@
     font-size: 8rem;
   }
 
+  .image-overlay {
+    display: none;
+  }
 
   .bg-image-section-detail {
     position: relative;

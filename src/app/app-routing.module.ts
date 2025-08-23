@@ -13,6 +13,7 @@ import { NewsComponent } from './pages/news/news.component';
 import { NewsDetailComponent } from './pages/news-detail/news-detail.component';
 import { ProjectsResolver } from './pages/resolvers/projects.resolver';
 import { ContactComponent } from './pages/contact/contact.component';
+import { DetailComponent } from './pages/publications/detail/detail.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'news-detail', component: NewsDetailComponent },
   { path: 'studio', component: OurStudioComponent },
   { path: 'our-team', component: TeamComponent },
+  { path: 'publications/:slug', component: DetailComponent },
 
   // ✅ Category & Subcategory lists
   {

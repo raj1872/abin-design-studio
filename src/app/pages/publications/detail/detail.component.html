@@ -1,0 +1,46 @@
+<div class="publication-detail" [ngStyle]="{
+    'background-color': '#ffe080',
+    'color':  '#1A1A1A'
+  }" *ngIf="publication">
+  <!-- publication?.color_background ||  -->
+   <!-- publication?.color_text || -->
+  <div class="detail-container">
+    <!-- Title & Date -->
+    <h1 class="pub-title">{{ publication.title }}</h1>
+    <p class="pub-date">{{ publication.date | date: 'longDate' }}</p>
+
+    <!-- Thumbnail -->
+    <img *ngIf="publication.thumbnail" [src]="publication.thumbnail" [alt]="publication.title" class="pub-thumbnail" />
+
+    <!-- Description (from API, full HTML) -->
+    <div class="pub-description" [innerHTML]="publication.description | safeHtml"></div>
+
+    <a class="download-pdf-btn wfc" href="{{publication.doc_file}}" target="_blank">
+      <button class="button-style-primary abin-design-studio-button">
+        <p>
+          View Publication
+        </p>
+      </button>
+    </a>
+
+    <!-- Gallery -->
+    <div *ngIf="publication.multipleImages?.length" class="gallery">
+      <h3>Gallery</h3>
+      <div class="gallery-grid">
+        <img *ngFor="let img of publication.multipleImages" [src]="img.image" [alt]="img.image_name" />
+      </div>
+    </div>
+
+    <!-- Related Projects -->
+    <div *ngIf="publication.related_projects?.length" class="related-projects">
+      <h3>Related Projects</h3>
+      <ul>
+        <li *ngFor="let proj of publication.related_projects">
+          <a [routerLink]="[proj.project_slug]">{{
+            proj.project_name
+          }}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

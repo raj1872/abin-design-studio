@@ -78,7 +78,7 @@ export class ApiService {
       this.http.post(`${this.baseUrl}/projects`, payload)
     );
   }
-  
+
   getBanners(): Observable<any> {
     return this.getWithTransferState(
       'banners',
@@ -91,8 +91,22 @@ export class ApiService {
       this.http.post(`${this.baseUrl}/home_banners`, {})
     );
   }
+  getPublications(): Observable<any> {
+    return this.getWithTransferState(
+      'publications',
+      this.http.post(`${this.baseUrl}/publications`, {})
+    );
+  }
 
-  
+  getPublicationsDetails(slug: string): Observable<any> {
+    const payload = { slug }; // safer than headers for SSR
+
+    return this.getWithTransferState(
+      'publications-detail-' + slug, // unique cache key per slug
+      this.http.post(`${this.baseUrl}/publications/detail`, payload)
+    );
+  }
+
   getContactInfo(): Observable<any> {
     return this.getWithTransferState(
       'contact_info', // transfer state key

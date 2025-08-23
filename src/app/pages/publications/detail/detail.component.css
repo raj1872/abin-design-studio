@@ -1,0 +1,250 @@
+/* ========================
+   Publication Detail Page
+   ======================== */
+.publication-detail {
+  width: 100%;
+  min-height: 100vh;
+  background: var(--background-smoke);
+  color: var(--pure-black-color);
+  font-family: var(--regular-font-family);
+  padding: var(--big-gap-size) 0;
+}
+
+.detail-container {
+  width: 100%;
+  max-width: 1000px;
+  /* using mini-container for blog-like feel */
+  margin: 0 auto;
+  padding: 0 var(--small-gap-size);
+}
+
+/* Title & Date */
+.pub-title {
+  font-size: var(--section-title-font-size);
+  font-family: var(--bold-font-family);
+  color: var(--primary-color);
+  margin-bottom: var(--common-gap-size);
+  line-height: 1.3;
+}
+
+.pub-date {
+  font-size: var(--text-font-size);
+  font-family: var(--light-font-family);
+  color: #666;
+  margin-bottom: var(--medium-gap-size);
+}
+
+/* Thumbnail */
+.pub-thumbnail {
+  display: block;
+  width: 100%;
+  max-height: 480px;
+  object-fit: cover;
+  border-radius: var(--web-border-radius);
+  margin-bottom: var(--medium-gap-size);
+}
+
+/* Blog-Style Description */
+.pub-description {
+  font-size: var(--content-font-size);
+  line-height: 1.8;
+  color: var(--pure-black-color);
+  margin-bottom: var(--big-gap-size);
+}
+
+/* Headings hierarchy */
+::ng-deep .pub-description h1 {
+  font-size: 2.25rem;
+  /* bigger than section title */
+  font-family: var(--bold-font-family);
+  margin: 2rem 0 1rem;
+  line-height: 1.3;
+}
+
+::ng-deep .pub-description h2 {
+  font-size: 1.85rem;
+  font-family: var(--semibold-font-family);
+  margin: 1.75rem 0 1rem;
+  line-height: 1.4;
+}
+
+::ng-deep .pub-description h3 {
+  font-size: 1.5rem;
+  font-family: var(--medium-font-family);
+  margin: 1.5rem 0 1rem;
+}
+
+::ng-deep .pub-description h4 {
+  font-size: 1.25rem;
+  font-family: var(--medium-font-family);
+  margin: 1.25rem 0 0.75rem;
+}
+
+::ng-deep .pub-description p {
+  margin: 0 0 1.25rem;
+  font-size: var(--content-font-size);
+  line-height: 1.8;
+}
+
+::ng-deep .pub-description ul {
+  list-style-type: disc !important;
+}
+
+::ng-deep .pub-description ol {
+  list-style-type: decimal !important
+}
+
+/* Blockquote (Blog Style) */
+::ng-deep .pub-description blockquote {
+  position: relative;
+  font-size: 1.25rem;
+  font-family: var(--regular-font-family);
+  font-style: italic;
+  color: #333;
+  background: #fafafa;
+  border-left: 6px solid var(--primary-color);
+  padding: 1.5rem 2rem;
+  margin: 2rem 0;
+  border-radius: var(--web-border-radius);
+}
+
+::ng-deep .pub-description blockquote::before {
+  content: "“";
+  font-size: 3.5rem;
+  color: var(--secondary-highlight-color);
+  position: absolute;
+  left: 15px;
+  top: 5px;
+  font-family: "Georgia", serif;
+}
+
+::ng-deep .pub-description blockquote::after {
+  content: "”";
+  font-size: 3.5rem;
+  color: var(--secondary-highlight-color);
+  position: absolute;
+  right: 20px;
+  bottom: -10px;
+  font-family: "Georgia", serif;
+}
+::ng-deep .pub-description blockquote p em {
+  padding: 1rem;
+}
+::ng-deep .pub-description blockquote p {
+  margin: 0;
+}
+
+::ng-deep .pub-description blockquote cite {
+  display: block;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #666;
+  font-style: normal;
+  text-align: right;
+}
+
+::ng-deep .pub-description ul,
+::ng-deep .pub-description ol {
+  margin: 1rem 0 1.5rem 2rem;
+  font-size: var(--content-font-size);
+  color: var(--primary-color);
+  line-height: 1.7;
+}
+
+::ng-deep .pub-description li {
+  margin-bottom: 0.75rem;
+  color: var(--primary-color);
+}
+
+::ng-deep .pub-description a {
+  color: var(--secondary-highlight-color);
+  text-decoration: underline;
+  transition: var(--common-transition);
+}
+
+::ng-deep .pub-description a:hover {
+  color: var(--primary-color);
+}
+
+/* PDF Viewer */
+.pdf-viewer {
+  width: 100%;
+  margin: var(--big-gap-size) 0;
+}
+
+.pdf-title {
+  font-size: var(--section-subtitle-font-size2);
+  font-family: var(--semibold-font-family);
+  color: var(--pure-black-color);
+  margin-bottom: var(--small-gap-size);
+}
+
+.pdf-container {
+  width: 100%;
+  height: 80vh;
+  border-radius: var(--web-border-radius);
+  background: var(--white-color);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Gallery */
+.gallery {
+  margin: var(--big-gap-size) 0;
+}
+
+.gallery h3 {
+  font-size: var(--section-subtitle-font-size2);
+  font-family: var(--semibold-font-family);
+  margin-bottom: var(--small-gap-size);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--small-gap-size);
+}
+
+.gallery-grid img {
+  width: 100%;
+  border-radius: var(--web-border-radius);
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.gallery-grid img:hover {
+  transform: scale(1.02);
+}
+
+/* Related Projects */
+.related-projects {
+  margin: var(--big-gap-size) 0;
+  padding-top: var(--medium-gap-size);
+  border-top: 1px solid var(--highlight-color);
+}
+
+.related-projects h3 {
+  font-size: var(--section-subtitle-font-size2);
+  font-family: var(--semibold-font-family);
+  margin-bottom: var(--small-gap-size);
+}
+
+.related-projects ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.related-projects li {
+  margin-bottom: var(--common-gap-size);
+}
+
+.related-projects a {
+  font-size: var(--content-font-size);
+  color: var(--secondary-highlight-color);
+  font-family: var(--medium-font-family);
+  transition: var(--common-transition);
+}
+
+.related-projects a:hover {
+  color: var(--primary-color);
+}
