@@ -122,7 +122,12 @@
 .news-swiper {
   width: 100%;
 }
-
+.news-card-image,
+.news-image{
+  width: 100%;
+  background-color: #DEDEDE;
+  aspect-ratio: 12/13;
+}
 .readmore-link-img {
   width: 2rem;
   height: 2rem;

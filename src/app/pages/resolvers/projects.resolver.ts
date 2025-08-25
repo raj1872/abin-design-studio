@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../../services/api.service';
 import { Observable } from 'rxjs';
 

@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { SwiperModule } from 'swiper/angular';
-
+import { FancyboxDirective } from './directives/fancybox.directive';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
@@ -24,6 +24,7 @@ import { ContactComponent } from './pages/contact/contact.component';
 @NgModule({
   declarations: [
     AppComponent,
+    FancyboxDirective,
     HeaderComponent,
     FooterComponent,
     FullPageLoaderComponent,

@@ -94,9 +94,11 @@
 .all-sub-flex li:hover {
   opacity: 1 !important;
 }
+
 .all-sub-flex li a {
   opacity: 0.85;
 }
+
 .all-sub-flex li a.active {
   font-family: var(--medium-font-family);
   opacity: 1
@@ -154,6 +156,13 @@
     flex-wrap: wrap;
     row-gap: 0.5rem;
     margin-top: 1rem;
+  }
+
+  .project-list-card:hover img.project-list-hover-enable {
+    opacity: 0;
+    z-index: -5;
+    visibility: hidden;
+    transition: var(--common-transition);
   }
 
   .project-list-card img.project-list-hover-disable,

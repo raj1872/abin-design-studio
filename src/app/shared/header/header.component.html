@@ -39,6 +39,9 @@
     <div class="main-nav-flex">
       <div class="header-links-flex inner-flex inner-flex-medium inner-flex-center">
         <div class="section-paragraph">
+          <p class="uppercase bold-fonts c-pointer lh1" (click)="closeMenu()">Home</p>
+        </div>
+        <div class="section-paragraph">
           <p class="uppercase bold-fonts c-pointer lh1" (click)="closeMenu()">Search</p>
         </div>
         <div class="section-paragraph">
@@ -60,7 +63,7 @@
                   <div class="inner-project-flex-row" #childContainer [class.active]="activeCategory === i">
                     <div class="section-paragraph c-pointer" *ngFor="let child of category.child_categories">
                       <a routerLink="/projects/{{category.slug}}/{{child.slug}}" routerLinkActive="active"
-                        (click)="closeMenu()" class="lh1 light-fonts">
+                        (click)="closeMenu()" class="lh1 light-fonts" (click)="closeCategory(); $event.stopPropagation()">
                         {{ child.name }}
                       </a>
                     </div>

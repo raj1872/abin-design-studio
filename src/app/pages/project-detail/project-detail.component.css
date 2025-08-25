@@ -303,7 +303,9 @@
   visibility: visible;
   pointer-events: all;
 }
-
+.publication-image{
+  max-height: 60vh;
+}
 .inner-popup-space {
   padding: var(--small-gap-size);
   opacity: 0;

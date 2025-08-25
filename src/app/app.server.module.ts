@@ -10,7 +10,7 @@ import { ProjectsPreloadService } from './services/projects-preload.service';
   imports: [
     AppModule,
     ServerModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   bootstrap: [AppComponent],
   providers: [
@@ -19,20 +19,18 @@ import { ProjectsPreloadService } from './services/projects-preload.service';
       multi: true,
       useFactory: (preloadService: ProjectsPreloadService) => {
         return () => {
-          // ✅ List of categories and sub-categories to preload
-          const categories = ['architure', 'interior', 'design']; // example
+          const categories = ['architecture', 'interior', 'design']; // ✅ corrected
           const subCategories = {
-            architure: ['homes', 'hospitality', 'office'],
+            architecture: ['homes', 'hospitality', 'office'],
             interior: ['residential', 'commercial'],
-            design: ['modern', 'classic']
+            design: ['modern', 'classic'],
           };
 
-          // Preload all projects into TransferState during SSR
           return preloadService.preloadAllProjects(categories, subCategories);
         };
       },
-      deps: [ProjectsPreloadService]
-    }
-  ]
+      deps: [ProjectsPreloadService],
+    },
+  ],
 })
 export class AppServerModule {}

@@ -96,7 +96,7 @@
                 <div class="section-paragraph close-publications c-pointer" (click)="closeAll()">
                   <p class="white-color">&times;</p>
                 </div>
-                <img [src]="pub.thumbnail" [alt]="pub.title || 'Publication Image'">
+                <img [src]="pub.thumbnail" [alt]="pub.title || 'Publication Image'" class="publication-image">
               </div>
 
               <!-- Title -->
@@ -105,7 +105,7 @@
               </div>
 
               <!-- Description (render as HTML) -->
-              <div class="section-paragraph" [innerHTML]="pub.description"></div>
+              <!-- <div class="section-paragraph" [innerHTML]="pub.description"></div> -->
 
             </div>
           </div>
@@ -197,13 +197,15 @@
 
           <!-- gallery-block -->
           <section *ngIf="section.type === 'gallery-block'" class="abin-design-studio-section relative">
-
-            <div class="abin-sec-6-grid">
+            <div class="abin-sec-6-grid" appFancybox>
+              <!-- 👈 Directive here -->
               <div class="sec-6-image" *ngFor="let img of section.content">
-                <img #scalableImage [src]="img.image_view" alt="">
+                <a data-fancybox="gallery" [attr.href]="img.image_view"> <img [src]="img.image_view" alt="">
+                </a>
               </div>
             </div>
           </section>
+
 
         </ng-container>
 
@@ -225,7 +227,8 @@
               </p>
             </div>
             <div class="section-content">
-              <p class=" lh1" [ngStyle]="{'color': projectDetailObj.previous_projects.prev_next_text_color, 'important': true}">
+              <p class=" lh1"
+                [ngStyle]="{'color': projectDetailObj.previous_projects.prev_next_text_color, 'important': true}">
                 Previous Project
               </p>
             </div>
@@ -248,7 +251,8 @@
             </div>
 
             <div class="section-content">
-              <p class="lh1" [ngStyle]="{'color': projectDetailObj.next_project.prev_next_text_color, 'important': true}">
+              <p class="lh1"
+                [ngStyle]="{'color': projectDetailObj.next_project.prev_next_text_color, 'important': true}">
                 Next Project
               </p>
             </div>

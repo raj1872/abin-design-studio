@@ -143,7 +143,9 @@ export class HeaderComponent implements OnInit {
   toggleCategory(index: number): void {
     this.activeCategory = this.activeCategory === index ? null : index;
   }
-
+  closeCategory(): void {
+    this.activeCategory = null;
+  }
   openContactNav(): void {
     this.isContactNavActive = true;
   }

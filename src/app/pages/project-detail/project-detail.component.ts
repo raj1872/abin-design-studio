@@ -14,6 +14,8 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../services/api.service';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
@@ -53,6 +55,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
     private renderer: Renderer2,
     private route: ActivatedRoute,
     private apiService: ApiService,
+    private router: Router, // 👈 add this
     private meta: Meta,
     private title: Title
   ) {}
@@ -65,6 +68,14 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
       this.updateSectionTop();
     }
 
+    // ✅ Close popup on any route change
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.closeAll();
+      });
+
+    // ✅ still fetch project detail when slug changes
     this.route.paramMap.subscribe((params) => {
       const slug = params.get('slug');
       if (slug) {
