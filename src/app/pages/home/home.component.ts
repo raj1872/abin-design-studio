@@ -14,6 +14,7 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 import { Title, Meta } from '@angular/platform-browser';
 import { ApiService } from '../../services/api.service';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -29,14 +30,10 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
 
   // ✅ API banners
   homePageDetails: any[] = [];
-  // Inside HomeComponent class
-  isLoading = true; // default true
+  isLoading = true;
 
-  // ✅ Add this line
   isBrowser = false;
-
   private loadingTimeout: any;
-
   private scrollListener: (() => void) | null = null;
 
   constructor(
@@ -44,7 +41,8 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
     private titleService: Title,
     private apiService: ApiService,
     private metaService: Meta,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private router: Router
   ) {
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
@@ -77,10 +75,13 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
     this.metaService.updateTag({ property: 'og:type', content: 'website' });
     this.metaService.updateTag({ property: 'og:url', content: '' });
 
+    // ✅ Fetch API data
     this.apiService.getHomePage().subscribe({
       next: (res: any) => {
         if (res?.success && res?.list) {
           this.homePageDetails = res.list;
+          // 🎯 Try playing video once API data renders
+          setTimeout(() => this.playBannerVideo(), 200);
         }
         setTimeout(() => {
           this.isLoading = false;
@@ -93,21 +94,21 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
         }, 500);
       },
     });
+
+    // ✅ Restart video on navigation back to home
+    if (this.isBrowser) {
+      this.router.events.subscribe((event) => {
+        if (event instanceof NavigationEnd && event.urlAfterRedirects === '/home') {
+          setTimeout(() => this.playBannerVideo(true), 200);
+        }
+      });
+    }
   }
 
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      const videoEl = this.bannerVideo?.nativeElement;
-      if (videoEl) {
-        videoEl.muted = true; // must be muted
-        videoEl.playsInline = true;
-        videoEl.autoplay = true;
+      this.playBannerVideo();
 
-        // Try to play
-        videoEl.play().catch((err) => {
-          console.warn('Autoplay blocked, showing poster instead:', err);
-        });
-      }
       // ✅ Parallax scroll effect (images + videos)
       this.scrollListener = this.renderer.listen('window', 'scroll', () => {
         const parallaxEls = document.querySelectorAll<HTMLElement>(
@@ -122,12 +123,23 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
     }
   }
 
+  private playBannerVideo(reset: boolean = false): void {
+    const videoEl = this.bannerVideo?.nativeElement;
+    if (videoEl) {
+      videoEl.muted = true;
+      videoEl.playsInline = true;
+      if (reset) videoEl.currentTime = 0;
+
+      videoEl.play().catch((err) => {
+        console.warn('Autoplay blocked:', err);
+      });
+    }
+  }
+
   ngOnDestroy(): void {
-    // ✅ Clear timeout on destroy
     if (this.loadingTimeout) {
       clearTimeout(this.loadingTimeout);
     }
-    // ✅ Remove scroll listener
     if (this.scrollListener) {
       this.scrollListener();
       this.scrollListener = null;

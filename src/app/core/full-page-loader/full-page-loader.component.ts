@@ -28,8 +28,8 @@ export class FullPageLoaderComponent implements OnInit, OnDestroy {
 
         // Restore scrolling
         this.document.body.style.overflow = '';
-      }, 100); // 2s stroke + 1s fill
-      // }, 3000); // 2s stroke + 1s fill
+      // }, 100); // 2s stroke + 1s fill
+      }, 3000); // 2s stroke + 1s fill
     }
   }
 
