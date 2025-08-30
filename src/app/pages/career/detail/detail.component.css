@@ -1,0 +1,19 @@
+.step-number.active {
+    background: #000000;
+    border-color: #ffffff;
+}
+
+.step-number.active * {
+    color: #ffffff;
+}
+
+.step-number {
+    width: 25px;
+    height: 25px;
+    padding: 5px;
+    border: solid 1px #000000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

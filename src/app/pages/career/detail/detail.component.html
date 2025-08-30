@@ -5,147 +5,157 @@
     </div>
   </section>
   <section class="abin-design-studio-section section-padding relative" id="abin-design-studio-career-2">
-      <form [formGroup]="careerFormData" (ngSubmit)="submit()" class="inner-flex inner-flex-small" style="width: 40%; margin: 0 auto;">
-      
-          <!-- Step 1 -->
-          <ng-container *ngIf="currentStep === 0">
-              <input formControlName="name" placeholder="Name" />
-              <div *ngIf="isControlInvalid('name')">Name is required.</div>
-      
-              <input formControlName="preferred_name" placeholder="Preferred Name" />
-              <div *ngIf="isControlInvalid('preferred_name')">Preferred name is required.</div>
-      
-              <input formControlName="email" placeholder="Email" />
-              <div *ngIf="isControlInvalid('email')">Valid email is required.</div>
-      
-              <input formControlName="dob" type="date" placeholder="DOB" />
-              <div *ngIf="isControlInvalid('dob')">DOB is required.</div>
-      
-              <input formControlName="contact_no" placeholder="Contact No" />
-              <div *ngIf="isControlInvalid('contact_no')">10-digit number required.</div>
-      
-              <input formControlName="city" placeholder="City" />
-              <div *ngIf="isControlInvalid('city')">City is required.</div>
-      
-              <input formControlName="country" placeholder="Country" />
-              <div *ngIf="isControlInvalid('country')">Country is required.</div>
-          </ng-container>
-      
-          <!-- Step 2 -->
-          <ng-container *ngIf="currentStep === 1">
-              <input formControlName="institution_name" placeholder="Institution" />
-              <div *ngIf="isControlInvalid('institution_name')">Required.</div>
-      
-              <input formControlName="degree_program" placeholder="Degree Program" />
-              <div *ngIf="isControlInvalid('degree_program')">Required.</div>
-      
-              <input formControlName="expected_grad_year" placeholder="Expected Grad Year" />
-              <div *ngIf="isControlInvalid('expected_grad_year')">Required.</div>
-      
-              <textarea formControlName="achievements" placeholder="Achievements"></textarea>
-              <div *ngIf="isControlInvalid('achievements')">Required.</div>
-          </ng-container>
-
-          <!-- Step 3 -->
-          <ng-container *ngIf="currentStep === 2">
-              <textarea formControlName="why_join" placeholder="Why join?"></textarea>
-              <div *ngIf="isControlInvalid('why_join')">Required.</div>
-      
-              <textarea formControlName="what_to_learn" placeholder="What to learn?"></textarea>
-              <div *ngIf="isControlInvalid('what_to_learn')">Required.</div>
-      
-              <textarea formControlName="inspiration" placeholder="Inspiration"></textarea>
-              <div *ngIf="isControlInvalid('inspiration')">Required.</div>
-      
-              <input formControlName="preferred_duration" placeholder="Preferred Duration" />
-              <div *ngIf="isControlInvalid('preferred_duration')">Required.</div>
-      
-              <input formControlName="preferred_start_date" type="date" placeholder="Preferred Start Date" />
-              <div *ngIf="isControlInvalid('preferred_start_date')">Required.</div>
-      
-              <div class="inner-flex">
-                <label>Academic Curriculum</label>
-                <div class="row-flex">
-                    <label><input type="radio" formControlName="academic_curriculum" value="Yes" /> Yes</label>
-                    <label><input type="radio" formControlName="academic_curriculum" value="No" /> No</label>
-                    <label><input type="radio" formControlName="academic_curriculum" value="Optional" /> Optional</label>
+    <div class="inner-flex inner-flex-medium" style="width: 40%; margin: 0 auto;">
+        <div class="inner-flex inner-flex-medium" style="flex-direction: row;">
+            <div class="step-number" [class.active]="0 <= currentStep" ><p>1</p></div>
+            <div class="step-number" [class.active]="1 <= currentStep" ><p>2</p></div>
+            <div class="step-number" [class.active]="2 <= currentStep" ><p>3</p></div>
+            <div class="step-number" [class.active]="3 <= currentStep" ><p>4</p></div>
+            <div class="step-number" [class.active]="4 <= currentStep" ><p>5</p></div>
+            <div class="step-number" [class.active]="5 <= currentStep" ><p>6</p></div>
+        </div>
+        <form [formGroup]="careerFormData" (ngSubmit)="submit()" class="inner-flex inner-flex-small">
+        
+            <!-- Step 1 -->
+            <ng-container *ngIf="currentStep === 0">
+                <input formControlName="name" placeholder="Name" />
+                <div *ngIf="isControlInvalid('name')">Name is required.</div>
+        
+                <input formControlName="preferred_name" placeholder="Preferred Name" />
+                <div *ngIf="isControlInvalid('preferred_name')">Preferred name is required.</div>
+        
+                <input formControlName="email" placeholder="Email" />
+                <div *ngIf="isControlInvalid('email')">Valid email is required.</div>
+        
+                <input formControlName="dob" type="date" placeholder="DOB" />
+                <div *ngIf="isControlInvalid('dob')">DOB is required.</div>
+        
+                <input formControlName="contact_no" placeholder="Contact No" />
+                <div *ngIf="isControlInvalid('contact_no')">10-digit number required.</div>
+        
+                <input formControlName="city" placeholder="City" />
+                <div *ngIf="isControlInvalid('city')">City is required.</div>
+        
+                <input formControlName="country" placeholder="Country" />
+                <div *ngIf="isControlInvalid('country')">Country is required.</div>
+            </ng-container>
+        
+            <!-- Step 2 -->
+            <ng-container *ngIf="currentStep === 1">
+                <input formControlName="institution_name" placeholder="Institution" />
+                <div *ngIf="isControlInvalid('institution_name')">Required.</div>
+        
+                <input formControlName="degree_program" placeholder="Degree Program" />
+                <div *ngIf="isControlInvalid('degree_program')">Required.</div>
+        
+                <input formControlName="expected_grad_year" placeholder="Expected Grad Year" />
+                <div *ngIf="isControlInvalid('expected_grad_year')">Required.</div>
+        
+                <textarea formControlName="achievements" placeholder="Achievements"></textarea>
+                <div *ngIf="isControlInvalid('achievements')">Required.</div>
+            </ng-container>
+  
+            <!-- Step 3 -->
+            <ng-container *ngIf="currentStep === 2">
+                <textarea formControlName="why_join" placeholder="Why join?"></textarea>
+                <div *ngIf="isControlInvalid('why_join')">Required.</div>
+        
+                <textarea formControlName="what_to_learn" placeholder="What to learn?"></textarea>
+                <div *ngIf="isControlInvalid('what_to_learn')">Required.</div>
+        
+                <textarea formControlName="inspiration" placeholder="Inspiration"></textarea>
+                <div *ngIf="isControlInvalid('inspiration')">Required.</div>
+        
+                <input formControlName="preferred_duration" placeholder="Preferred Duration" />
+                <div *ngIf="isControlInvalid('preferred_duration')">Required.</div>
+        
+                <input formControlName="preferred_start_date" type="date" placeholder="Preferred Start Date" />
+                <div *ngIf="isControlInvalid('preferred_start_date')">Required.</div>
+        
+                <div class="inner-flex">
+                  <label>Academic Curriculum</label>
+                  <div class="row-flex">
+                      <label><input type="radio" formControlName="academic_curriculum" value="Yes" /> Yes</label>
+                      <label><input type="radio" formControlName="academic_curriculum" value="No" /> No</label>
+                      <label><input type="radio" formControlName="academic_curriculum" value="Optional" /> Optional</label>
+                  </div>
+                  <div *ngIf="isControlInvalid('academic_curriculum')">Required.</div>
                 </div>
-                <div *ngIf="isControlInvalid('academic_curriculum')">Required.</div>
-              </div>
-      
-              <textarea formControlName="curriculum_explain" placeholder="Explain Curriculum"></textarea>
-              <div *ngIf="isControlInvalid('curriculum_explain')">Required.</div>
-          </ng-container>
-      
-          <!-- Step 4 -->
-          <ng-container *ngIf="currentStep === 3">
-              <input type="file" (change)="onFileChange('portfolio_file', $event)" />
-              <div *ngIf="isControlInvalid('portfolio_file')">Portfolio is required.</div>
-      
-              <input formControlName="website_url" placeholder="Website URL" />
-              <div *ngIf="isControlInvalid('website_url')">Required.</div>
-      
-              <div class="inner-flex">
-                <div class="row-flex" formGroupName="software_proficiency">
-                    <label><input type="checkbox" formControlName="autocad" [value]="1" (change)="toggleCheckbox('autocad', $event)" /> AutoCAD</label>
-                    <label><input type="checkbox" formControlName="rhino" [value]="1" (change)="toggleCheckbox('rhino', $event)" /> Rhino</label>
-                    <label><input type="checkbox" formControlName="sketchup" [value]="1" (change)="toggleCheckbox('sketchup', $event)" /> SketchUp</label>
-                    <label><input type="checkbox" formControlName="revit" [value]="1" (change)="toggleCheckbox('revit', $event)" /> Revit</label>
-                    <label><input type="checkbox" formControlName="adobe" [value]="1" (change)="toggleCheckbox('adobe', $event)" /> Adobe</label>
-                    <label><input type="checkbox" formControlName="lumion" [value]="1" (change)="toggleCheckbox('lumion', $event)" /> Lumion</label>
-                    <label>
-                        Other:
-                        <input type="text" formControlName="other" placeholder="Specify other software" />
-                    </label>
+        
+                <textarea formControlName="curriculum_explain" placeholder="Explain Curriculum"></textarea>
+                <div *ngIf="isControlInvalid('curriculum_explain')">Required.</div>
+            </ng-container>
+        
+            <!-- Step 4 -->
+            <ng-container *ngIf="currentStep === 3">
+                <input type="file" (change)="onFileChange('portfolio_file', $event)" />
+                <div *ngIf="isControlInvalid('portfolio_file')">Portfolio is required.</div>
+        
+                <input formControlName="website_url" placeholder="Website URL" />
+                <div *ngIf="isControlInvalid('website_url')">Required.</div>
+        
+                <div class="inner-flex">
+                  <div class="row-flex" formGroupName="software_proficiency">
+                      <label><input type="checkbox" formControlName="autocad" [value]="1" (change)="toggleCheckbox('autocad', $event)" /> AutoCAD</label>
+                      <label><input type="checkbox" formControlName="rhino" [value]="1" (change)="toggleCheckbox('rhino', $event)" /> Rhino</label>
+                      <label><input type="checkbox" formControlName="sketchup" [value]="1" (change)="toggleCheckbox('sketchup', $event)" /> SketchUp</label>
+                      <label><input type="checkbox" formControlName="revit" [value]="1" (change)="toggleCheckbox('revit', $event)" /> Revit</label>
+                      <label><input type="checkbox" formControlName="adobe" [value]="1" (change)="toggleCheckbox('adobe', $event)" /> Adobe</label>
+                      <label><input type="checkbox" formControlName="lumion" [value]="1" (change)="toggleCheckbox('lumion', $event)" /> Lumion</label>
+                      <label>
+                          Other:
+                          <input type="text" formControlName="other" placeholder="Specify other software" />
+                      </label>
+                  </div>
+                  <div *ngIf="isControlInvalid('software_proficiency')">Required.</div>
                 </div>
-                <div *ngIf="isControlInvalid('software_proficiency')">Required.</div>
-              </div>
-      
-              <div class="inner-flex">
-                <label>Sketching Level</label>
-                <div class="row-flex">
-                    <label><input type="radio" formControlName="sketching_level" value="Strong" /> Strong</label>
-                    <label><input type="radio" formControlName="sketching_level" value="Moderate" /> Moderate</label>
-                    <label><input type="radio" formControlName="sketching_level" value="Beginner" /> Beginner</label>
+        
+                <div class="inner-flex">
+                  <label>Sketching Level</label>
+                  <div class="row-flex">
+                      <label><input type="radio" formControlName="sketching_level" value="Strong" /> Strong</label>
+                      <label><input type="radio" formControlName="sketching_level" value="Moderate" /> Moderate</label>
+                      <label><input type="radio" formControlName="sketching_level" value="Beginner" /> Beginner</label>
+                  </div>
+                  <div *ngIf="isControlInvalid('sketching_level')">Required.</div>
                 </div>
-                <div *ngIf="isControlInvalid('sketching_level')">Required.</div>
-              </div>
-          </ng-container>
-      
-          <!-- Step 5 -->
-          <ng-container *ngIf="currentStep === 4">
-              <textarea formControlName="work_style" placeholder="Work Style"></textarea>
-              <div *ngIf="isControlInvalid('work_style')">Required.</div>
-      
-              <textarea formControlName="studio_excites" placeholder="What excites you in a studio?"></textarea>
-              <div *ngIf="isControlInvalid('studio_excites')">Required.</div>
-      
-              <div class="inner-flex">
-                <label>Competitions</label>
-                <div class="row-flex">
-                    <label><input type="radio" formControlName="competitions" value="Yes" /> Yes</label>
-                    <label><input type="radio" formControlName="competitions" value="No" /> No</label>
-                    <label><input type="radio" formControlName="competitions" value="Maybe" /> Maybe</label>
+            </ng-container>
+        
+            <!-- Step 5 -->
+            <ng-container *ngIf="currentStep === 4">
+                <textarea formControlName="work_style" placeholder="Work Style"></textarea>
+                <div *ngIf="isControlInvalid('work_style')">Required.</div>
+        
+                <textarea formControlName="studio_excites" placeholder="What excites you in a studio?"></textarea>
+                <div *ngIf="isControlInvalid('studio_excites')">Required.</div>
+        
+                <div class="inner-flex">
+                  <label>Competitions</label>
+                  <div class="row-flex">
+                      <label><input type="radio" formControlName="competitions" value="Yes" /> Yes</label>
+                      <label><input type="radio" formControlName="competitions" value="No" /> No</label>
+                      <label><input type="radio" formControlName="competitions" value="Maybe" /> Maybe</label>
+                  </div>
+                  <div *ngIf="isControlInvalid('competitions')">Required.</div>
                 </div>
-                <div *ngIf="isControlInvalid('competitions')">Required.</div>
-              </div>
-          </ng-container>
-      
-          <!-- Step 6 -->
-          <ng-container *ngIf="currentStep === 5">
-              <input type="file" (change)="onFileChange('resume_file', $event)" />
-              <div *ngIf="isControlInvalid('resume_file')">Resume is required.</div>
-      
-              <input type="file" (change)="onFileChange('recommendation_file', $event)" />
-              <div *ngIf="isControlInvalid('recommendation_file')">Recommendation letter is required.</div>
-          </ng-container>
-      
-          <!-- Nav buttons -->
-          <div class="wizard-nav" class="row-flex inner-flex-small">
-              <button type="button" (click)="prevStep()" [disabled]="currentStep === 0">Back</button>
-              <button type="button" *ngIf="currentStep < stepFields.length - 1" (click)="nextStep()">Next</button>
-              <button type="submit" *ngIf="currentStep === stepFields.length - 1">Submit</button>
-          </div>
-      </form>
+            </ng-container>
+        
+            <!-- Step 6 -->
+            <ng-container *ngIf="currentStep === 5">
+                <input type="file" (change)="onFileChange('resume_file', $event)" />
+                <div *ngIf="isControlInvalid('resume_file')">Resume is required.</div>
+        
+                <input type="file" (change)="onFileChange('recommendation_file', $event)" />
+                <div *ngIf="isControlInvalid('recommendation_file')">Recommendation letter is required.</div>
+            </ng-container>
+        
+            <!-- Nav buttons -->
+            <div class="wizard-nav" class="row-flex inner-flex-small">
+                <button type="button" (click)="prevStep()" [disabled]="currentStep === 0">Back</button>
+                <button type="button" *ngIf="currentStep < stepFields.length - 1" (click)="nextStep()">Next</button>
+                <button type="submit" *ngIf="currentStep === stepFields.length - 1">Submit</button>
+            </div>
+        </form>
+    </div>
   </section>
 </div>
