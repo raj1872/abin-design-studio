@@ -48,7 +48,7 @@ export class DetailComponent implements OnInit {
       });
     });
 
-    this.careerFormData = this.fb.group({
+    this.careerFormData = this.fb.group({ 
       name: ['', Validators.required],
       preferred_name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -73,7 +73,18 @@ export class DetailComponent implements OnInit {
 
       portfolio_file: ['', Validators.required],
       website_url: ['', Validators.required],
-      software_proficiency: ['', Validators.required],
+
+      // ✅ checkbox group
+      software_proficiency: this.fb.group({
+        autocad: [0],
+        rhino: [0],
+        sketchup: [0],
+        revit: [0],
+        adobe: [0],
+        lumion: [0],
+        other: ['']
+      }),
+
       sketching_level: ['', Validators.required],
 
       work_style: ['', Validators.required],
@@ -83,6 +94,12 @@ export class DetailComponent implements OnInit {
       resume_file: ['', Validators.required],
       recommendation_file: ['', Validators.required],
     });
+  }
+
+  toggleCheckbox(controlName: string, event: Event) {
+    const input = event.target as HTMLInputElement;
+    const group = this.careerFormData.get('software_proficiency') as FormGroup;
+    group.get(controlName)?.setValue(input.checked ? 1 : 0);
   }
 
   get c(): { [key: string]: AbstractControl } {
@@ -157,9 +174,21 @@ export class DetailComponent implements OnInit {
     // Helper: format to YYYY-MM-DD
     const formatDate = (val: any): string => {
       if (!val) return '';
+
       const d = new Date(val);
-      if (isNaN(d.getTime())) return val; // if it's already a string in correct format
-      return d.toISOString().split('T')[0]; // gives YYYY-MM-DD
+
+      if (isNaN(d.getTime())) {
+        // if it's already in YYYY-MM-DD string, just return it
+        const regex = /^\d{4}-\d{2}-\d{2}$/;
+        if (regex.test(val)) return val;
+        return '';
+      }
+
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, '0'); // ensure 2 digits
+      const day = String(d.getDate()).padStart(2, '0');        // ensure 2 digits
+
+      return `${year}-${month}-${day}`;
     };
 
     // Build FormData for files + fields
@@ -170,6 +199,10 @@ export class DetailComponent implements OnInit {
       // ✅ format specific date fields
       if (['dob', 'preferred_start_date', 'expected_grad_year'].includes(key)) {
         val = formatDate(val);
+      }
+
+      if (key === 'software_proficiency' && val && typeof val === 'object') {
+        val = JSON.stringify(val); 
       }
 
       if (val instanceof File) {

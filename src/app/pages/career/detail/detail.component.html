@@ -63,8 +63,15 @@
               <input formControlName="preferred_start_date" type="date" placeholder="Preferred Start Date" />
               <div *ngIf="isControlInvalid('preferred_start_date')">Required.</div>
       
-              <input formControlName="academic_curriculum" placeholder="Academic Curriculum" />
-              <div *ngIf="isControlInvalid('academic_curriculum')">Required.</div>
+              <div class="inner-flex">
+                <label>Academic Curriculum</label>
+                <div class="row-flex">
+                    <label><input type="radio" formControlName="academic_curriculum" value="Yes" /> Yes</label>
+                    <label><input type="radio" formControlName="academic_curriculum" value="No" /> No</label>
+                    <label><input type="radio" formControlName="academic_curriculum" value="Optional" /> Optional</label>
+                </div>
+                <div *ngIf="isControlInvalid('academic_curriculum')">Required.</div>
+              </div>
       
               <textarea formControlName="curriculum_explain" placeholder="Explain Curriculum"></textarea>
               <div *ngIf="isControlInvalid('curriculum_explain')">Required.</div>
@@ -78,11 +85,31 @@
               <input formControlName="website_url" placeholder="Website URL" />
               <div *ngIf="isControlInvalid('website_url')">Required.</div>
       
-              <input formControlName="software_proficiency" placeholder="Software Proficiency" />
-              <div *ngIf="isControlInvalid('software_proficiency')">Required.</div>
+              <div class="inner-flex">
+                <div class="row-flex" formGroupName="software_proficiency">
+                    <label><input type="checkbox" formControlName="autocad" [value]="1" (change)="toggleCheckbox('autocad', $event)" /> AutoCAD</label>
+                    <label><input type="checkbox" formControlName="rhino" [value]="1" (change)="toggleCheckbox('rhino', $event)" /> Rhino</label>
+                    <label><input type="checkbox" formControlName="sketchup" [value]="1" (change)="toggleCheckbox('sketchup', $event)" /> SketchUp</label>
+                    <label><input type="checkbox" formControlName="revit" [value]="1" (change)="toggleCheckbox('revit', $event)" /> Revit</label>
+                    <label><input type="checkbox" formControlName="adobe" [value]="1" (change)="toggleCheckbox('adobe', $event)" /> Adobe</label>
+                    <label><input type="checkbox" formControlName="lumion" [value]="1" (change)="toggleCheckbox('lumion', $event)" /> Lumion</label>
+                    <label>
+                        Other:
+                        <input type="text" formControlName="other" placeholder="Specify other software" />
+                    </label>
+                </div>
+                <div *ngIf="isControlInvalid('software_proficiency')">Required.</div>
+              </div>
       
-              <input formControlName="sketching_level" placeholder="Sketching Level" />
-              <div *ngIf="isControlInvalid('sketching_level')">Required.</div>
+              <div class="inner-flex">
+                <label>Sketching Level</label>
+                <div class="row-flex">
+                    <label><input type="radio" formControlName="sketching_level" value="Strong" /> Strong</label>
+                    <label><input type="radio" formControlName="sketching_level" value="Moderate" /> Moderate</label>
+                    <label><input type="radio" formControlName="sketching_level" value="Beginner" /> Beginner</label>
+                </div>
+                <div *ngIf="isControlInvalid('sketching_level')">Required.</div>
+              </div>
           </ng-container>
       
           <!-- Step 5 -->
@@ -93,8 +120,15 @@
               <textarea formControlName="studio_excites" placeholder="What excites you in a studio?"></textarea>
               <div *ngIf="isControlInvalid('studio_excites')">Required.</div>
       
-              <textarea formControlName="competitions" placeholder="Competitions"></textarea>
-              <div *ngIf="isControlInvalid('competitions')">Required.</div>
+              <div class="inner-flex">
+                <label>Competitions</label>
+                <div class="row-flex">
+                    <label><input type="radio" formControlName="competitions" value="Yes" /> Yes</label>
+                    <label><input type="radio" formControlName="competitions" value="No" /> No</label>
+                    <label><input type="radio" formControlName="competitions" value="Maybe" /> Maybe</label>
+                </div>
+                <div *ngIf="isControlInvalid('competitions')">Required.</div>
+              </div>
           </ng-container>
       
           <!-- Step 6 -->
