@@ -7,7 +7,7 @@ import { isPlatformBrowser, DOCUMENT } from '@angular/common';
   styleUrls: ['./full-page-loader.component.css']
 })
 export class FullPageLoaderComponent implements OnInit, OnDestroy {
-  showLoader = true;
+  showLoader = false; // Default to false for SSR
   private isBrowser: boolean;
 
   constructor(
@@ -19,6 +19,9 @@ export class FullPageLoaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if (this.isBrowser) {
+      // Trigger loader visibility after the component initializes in the browser
+      this.showLoader = true;
+
       // Disable body scroll
       this.document.body.style.overflow = 'hidden';
 
@@ -28,7 +31,6 @@ export class FullPageLoaderComponent implements OnInit, OnDestroy {
 
         // Restore scrolling
         this.document.body.style.overflow = '';
-      // }, 100); // 2s stroke + 1s fill
       }, 3000); // 2s stroke + 1s fill
     }
   }

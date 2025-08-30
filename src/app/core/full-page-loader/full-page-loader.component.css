@@ -10,7 +10,7 @@
       #607e59 25%,
       #2f5e9d 50%,
       #c49c3b 75%,
-      #993b2f 100%);;
+      #993b2f 100%);
   background-size: 300% 300%;
   animation: gradientDrift 30s ease-in-out infinite;
 }
