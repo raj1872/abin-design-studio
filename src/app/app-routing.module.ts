@@ -13,6 +13,7 @@ import { NewsDetailComponent } from './pages/news-detail/news-detail.component';
 import { ProjectsResolver } from './pages/resolvers/projects.resolver';
 import { ContactComponent } from './pages/contact/contact.component';
 import { DetailComponent } from './pages/publications/detail/detail.component';
+import { DetailComponent as CareerDetailComponent } from './pages/career/detail/detail.component';
 import { CareerComponent } from './pages/career/career.component';
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
 
   // ✅ Static routes first
   { path: 'career', component: CareerComponent },
+  { path: 'career/:slug', component: CareerDetailComponent },
   { path: 'publications', component: PublicationsComponent },
   { path: 'news', component: NewsComponent },
   { path: 'news-detail', component: NewsDetailComponent },

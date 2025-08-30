@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { SwiperModule } from 'swiper/angular';
@@ -21,6 +21,7 @@ import { NewsDetailComponent } from './pages/news-detail/news-detail.component';
 import { OurStudioComponent } from './pages/our-studio/our-studio.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { CareerComponent } from './pages/career/career.component';
+import { DetailComponent } from './pages/career/detail/detail.component';
 
 @NgModule({
   declarations: [
@@ -38,13 +39,15 @@ import { CareerComponent } from './pages/career/career.component';
     OurStudioComponent,
     HomeComponent,
     ProjectsComponent,
-    ProjectDetailComponent
+    ProjectDetailComponent,
+    DetailComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }), // ✅ SSR safe
     RouterModule,
     SwiperModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule
   ],

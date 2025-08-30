@@ -16,7 +16,7 @@
           </h2>
         </div>
         <div class="career-openings-wrapper">
-          <a class="career-card-opening" *ngFor="let data of openings">
+          <a class="career-card-opening"  [routerLink]="['/career', data.slug]" *ngFor="let data of openings">
             <!-- [routerLink]="['/career', data.slug]" -->
             <div class="career-flex-card-header">
               <div class="inner-flex inner-flex-small">
