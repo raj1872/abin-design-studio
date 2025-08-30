@@ -27,15 +27,15 @@ export class HeaderComponent implements OnInit {
   isLandingPage = false;
   isTeamPage = false;
   isPublicationsPage = false;
-  isContactNavActive = false;
-  contactInfo: any;
-  address: string = '';
-  addressLink: string = '';
 
   private prevScrollTop = 0;
   private scrollYBeforeLock = 0;
   isHeaderHidden = false;
   isHeaderChanged = false;
+
+  // ✅ New states for multi-step nav
+  isProjectsOpen = false;
+  activeCategory: number | null = null;
 
   constructor(
     private router: Router,
@@ -52,33 +52,16 @@ export class HeaderComponent implements OnInit {
         this.checkPageType(event.urlAfterRedirects);
       });
 
-    // ✅ Fetch categories safely
-    // ✅ Fetch categories on init (SSR + browser safe)
+    // ✅ Fetch categories
     this.apiService.getCategories().subscribe({
       next: (res) => {
         if (res && Array.isArray(res.list)) {
           this.categories = res.list || [];
-          // console.log(this.categories);
         } else {
-          // console.log('Categories API did not return an array:', res);
           this.categories = [];
         }
-        // console.log('Header categories:', this.categories);
       },
       error: (err) => console.error('Error fetching categories:', err),
-    });
-    this.apiService.getContactInfo().subscribe({
-      next: (res) => {
-        if (res && res.data) {
-          this.contactInfo = res.data;
-          this.address = res.data.address;
-          // Use the address_link from API if available, else default Google Maps link
-          this.addressLink =
-            res.data.address_link?.trim() ||
-            'https://maps.app.goo.gl/DfwBigGrbSbFzM749';
-        }
-      },
-      error: (err) => console.error('Error fetching contact info', err),
     });
   }
 
@@ -136,22 +119,28 @@ export class HeaderComponent implements OnInit {
     this.isMenuActive = false;
     this.isMenuLinksVisible = false;
     this.lockScroll(false);
+    this.closeProjects(); // ✅ Also close Projects & categories
   }
 
-  activeCategory: number | null = null;
+  // ✅ Multi-step navigation methods
+  toggleProjects(): void {
+    this.isProjectsOpen = !this.isProjectsOpen;
+    if (!this.isProjectsOpen) {
+      this.activeCategory = null;
+    }
+  }
+
+  closeProjects(): void {
+    this.isProjectsOpen = false;
+    this.activeCategory = null;
+  }
 
   toggleCategory(index: number): void {
     this.activeCategory = this.activeCategory === index ? null : index;
   }
+
   closeCategory(): void {
     this.activeCategory = null;
-  }
-  openContactNav(): void {
-    this.isContactNavActive = true;
-  }
-
-  closeContactNav(): void {
-    this.isContactNavActive = false;
   }
 
   @HostListener('document:keydown.escape', ['$event'])

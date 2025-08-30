@@ -20,6 +20,7 @@ import { NewsComponent } from './pages/news/news.component';
 import { NewsDetailComponent } from './pages/news-detail/news-detail.component';
 import { OurStudioComponent } from './pages/our-studio/our-studio.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { CareerComponent } from './pages/career/career.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ContactComponent } from './pages/contact/contact.component';
     NewsComponent,
     NewsDetailComponent,
     ContactComponent,
+    CareerComponent,
     OurStudioComponent,
     HomeComponent,
     ProjectsComponent,

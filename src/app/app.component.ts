@@ -27,22 +27,9 @@ export class AppComponent implements OnInit, AfterViewInit {
     });
   }
 
-  async ngAfterViewInit() {
+  ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
-      // ✅ Smooth scroll only in browser
-      const Lenis = (await import('@studio-freight/lenis')).default;
-
-      const lenis = new Lenis({
-        duration: 1.2,
-        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      });
-
-      const raf = (time: number) => {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      };
-
-      requestAnimationFrame(raf);
+      // ✅ Browser-only logic (empty for now since Lenis is removed)
     }
   }
 }

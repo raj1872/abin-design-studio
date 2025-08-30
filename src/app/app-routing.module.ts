@@ -7,13 +7,13 @@ import { ProjectDetailComponent } from './pages/project-detail/project-detail.co
 import { LandingComponent } from './pages/landing/landing.component';
 import { OurStudioComponent } from './pages/our-studio/our-studio.component';
 import { TeamComponent } from './pages/team/team.component';
-import { ProjectListSvgComponent } from './pages/project-list-svg/project-list-svg.component';
 import { PublicationsComponent } from './pages/publications/publications.component';
 import { NewsComponent } from './pages/news/news.component';
 import { NewsDetailComponent } from './pages/news-detail/news-detail.component';
 import { ProjectsResolver } from './pages/resolvers/projects.resolver';
 import { ContactComponent } from './pages/contact/contact.component';
 import { DetailComponent } from './pages/publications/detail/detail.component';
+import { CareerComponent } from './pages/career/career.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
 
   // ✅ Static routes first
-  { path: 'projects-svg', component: ProjectListSvgComponent },
+  { path: 'career', component: CareerComponent },
   { path: 'publications', component: PublicationsComponent },
   { path: 'news', component: NewsComponent },
   { path: 'news-detail', component: NewsDetailComponent },

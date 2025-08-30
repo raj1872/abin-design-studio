@@ -1,0 +1,74 @@
+.career-hover {
+  transition: var(--common-transition);
+}
+
+.career-hover:hover {
+  text-decoration: underline;
+  transition: var(--common-transition);
+}
+
+.flex-row-career-card {
+  display: flex;
+  flex-direction: row;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.flex-row-career-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.career-exp-icon {
+  width: 1.15rem;
+}
+
+.cursor-link-arrow {
+  width: 2.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-5px, 5px);
+  transition: var(--common-transition);
+}
+
+.career-card-opening:hover .cursor-link-arrow {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(0, 0);
+  transition: var(--common-transition);
+
+}
+
+.career-card-opening:hover {
+  transition: var(--common-transition);
+  background-color: #F0F0F0;
+}
+
+.career-card-opening {
+  transition: var(--common-transition);
+  padding: 2.5rem;
+  background-color: #FAFAFA;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 1.5rem;
+}
+
+.career-flex-card-header {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  gap: 1.5rem;
+  justify-content: space-between;
+  width: 100%;
+}
+
+
+.career-openings-wrapper{
+    display: grid;
+    grid-template-columns: 100%;
+    gap: 0.5rem;
+    align-items: start;
+}

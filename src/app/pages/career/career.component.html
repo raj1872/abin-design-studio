@@ -1,0 +1,61 @@
+<div id="abin-design-studio-career-page-wrapper" class="abin-design-studio-page-wrapper">
+  <section class="abin-design-studio-section relative" id="abin-design-studio-career-1">
+    <div class="career-page-img">
+      <img src="./assets/images/career/career-banner.jpg" alt="">
+    </div>
+  </section>
+  <section class="abin-design-studio-section section-padding relative" id="abin-design-studio-career-2">
+    <div class="main-container">
+      <div class="inner-flex inner-flex-medium">
+        <div class="section-title section-title-container-career">
+          <h2 class="medium-fonts">
+            For work opportunities, interested <br class="hide-tab-mobile">
+            candidates may share their updated CV <br class="hide-tab-mobile">
+            at <a href="mailto:contact@abindesignstudio.com"
+              class="medium-fonts career-hover">contact@abindesignstudio.com</a>
+          </h2>
+        </div>
+        <div class="career-openings-wrapper">
+          <a class="career-card-opening" *ngFor="let data of openings">
+            <!-- [routerLink]="['/career', data.slug]" -->
+            <div class="career-flex-card-header">
+              <div class="inner-flex inner-flex-small">
+                <div class="section-subtitle2">
+                  <p class="lh1">
+                    {{data.title}}
+                  </p>
+                </div>
+                <div class="flex-row-career-wrapper">
+                  <div class="flex-row-career-card">
+                    <div class="career-exp-icon">
+                      <img src="./assets/images/icons/map-pin.svg" alt="">
+                    </div>
+                    <div class="section-content">
+                      <p class="lh1">
+                        {{data.location}}
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex-row-career-card">
+                    <div class="career-exp-icon">
+                      <img src="./assets/images/icons/experience.svg" alt="">
+                    </div>
+                    <div class="section-content">
+                      <p class="lh1">
+                        {{data.experience}}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="cursor-link-arrow">
+                <img src="./assets/images/icons/arrow_outward_black.svg" alt="">
+              </div>
+            </div>
+
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

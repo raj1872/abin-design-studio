@@ -41,28 +41,32 @@
   align-items: flex-end;
 }
 
-.about-detail-para {
-  padding-bottom: 2.5rem;
+.about-swiper-flex {
+  width: calc(100% - 50% - 2.5rem);
+  flex-basis: calc(100% - 50% - 2.5rem);
 }
 
-.about-detail-para,
-.about-swiper-flex {
-  width: calc(100% - 60% - 2.5rem);
-  flex-basis: calc(100% - 60% - 2.5rem);
+.about-detail-para {
+  width: calc(100% - 55% - 2.5rem);
+  flex-basis: calc(100% - 55% - 2.5rem);
 }
 
 .team-wrapper {
   display: grid;
-  grid-template-columns: calc(100% - 53% - 2.5rem) calc(100% - 60% - 2.5rem);
+  grid-template-columns: calc(100% - 50% - 2.5rem) calc(100% - 55% - 2.5rem);
   gap: 5rem;
   justify-content: space-between;
   align-items: flex-start;
 }
 
+.team-image {
+  padding-bottom: 7rem;
+}
+
 .team-detail-para {
   position: sticky;
   top: 65%;
-  margin-top: 65%;
+  margin-top: 75%;
 }
 
 .team-flex-columns {
@@ -74,9 +78,9 @@
 }
 
 ::ng-deep .swiper-pagination.swiper-pagination-studio {
-  position: relative;
+  position: absolute;
   top: unset;
-  bottom: unset;
+  bottom: 1.5rem;
   display: flex;
   flex-direction: row;
   width: 100%;

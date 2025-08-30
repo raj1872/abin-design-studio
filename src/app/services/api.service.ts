@@ -97,6 +97,12 @@ export class ApiService {
       this.http.post(`${this.baseUrl}/publications`, {})
     );
   }
+  getopenings(): Observable<any> {
+    return this.getWithTransferState(
+      'openings',
+      this.http.post(`${this.baseUrl}/openings`, {})
+    );
+  }
 
   getPublicationsDetails(slug: string): Observable<any> {
     const payload = { slug }; // safer than headers for SSR

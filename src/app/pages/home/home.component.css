@@ -1,9 +1,9 @@
-/* .abin-design-studio-page-wrapper {
+.abin-design-studio-page-wrapper {
   height: 100lvh;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
-} */
+}
 
 
 /* Skeleton wrapper */
@@ -98,9 +98,21 @@
   height: 100vh; /* full screen */
   background-repeat: no-repeat;
   background-size: cover;
+   scroll-snap-align: start;
+  scroll-snap-stop: always;
   background-position: center center;
   background-attachment: fixed; /* works correctly here */
   overflow: hidden;
+}
+
+#abin-design-studio-home-5{
+  position: relative;
+  width: 100%;
+  height: 100vh; /* full screen */
+  background-repeat: no-repeat;
+  background-size: cover;
+   scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 

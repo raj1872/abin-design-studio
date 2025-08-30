@@ -22,7 +22,7 @@
     </div> -->
 
     <!-- Web bar -->
-    <div class="web-bar" (click)="toggleMenu(); closeContactNav();" [class.active]="isMenuActive">
+    <div class="web-bar" (click)="toggleMenu();" [class.active]="isMenuActive">
 
       <span *ngIf="!isMenuActive">Menu</span>
       <span *ngIf="isMenuActive">Close</span>
@@ -35,19 +35,17 @@
 <!-- Menu (hidden/toggled) -->
 
 <div class="menu-wrapper" [class.active]="isMenuActive">
-  <ng-container id="header-navigation-main" *ngIf="!isContactNavActive">
+  <ng-container id="header-navigation-main">
     <div class="main-nav-flex">
       <div class="header-links-flex inner-flex inner-flex-medium inner-flex-center">
+        <!-- Projects -->
         <div class="section-paragraph">
-          <p class="uppercase bold-fonts c-pointer lh1" (click)="closeMenu()">Home</p>
-        </div>
-        <div class="section-paragraph">
-          <p class="uppercase bold-fonts c-pointer lh1" (click)="closeMenu()">Search</p>
-        </div>
-        <div class="section-paragraph">
-          <p class="uppercase bold-fonts c-pointer lh1" (click)="closeMenu()">Projects</p>
+          <p class="uppercase bold-fonts c-pointer lh1" (click)="toggleProjects()">
+            Projects
+          </p>
 
-          <ng-container>
+          <!-- Show Categories only when Projects is opened -->
+          <ng-container *ngIf="isProjectsOpen">
             <div class="inner-flex project-header-links inner-flex-small">
               <div class="projects-link-flex-row" *ngFor="let category of categories; let i = index">
 
@@ -63,7 +61,8 @@
                   <div class="inner-project-flex-row" #childContainer [class.active]="activeCategory === i">
                     <div class="section-paragraph c-pointer" *ngFor="let child of category.child_categories">
                       <a routerLink="/projects/{{category.slug}}/{{child.slug}}" routerLinkActive="active"
-                        (click)="closeMenu()" class="lh1 light-fonts" (click)="closeCategory(); $event.stopPropagation()">
+                        (click)="closeMenu()" class="lh1 light-fonts"
+                        (click)="closeCategory(); $event.stopPropagation()">
                         {{ child.name }}
                       </a>
                     </div>
@@ -74,8 +73,8 @@
               </div>
             </div>
           </ng-container>
-
         </div>
+
 
         <div class="section-paragraph">
           <p class="uppercase bold-fonts c-pointer lh1" routerLink="/studio" routerLinkActive="active"
@@ -89,143 +88,7 @@
           <p class="uppercase bold-fonts c-pointer lh1" routerLink="/contact" routerLinkActive="active"
             (click)="closeMenu()">Contact</p>
         </div>
-        <div class="section-content address-header">
-          <a [href]="addressLink" target="_blank" class="text-center light-fonts" (click)="closeMenu()">
-            <p>
-              {{ address }}
-            </p>
-          </a>
-        </div>
 
-      </div>
-      <!-- <div class="menu-wrapper-web-links-grid main-container" [class.visible]="isMenuLinksVisible">
-        <div class="menu-wrapper-column">
-          <div class="inner-flex inner-flex-small main-nav-flex-project">
-            <div class="section-content">
-              <p class="semibold-fonts lh1 uppercase ">
-                Projects
-              </p>
-            </div>
-            <div class="inner-flex inner-flex-common" *ngFor="let category of categories">
-              <div class="section-subtitle2">
-                <p class="bold-fonts lh1">
-                  {{ category.name }}
-                </p>
-              </div>
-              <div class="inner-flex" *ngIf="category.child_categories?.length">
-                <div class="section-paragraph" *ngFor="let child of category.child_categories">
-                  <a routerLink="/projects/{{category.slug}}/{{child.slug}}" routerLinkActive="active" (click)="closeMenu()"
-                    class="lh1">
-                    {{ child.name }}
-                  </a>
-                </div>
-              </div>
-            </div>
-
-
-          </div>
-        </div>
-        <div class="menu-wrapper-column">
-          <div class="inner-flex inner-flex-common">
-            <div class="section-content">
-              <p class="semibold-fonts lh1 uppercase ">
-                PRACTICE
-              </p>
-            </div>
-            <div class="inner-flex">
-              <div class="section-paragraph">
-                <a href="javascript:void(0);" class=" lh1">History</a>
-              </div>
-              <div class="section-paragraph">
-                <a routerLink="/studio" routerLinkActive="active" (click)="closeMenu()" class=" lh1">Studio</a>
-              </div>
-              <div class="section-paragraph">
-                <a routerLink="/our-team" routerLinkActive="active" (click)="closeMenu()" class=" lh1">People</a>
-              </div>
-              <div class="section-paragraph">
-                <a routerLink="/publications" routerLinkActive="active" (click)="closeMenu()"
-                  class=" lh1">Publications</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="header-bottom-links" [class.active]="isMenuLinksVisible">
-        <ul>
-          <li>
-            <a href="" class="section-paragraph">
-              <p class="semibold-fonts">Instagram</p>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0);" class="section-paragraph" id="contact-detail-navigation"
-              (click)="openContactNav()">
-              <p class="semibold-fonts">Contact</p>
-            </a>
-          </li>
-          <li>
-            <a routerLink="/news" routerLinkActive="active" (click)="closeMenu()" class="section-paragraph">
-              <p class="semibold-fonts">News</p>
-            </a>
-          </li>
-          <li>
-            <a href="" class="section-paragraph">
-              <p class="semibold-fonts">Careers</p>
-            </a>
-          </li>
-        </ul>
-      </div> -->
-    </div>
-  </ng-container>
-  <ng-container id="header-navigation-contact" *ngIf="isContactNavActive">
-    <div class="contact-navigation-wrapper relative">
-      <div class="contact-nav-close-click" (click)="closeContactNav();">
-        <img src="./assets/images/back-icon.svg" alt="">
-      </div>
-      <div class="inner-flex inner-flex-medium inner-end-flex">
-        <div class="section-subtitle2">
-          <p class="semibold-fonts">
-            Contact
-          </p>
-        </div>
-        <div class="inner-flex inner-flex-smallest section-paragraph">
-          <p class="lh1">
-            For project & media related inquiries:
-          </p>
-          <a href="mailto:" target="_blank">
-            <p class="lh1">
-              contact@abindesignstudio.com
-            </p>
-          </a>
-        </div>
-        <div class="inner-flex inner-flex-smallest section-paragraph">
-          <p class="lh1">
-            For Employment:
-          </p>
-          <a href="mailto:" target="_blank">
-            <p class="lh1">
-              click <span class="semibold-fonts" style="color: var(--primary-color) !important;">HERE</span> to apply
-            </p>
-          </a>
-        </div>
-        <div class="inner-flex inner-flex-small inner-end-flex">
-          <div class="section-subtitle2">
-            <p class="uppercase semibold-fonts">
-              Abin Design Studio
-            </p>
-          </div>
-          <div class="inner-flex inner-flex-smallest section-paragraph">
-            <p class="">
-              62/2, Hindustan Park Rd,<br class="hide-tab-mobile"> Golpark, Hindustan Park, Gariahat, <br
-                class="hide-tab-mobile">Kolkata, West Bengal 700029
-            </p>
-            <a href="tel:+91-03324666191">
-              <p class="">
-                Phone : 033 2466 6191
-              </p>
-            </a>
-          </div>
-        </div>
       </div>
     </div>
   </ng-container>

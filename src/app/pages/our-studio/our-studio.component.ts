@@ -23,10 +23,10 @@ export class OurStudioComponent implements OnInit, AfterViewInit {
   @ViewChild('swiperContainer', { static: false }) swiperContainer!: ElementRef;
 
   images: string[] = [
-    'https://dummyimage.com/600x600/FAFAFA/FAFAFA',
-    'https://dummyimage.com/600x600/DEDEDE/DEDEDE',
-    'https://dummyimage.com/600x600/FEFEFE/FEFEFE',
-    'https://dummyimage.com/600x600/1A1A1A/1A1A1A',
+    'https://dummyimage.com/1080x926/1A1A1A/1A1A1A',
+    'https://dummyimage.com/1080x926/1C1C1C/1C1C1C',
+    'https://dummyimage.com/1080x926/C1C1C1/C1C1C1',
+    'https://dummyimage.com/1080x926/1A1A1A/1A1A1A',
   ];
 
   constructor(
