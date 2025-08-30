@@ -12,6 +12,7 @@ import { ApiService } from 'src/app/services/api.service';
 export class DetailComponent implements OnInit {
   careerFormData!: FormGroup;
   currentStep = 0;
+  loading = true;
   slug: any;
   openingDetail: any;
   constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute, private apiService: ApiService) {}
@@ -43,6 +44,7 @@ export class DetailComponent implements OnInit {
           this.openingDetail = res.list[0] || res;
           console.log(this.openingDetail);
           console.log(this.openingDetail.id);
+          this.loading = false;
         },
         error: (err) => console.error('Error fetching openings:', err),
       });

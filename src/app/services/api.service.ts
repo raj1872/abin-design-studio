@@ -9,8 +9,8 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class ApiService {
-  // private baseUrl = 'https://work.reecosys.com/abin-design-studio/api/services';
-  private baseUrl = 'http://192.168.1.200/abin-design-studio/api/services';
+  private baseUrl = 'https://work.reecosys.com/abin-design-studio/api/services';
+  // private baseUrl = 'http://192.168.1.200/abin-design-studio/api/services';
 
   constructor(
     private http: HttpClient,

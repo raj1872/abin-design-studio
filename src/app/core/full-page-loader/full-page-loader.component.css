@@ -30,7 +30,7 @@
 }
 
 .loader-svg text {
-  font-family: "Playfair Display", serif;
+  font-family: var(--bold-font-family);
   font-weight: 900;
   font-size: 80px;
   fill: transparent;

@@ -59,16 +59,32 @@
 .career-flex-card-header {
   display: flex;
   flex-direction: row;
-  align-items: start;
+  align-items: flex-start;
   gap: 1.5rem;
   justify-content: space-between;
   width: 100%;
 }
 
 
-.career-openings-wrapper{
-    display: grid;
-    grid-template-columns: 100%;
-    gap: 0.5rem;
-    align-items: start;
+.career-openings-wrapper {
+  display: grid;
+  grid-template-columns: 100%;
+  gap: 0.5rem;
+  align-items: start;
+}
+
+@media only screen and (max-width: 768px) {
+
+  .section-title h1,
+  .section-title p,
+  .section-title h1 span,
+  .section-title h2,
+  .section-title h2 span {
+    font-size: 20px !important;
+  }
+
+  .flex-row-career-wrapper{
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
 }
