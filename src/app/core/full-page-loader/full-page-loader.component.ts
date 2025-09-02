@@ -7,8 +7,10 @@ import { isPlatformBrowser, DOCUMENT } from '@angular/common';
   styleUrls: ['./full-page-loader.component.css']
 })
 export class FullPageLoaderComponent implements OnInit, OnDestroy {
-  showLoader = false; // Default to false for SSR
+  showLoader = false;
   private isBrowser: boolean;
+
+  words: string[] = [];
 
   constructor(
     @Inject(PLATFORM_ID) platformId: Object,
@@ -19,24 +21,21 @@ export class FullPageLoaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if (this.isBrowser) {
-      // Trigger loader visibility after the component initializes in the browser
-      this.showLoader = true;
+      // Split into words instead of letters
+      this.words = 'Soul In The Shell'.split(' ');
 
-      // Disable body scroll
+      this.showLoader = true;
       this.document.body.style.overflow = 'hidden';
 
-      // Match total animation time (stroke + fill)
+      // Hide loader after fade + slide
       setTimeout(() => {
         this.showLoader = false;
-
-        // Restore scrolling
         this.document.body.style.overflow = '';
-      }, 3000); // 2s stroke + 1s fill
+      }, 4000);
     }
   }
 
   ngOnDestroy(): void {
-    // Ensure scroll is restored if component is destroyed early
     if (this.isBrowser) {
       this.document.body.style.overflow = '';
     }

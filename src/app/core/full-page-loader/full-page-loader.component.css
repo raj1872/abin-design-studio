@@ -13,6 +13,7 @@
       #993b2f 100%);
   background-size: 300% 300%;
   animation: gradientDrift 30s ease-in-out infinite;
+  overflow: hidden;
 }
 
 @keyframes gradientDrift {
@@ -23,44 +24,41 @@
   100% { background-position: 0% 50%; }
 }
 
-/* SVG text style */
-.loader-svg {
-  width: 80%;
-  max-width: 1000px;
+.loader-container {
+  display: inline-flex;
+  gap: 1rem; /* keeps natural spacing between words */
 }
 
-.loader-svg text {
+.loader-word {
   font-family: var(--bold-font-family);
   font-weight: 900;
   font-size: 80px;
-  fill: transparent;
-  stroke: white;
-  stroke-width: 2;
-  stroke-dasharray: 1000; /* total path length */
-  stroke-dashoffset: 1000;
-  animation:
-    drawStroke 4s ease forwards,
-    fillText 2s ease forwards 1s; /* starts after stroke is done */
+  color: white;
+  opacity: 0;
+  animation: fadeInWord 0.8s forwards;
 }
 
-/* Draw stroke */
-@keyframes drawStroke {
+@keyframes fadeInWord {
   to {
-    stroke-dashoffset: 0;
+    opacity: 1;
   }
 }
 
-/* Fill color after stroke */
-@keyframes fillText {
-  to {
-    fill: white;
-    stroke: transparent;
-  }
+/* Slide up after all words visible */
+.loader-animate-up {
+  animation: slideUp 1s ease-in-out forwards;
+  animation-delay: 3s;
 }
 
+@keyframes slideUp {
+  to {
+    transform: translateY(-120%);
+    opacity: 0;
+  }
+}
 
 @media only screen and (max-width: 992px) {
-  .loader-svg text{
+  .loader-word {
     font-size: 140px;
   }
 }

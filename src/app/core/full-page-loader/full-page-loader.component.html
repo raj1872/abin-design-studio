@@ -1,7 +1,11 @@
 <div class="loader-overlay" *ngIf="showLoader">
-  <svg viewBox="0 0 1200 200" class="loader-svg">
-    <text x="50%" y="50%" dy=".35em" text-anchor="middle">
-      Soul in the Shell
-    </text>
-  </svg>
+  <div class="loader-container loader-animate-up">
+    <span
+      *ngFor="let word of words; let i = index"
+      class="loader-word"
+      [style.animation-delay]="(i * 0.3) + 's'"
+    >
+      {{ word }}
+    </span>
+  </div>
 </div>
