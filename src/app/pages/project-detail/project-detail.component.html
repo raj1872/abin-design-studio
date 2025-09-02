@@ -15,23 +15,25 @@
     }"></div>
       <div class="detail-banner-abs">
         <div class="main-container">
-          <div class="inner-flex inner-flex-big">
+          <!-- <div class="inner-flex inner-flex-big"> -->
+          <div class="w100" [ngClass]="isMobile ? 'inner-flex inner-flex-medium' : 'flex-row inner-flex-big'" [ngStyle]="isMobile ? {} : { 'align-items': 'center'}" style="justify-content: space-between;">
             <div class="inner-flex inner-flex-small">
               <div *ngIf="projectDetailObj.project">
-                <div class="big-banner-title overflowdiv"
-                  *ngFor="let word of projectDetailObj?.project?.split(' '); let i = index">
-                  <h1 class="white-color uppercase" data-aos="fade-up" [attr.data-aos-delay]="300 + (i * 200)">
-                    {{ word }}
+                <!-- *ngFor="let word of projectDetailObj?.project?.split(' '); let i = index"> -->
+                <div class="banner-title overflowdiv">
+                  <!-- <h4 class="white-color uppercase" data-aos="fade-up" [attr.data-aos-delay]="300 + (i * 200)"> -->
+                  <h1 class="white-color bold-fonts lh1" data-aos="fade-up" data-aos-delay="450">
+                    {{ projectDetailObj?.project }}
                   </h1>
                 </div>
               </div>
-              <div class="overflowdiv section-subtitle2 lh1" *ngIf="projectDetailObj.tagline">
+              <!-- <div class="overflowdiv section-subtitle2 lh1" *ngIf="projectDetailObj.tagline">
                 <p class="white-color bold-fonts lh1" data-aos="fade-up" data-aos-delay="600">
                   {{ projectDetailObj.tagline }}
                 </p>
-              </div>
+              </div> -->
             </div>
-            <div class="flex-row flex-row-small flex-col-mobile overflowdiv">
+            <!-- <div class="flex-row flex-row-small flex-col-mobile overflowdiv">
               <div class="section-content lh1" *ngIf="projectDetailObj.location">
                 <p class="white-color uppercase lh1 regular-fonts" data-aos="fade-up" data-aos-delay="700">
                   {{projectDetailObj.location}}
@@ -67,13 +69,25 @@
                   {{ projectDetailObj.type }}
                 </p>
               </div>
+            </div> -->
+            <div class="inner-row flex-row-smallest flex-col-mobile overflowdiv" [ngStyle]="isMobile ? {} : { 'text-align': 'right'}" data-aos="fade-up" data-aos-delay="550">
+              <div class="section-content" *ngIf="projectDetailObj.location">
+                <p class="white-color uppercase regular-fonts">
+                  {{projectDetailObj.location}}
+                </p>
+              </div>
+              <div class="section-content lh1" *ngIf="projectDetailObj.year">
+                <p class="white-color uppercase regular-fonts">
+                  {{ projectDetailObj.year }}
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="abin-design-studio-section relative" id="abin-design-studio-project-detail-2">
+    <section class="abin-design-studio-section relative section-padding" id="abin-design-studio-project-detail-2">
 
 
       <div class="overview-flex-wrapper">
@@ -114,7 +128,7 @@
             *ngIf="projectDetailObj?.credits_content?.length">
             <div class="inner-flex inner-flex-small inner-popup-space"
               [ngClass]="{'inner-popup-space-active': isInnerPopupActive}">
-              <div class="section-paragraph c-pointer" (click)="closeAll()">
+              <div class="section-paragraph c-pointer" (click)="closeAll()" style="align-self: end;">
                 <p>&times;</p>
               </div>
               <div class="section-paragraph section-paragraph-credit">
@@ -137,13 +151,13 @@
             </div>
           </div>
           <div class="abs-click-btns">
-            <div class="section-paragraph" data-aos="fade-up" data-aos-delay="400"
-              *ngIf="projectDetailObj?.credits_content?.length">
-              <p (click)="openCredits()" class="c-pointer semibold-fonts">+ Credits</p>
-            </div>
             <div class="section-paragraph" data-aos="fade-up" data-aos-delay="600"
               *ngIf="projectDetailObj?.publication_details?.length">
-              <p (click)="openPublication()" class="c-pointer semibold-fonts">+ Publication</p>
+              <p (click)="openPublication()" class="c-pointer semibold-fonts uppercase">+ Publication</p>
+            </div>
+            <div class="section-paragraph" data-aos="fade-up" data-aos-delay="400"
+              *ngIf="projectDetailObj?.credits_content?.length">
+              <p (click)="openCredits()" class="c-pointer semibold-fonts uppercase">+ Credits</p>
             </div>
           </div>
           <img src="./assets/images/projects/waterfront-pavilion/detail-popup-mob.png" alt="">
@@ -169,8 +183,8 @@
             <div class="image-overlay"></div>
             <div class="section-abs-section">
               <div class="main-container">
-                <div class="section-subtitle inner-abs-container" data-aos="fade-up" data-aos-delay="400">
-                  <p class="white-color regular-fonts lh1" [innerHTML]="section.content.text"></p>
+                <div class="section-subtitle inner-abs-container" data-aos="fade-up" data-aos-delay="25 0">
+                  <p class="white-color bold-fonts lh1" [innerHTML]="section.content.text"></p>
                 </div>
               </div>
             </div>

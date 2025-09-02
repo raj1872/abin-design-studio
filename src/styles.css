@@ -299,7 +299,8 @@
   font-family: var(--medium-font-family) !important;
 }
 
-.bold-fonts {
+.bold-fonts,
+.bold-fonts * {
   font-family: var(--bold-font-family) !important;
 }
 

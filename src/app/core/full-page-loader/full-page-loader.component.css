@@ -92,3 +92,9 @@
     font-size: 140px;
   }
 }
+
+@media only screen and (max-width: 486px) {
+  .loader-letter {
+    font-size: 40px;
+  }
+}

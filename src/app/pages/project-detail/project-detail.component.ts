@@ -58,7 +58,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
     private router: Router, // 👈 add this
     private meta: Meta,
     private title: Title
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.isBrowser = isPlatformBrowser(this.platformId);
@@ -129,7 +129,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
             videoEl.playsInline = true;
             videoEl.loop = true;
             videoEl.load();
-            videoEl.play().catch(() => {});
+            videoEl.play().catch(() => { });
           } else {
             videoEl.pause();
           }
@@ -319,7 +319,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
           1 -
           Math.abs(
             (rect.top + rect.height / 2 - window.innerHeight / 2) /
-              (window.innerHeight / 2)
+            (window.innerHeight / 2)
           );
         const scale = 1 + Math.max(0, Math.min(0.05, progress * 0.05));
         imgEl.style.transform = `scale(${scale})`;
@@ -396,7 +396,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit {
       const scrollTop = window.scrollY;
       const elementStart = scrollTop + rect.top;
       const scrollDistance = scrollTop - (elementStart - window.innerHeight);
-      const vhMultiplier = this.isMobile ? 1.15 : 0.75; // ✅ using class property
+      const vhMultiplier = this.isMobile ? 1.15 : 1.3;
       const revealRange = window.innerHeight * vhMultiplier;
       const revealStep = revealRange / this.totalSpans;
 
