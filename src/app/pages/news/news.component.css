@@ -75,6 +75,12 @@
   z-index: 2;
 }
 
+/* ::ng-deep .news-swiper:not(.home-swiper) .swiper-slide-active {
+  transform: scale(1);
+  opacity: 1;
+  z-index: 2;
+} */
+
 
 .news-title {
   min-height: 7.5vh;
@@ -122,12 +128,14 @@
 .news-swiper {
   width: 100%;
 }
+
 .news-card-image,
-.news-image{
+.news-image {
   width: 100%;
   background-color: #DEDEDE;
   aspect-ratio: 12/13;
 }
+
 .readmore-link-img {
   width: 2rem;
   height: 2rem;

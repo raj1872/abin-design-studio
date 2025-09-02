@@ -52,9 +52,10 @@
         <!-- Image Strip -->
         <div class="image-stirp-container" #imageStripContainer>
           <div #imageStrip class="image-strip">
-            <div class="image-stip-card-img" *ngFor="let img of filteredImages; let i = index">
+            <div class="image-stip-card-img relative" *ngFor="let img of filteredImages; let i = index">
               <img [src]="img" [class.active]="i === currentIndex" [attr.alt]="'Project Image ' + (i + 1)"
                 (click)="onImageClick(img)" id="timeline-image-thumbnail" />
+              
             </div>
           </div>
         </div>

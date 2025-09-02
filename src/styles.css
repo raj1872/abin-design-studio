@@ -488,6 +488,9 @@ img {
   padding: 0 !important;
 }
 
+.m-auto {
+  margin: 0 auto;
+}
 
 .main-container-fluid {
   width: 95%;
@@ -885,7 +888,7 @@ button:focus-visible {
 
 .button-style-secondary span,
 .button-style-secondary p {
-  color: var(--white-color);
+  color: var(--primary-color);
   transition: var(--common-transition);
   font-size: 1.15rem;
 }

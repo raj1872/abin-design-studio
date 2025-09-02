@@ -28,7 +28,7 @@
 
 
     </div> -->
-    <div class="news-swiper">
+    <div class="news-swiper relative" [class.home-swiper]="fromHome">
       <div class="swiper" #swiperEl>
         <div class="swiper-wrapper">
           <div class="swiper-slide" *ngFor="let news of filteredNews">
@@ -49,6 +49,15 @@
           </div>
         </div>
          <div class="swiper-pagination"></div>
+      </div>
+      <div class="abs-btn" *ngIf="fromHome">
+            <a class="download-pdf-btn wfc m-auto" routerLink="/news" >
+              <button class="button-style-secondary abin-design-studio-button">
+                <p>
+                  View All
+                </p>
+              </button>
+            </a>
       </div>
     </div>
 

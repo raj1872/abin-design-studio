@@ -111,7 +111,9 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
 
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
+      this.setTab('all')
       this.playBannerVideo();
+
 
       // ✅ Setup Lenis
       const lenis = new Lenis({
@@ -321,6 +323,13 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
     setTimeout(() => {
       this.scrollToYear('2010');
     });
+    const updated = document.getElementById(
+      'timeline-image-updated'
+    ) as HTMLImageElement;
+    if (updated) {
+      console.log("updated");
+      updated.src = this.filteredImages[0];
+    }
   }
 
   onImageScroll(): void {
