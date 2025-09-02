@@ -5,7 +5,7 @@
   </div>
 </ng-container>
 <ng-container *ngIf="!isLoading">
-  <div id="abin-design-studio-home-page-wrapper" class="abin-design-studio-page-wrapper">
+  <div id="abin-design-studio-home-page-wrapper" class="abin-design-studio-page-wrapper" #pageWrapper>
     <section *ngFor="let banner of homePageDetails; let i = index" class="abin-design-studio-section-home-single-screen"
       [ngClass]="{ 'parallax-section': i === 0 }" [ngStyle]="{
     'background-image':

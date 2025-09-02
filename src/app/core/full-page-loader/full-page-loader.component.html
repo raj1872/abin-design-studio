@@ -1,11 +1,9 @@
-<div class="loader-overlay" *ngIf="showLoader">
-  <div class="loader-container loader-animate-up">
+<div class="loader-overlay loader-animate-up" *ngIf="showLoader">
+  <div class="loader-container">
     <span
-      *ngFor="let word of words; let i = index"
-      class="loader-word"
-      [style.animation-delay]="(i * 0.3) + 's'"
-    >
-      {{ word }}
-    </span>
+      *ngFor="let letter of words; let i = index"
+      class="loader-letter"
+      [style.animation-delay]="(i * 0.1) + 's'"
+    >{{letter}}</span>
   </div>
 </div>

@@ -15,6 +15,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { Title, Meta } from '@angular/platform-browser';
 import { ApiService } from '../../services/api.service';
 import { Router, NavigationEnd } from '@angular/router';
+import Lenis from '@studio-freight/lenis';
 
 @Component({
   selector: 'app-home',
@@ -22,11 +23,14 @@ import { Router, NavigationEnd } from '@angular/router';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
+  @ViewChild('pageWrapper', { static: true }) pageWrapper!: ElementRef;
   @ViewChildren('animateUnderline') underlineElements!: QueryList<ElementRef>;
   @ViewChild('imageStrip', { static: false }) imageStripRef!: ElementRef;
   @ViewChild('imageStripContainer', { static: false })
   imageStripContainerRef!: ElementRef;
   @ViewChild('bannerVideo') bannerVideo!: ElementRef<HTMLVideoElement>;
+
+  private lenis!: Lenis;
 
   // ✅ API banners
   homePageDetails: any[] = [];
@@ -109,12 +113,27 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
     if (isPlatformBrowser(this.platformId)) {
       this.playBannerVideo();
 
-      // ✅ Parallax scroll effect (images + videos)
+      // ✅ Setup Lenis
+      const lenis = new Lenis({
+        wrapper: this.pageWrapper.nativeElement,
+        content: this.pageWrapper.nativeElement,
+        duration: 1.8,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+      });
+
+      const raf = (time: number) => {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      };
+      requestAnimationFrame(raf);
+
+      // ✅ Parallax effect
       this.scrollListener = this.renderer.listen('window', 'scroll', () => {
         const parallaxEls = document.querySelectorAll<HTMLElement>(
           '.parallax-section .banner-bg-image, .parallax-section .banner-video'
         );
-        const speed = 0.3;
+        const speed = 0.005;
         parallaxEls.forEach((el) => {
           const offset = window.scrollY * speed;
           this.renderer.setStyle(el, 'transform', `translateY(${offset}px)`);
@@ -317,7 +336,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
       const count =
         this.activeTab === 'all'
           ? (this.projects.architecture[year]?.length || 0) +
-            (this.projects.interior[year]?.length || 0)
+          (this.projects.interior[year]?.length || 0)
           : this.projects[this.activeTab]?.[year]?.length || 0;
       if (index < runningIndex + count) {
         if (this.activeYear !== year) {
@@ -337,7 +356,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
       targetIndex +=
         this.activeTab === 'all'
           ? (this.projects.architecture[y]?.length || 0) +
-            (this.projects.interior[y]?.length || 0)
+          (this.projects.interior[y]?.length || 0)
           : this.projects[this.activeTab]?.[y]?.length || 0;
     }
     const strip = this.imageStripRef.nativeElement as HTMLElement;

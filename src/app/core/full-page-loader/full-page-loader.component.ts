@@ -22,7 +22,7 @@ export class FullPageLoaderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     if (this.isBrowser) {
       // Split into words instead of letters
-      this.words = 'Soul In The Shell'.split(' ');
+      this.words = 'Soul In The Shell'.split('').map(ch => ch === ' ' ? '\u00A0' : ch);
 
       this.showLoader = true;
       this.document.body.style.overflow = 'hidden';

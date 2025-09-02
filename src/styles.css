@@ -528,7 +528,7 @@ img {
   display: none;
 }
 
-.wfc{
+.wfc {
   width: fit-content !important;
   display: block;
 }
@@ -1069,13 +1069,6 @@ button:focus-visible {
 
 .header-logo a {
   display: block;
-  font-size: 1.5rem;
-  line-height: 1 !important;
-}
-
-.header-logo a h1 {
-  font-size: 1.5rem;
-  line-height: 1 !important;
 }
 
 @keyframes shimmer {
@@ -1187,9 +1180,16 @@ button:focus-visible {
 }
 
 .web-bar span {
-  font-size: 1.5rem;
   color: var(--white-color);
   font-family: var(--medium-font-family);
+}
+
+
+.header-logo a h1,
+.header-logo a,
+.web-bar span {
+  font-size: 2rem;
+  line-height: 1 !important;
 }
 
 .bar {
