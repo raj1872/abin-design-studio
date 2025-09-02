@@ -40,7 +40,16 @@
 
     <section class="abin-design-studio-section relative" id="abin-design-studio-home-5">
       <div class="tab-change-image-width" style="position: relative;z-index: 5;">
-        <img src="./assets/images/tabs-image.jpg" alt="" id="timeline-image-updated" width="1920" height="456">
+        <img [src]="filteredImages[0]" alt="" id="timeline-image-updated" width="1920" height="456">
+        <div class="abs-btn">
+          <a class="download-pdf-btn wfc" routerLink="/waterfront-pavilion">
+            <button class="button-style-primary abin-design-studio-button">
+              <p>
+                Waterfront Pavilion
+              </p>
+            </button>
+          </a>
+        </div>
       </div>
       <div class="main-container" style="position: relative;z-index: 5;">
         <!-- Tabs -->
@@ -55,7 +64,6 @@
             <div class="image-stip-card-img relative" *ngFor="let img of filteredImages; let i = index">
               <img [src]="img" [class.active]="i === currentIndex" [attr.alt]="'Project Image ' + (i + 1)"
                 (click)="onImageClick(img)" id="timeline-image-thumbnail" />
-              
             </div>
           </div>
         </div>

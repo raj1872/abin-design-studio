@@ -15,6 +15,7 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { DetailComponent } from './pages/publications/detail/detail.component';
 import { DetailComponent as CareerDetailComponent } from './pages/career/detail/detail.component';
 import { CareerComponent } from './pages/career/career.component';
+import { SiteCreditsComponent } from './pages/site-credits/site-credits.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'news-detail', component: NewsDetailComponent },
   { path: 'studio', component: OurStudioComponent },
   { path: 'our-team', component: TeamComponent },
+  { path: 'site-credits', component: SiteCreditsComponent },
   { path: 'publications/:slug', component: DetailComponent },
 
   // ✅ Category & Subcategory lists
@@ -65,4 +67,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

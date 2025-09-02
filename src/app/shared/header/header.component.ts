@@ -27,6 +27,7 @@ export class HeaderComponent implements OnInit {
   isLandingPage = false;
   isTeamPage = false;
   isPublicationsPage = false;
+  isCreditsPage = false;
 
   private prevScrollTop = 0;
   private scrollYBeforeLock = 0;
@@ -41,7 +42,7 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object,
     private apiService: ApiService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.checkPageType(this.router.url);
@@ -70,6 +71,7 @@ export class HeaderComponent implements OnInit {
     this.isLandingPage = url === '/' || url.startsWith('/landing');
     this.isTeamPage = /^\/our-team(\/|$)/.test(url);
     this.isPublicationsPage = /^\/publications(\/|$)/.test(url);
+    this.isCreditsPage = /^\/site-credits(\/|$)/.test(url);
     this.isNewsPage = /^\/news(\/|$)/.test(url);
     this.isNewsDetailPage = /^\/news-detail(\/|$)/.test(url);
     this.projectListingTrue = /^\/projects-svg(\/|$)/.test(url);
