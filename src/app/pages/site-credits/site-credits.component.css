@@ -1,5 +1,113 @@
+* {
+    color: #ffffff !important;
+}
+
+.grey,
+.grey * {
+    /* opacity: 0.5; */
+    color: #ffffff50 !important;
+}
+
+.grid2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    height: 100%;
+}
+
+.abin-design-studio-section {
+    height: 100vh;
+    overflow: hidden;
+    background-color: #000000;
+}
+
+.section-padding {
+    padding-left: 4rem;
+    padding-right: 4rem;
+}
+
+.credits {
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    justify-content: center;
+}
+
+.credits::-webkit-scrollbar {
+    display: none;
+}
+
+@media only screen and (max-width: 991px) {
+    .section-padding {
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .section-padding {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    .heading h1 {
+        padding: 2rem 0;
+        padding-top: 3rem;
+        font-size: calc(var(--banner-title-font-size) - 0.864rem);
+    }
+
+    .grid2 .section-content {
+        padding: 2rem 0;
+    }
+
+    .credits {
+        justify-content: start;
+        align-items: flex-start;
+        overflow-y: unset;
+        height: -moz-fit-content;
+        height: fit-content;
+        position: absolute;
+        width: 100%;
+        max-height: 50vh;
+        overflow-y: scroll;
+        align-self: center;
+    }
+
+    .credits .section-subtitle2 p {
+        font-size: calc(var(--section-subtitle-font-size2) - 0.182rem);
+    }
+
+    .heading {
+        /* position: absolute; */
+        z-index: 10;
+        bottom: 0;
+        left: 0;
+        padding-left: 0;
+        height: 100%;
+        width: 100vw;
+        pointer-events: none;
+    }
+
+    .grid2 {
+        grid-template-columns: repeat(1, 1fr);
+        overflow: hidden;
+        height: 94vh;
+        padding: 0;
+    }
+
+    .heading .section-paragraph p,
+    .heading .section-paragraph p span,
+    .heading .section-content p,
+    .heading .section-content a,
+    .heading .section-content p span {
+        font-size: 1.273rem;
+    }
+}
+
 @media only screen and (min-width: 992px) {
+
+    .hover-red:hover,
+    .hover-red:hover *,
     a:hover {
-        color: #E20613;
+        color: #E20613 !important;
     }
 }

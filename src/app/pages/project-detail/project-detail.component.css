@@ -775,4 +775,9 @@
     font-size: var(--paragraph-font-size);
   }
 
+  .overflowdiv .section-content p {
+    font-size: var(--content-font-size);
+  }
+
+
 }

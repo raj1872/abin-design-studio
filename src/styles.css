@@ -1443,6 +1443,12 @@ button:focus-visible {
   .section-padding-small {
     padding: 4rem 0;
   }
+
+  .header-logo a h1,
+  .header-logo a,
+  .web-bar span {
+    font-size: 2.2rem;
+  }
 }
 
 @media only screen and (max-width: 600px) {
