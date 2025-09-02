@@ -1,8 +1,8 @@
 <div class="header-wrapper"
   [class.black-header-wrapper]="isProjectsPage || isNewsDetailPage || isTeamPage || projectListingTrue || isPublicationsPage"
-  [class.webmenu_hidden]="isHeaderHidden" [class.header_change]="isHeaderChanged"
+   [class.header_change]="isHeaderChanged"
   [class.headerActiveOpen]="isMenuActive" *ngIf="!isLandingPage">
-
+<!-- [class.webmenu_hidden]="isHeaderHidden" -->
   <div class="header-flex main-container">
     <div class="header-logo">
       <a href="javascript:void(0);" routerLink="/home" routerLinkActive="active">

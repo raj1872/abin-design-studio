@@ -22,6 +22,7 @@ import { OurStudioComponent } from './pages/our-studio/our-studio.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { CareerComponent } from './pages/career/career.component';
 import { DetailComponent } from './pages/career/detail/detail.component';
+import { SiteCreditsComponent } from './pages/site-credits/site-credits.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { DetailComponent } from './pages/career/detail/detail.component';
     HomeComponent,
     ProjectsComponent,
     ProjectDetailComponent,
-    DetailComponent
+    DetailComponent,
+    SiteCreditsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }), // ✅ SSR safe

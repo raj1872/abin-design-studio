@@ -7,6 +7,7 @@ import {
   OnDestroy,
   ElementRef,
   ViewChild,
+  Input,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import Swiper, { Mousewheel } from 'swiper';
@@ -25,6 +26,8 @@ interface NewsItem {
   styleUrls: ['./news.component.css'],
 })
 export class NewsComponent implements OnInit, AfterViewInit, OnDestroy {
+  @Input() fromHome: boolean = false;
+
   isBrowser = false;
   isMobile = false;
   dropdownOpen = false;
@@ -154,7 +157,7 @@ export class NewsComponent implements OnInit, AfterViewInit, OnDestroy {
   private swiper?: Swiper;
   private wheelHandler?: (e: WheelEvent) => void;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
 
   ngOnInit(): void {
     this.isBrowser = isPlatformBrowser(this.platformId);
@@ -173,14 +176,16 @@ export class NewsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // Extra wheel->slide fallback to ensure horizontal wheel works
     const el = this.swiperEl.nativeElement;
-    this.wheelHandler = (e: WheelEvent) => {
-      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-        e.preventDefault();
-        if (e.deltaY > 0) this.swiper?.slideNext();
-        else this.swiper?.slidePrev();
-      }
-    };
-    el.addEventListener('wheel', this.wheelHandler, { passive: false });
+    if (!this.fromHome) {
+      this.wheelHandler = (e: WheelEvent) => {
+        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+          e.preventDefault();
+          if (e.deltaY > 0) this.swiper?.slideNext();
+          else this.swiper?.slidePrev();
+        }
+      };
+      el.addEventListener('wheel', this.wheelHandler, { passive: false });
+    }
   }
 
   private initSwiper() {
@@ -191,7 +196,7 @@ export class NewsComponent implements OnInit, AfterViewInit, OnDestroy {
       centeredSlidesBounds: true,
       spaceBetween: 24,
       speed: 500,
-      loop: true,
+      loop: !this.fromHome,
       mousewheel: {
         forceToAxis: true,
         releaseOnEdges: true,
@@ -283,6 +288,13 @@ export class NewsComponent implements OnInit, AfterViewInit, OnDestroy {
       this.filteredNews = this.newsList.filter(
         (n) => n.category === this.activeCategory
       );
+    }
+
+    // ✅ If fromHome -> show only the latest 4 news items
+    if (this.fromHome) {
+      this.filteredNews = [...this.filteredNews]
+        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()) // sort by date desc
+        .slice(0, 4); // pick top 4
     }
   }
 

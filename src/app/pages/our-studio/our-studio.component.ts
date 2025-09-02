@@ -21,6 +21,7 @@ Swiper.use([Navigation, Pagination, Autoplay]);
 })
 export class OurStudioComponent implements OnInit, AfterViewInit {
   @ViewChild('swiperContainer', { static: false }) swiperContainer!: ElementRef;
+  hoverName: string = "People Name";
 
   images: string[] = [
     'https://dummyimage.com/1080x926/1A1A1A/1A1A1A',
@@ -33,7 +34,7 @@ export class OurStudioComponent implements OnInit, AfterViewInit {
     private titleService: Title,
     private metaService: Meta,
     @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.titleService.setTitle('Our Studio - Abin Design Studio');

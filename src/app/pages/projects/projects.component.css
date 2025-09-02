@@ -129,6 +129,29 @@
   transition: var(--common-transition);
 }
 
+.all-categories-link-tabs.flex-row {
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.form-control-card select,
+.form-control-card textarea,
+.form-control-card input {
+  padding: 1.25rem;
+  border: 1px solid var(--highlight-color);
+  resize: none;
+  background-color: transparent;
+  margin: 0 !important;
+  outline: none;
+  color: var(--primary-color);
+  line-height: 1;
+  font-size: 1.25rem;
+  width: 100%;
+  font-family: var(--medium-font-family);
+  border-radius: 0rem;
+}
+
 @media only screen and (max-width: 991px) {
   .project-listing-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -169,5 +192,13 @@
   .project-list-card,
   .project-list-card img.project-list-hover-disable {
     aspect-ratio: 1;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .all-categories-link-tabs.flex-row {
+    /* justify-content: space-between; */
+    align-items: flex-start;
+    flex-direction: column;
   }
 }

@@ -1,8 +1,8 @@
 <div id="abin-design-studio-projects-page-wrapper" class="abin-design-studio-page-wrapper">
   <section class="abin-design-studio-section section-padding relative" id="abin-design-studio-projects-1">
     <div class="main-container">
-      <div class="all-categories-link-tabs">
-        <div *ngIf="!loading">
+      <div class="all-categories-link-tabs flex-row flex-row-medium">
+        <div *ngIf="!loading" >
           <div class="section-paragraph">
             <p class="semibold-fonts">
               {{ selectedCategory.name }}
@@ -17,6 +17,12 @@
             </li>
           </ul>
 
+        </div>
+        <div class="search">
+          <div class="relative form-control-card w100">
+            <input placeholder="Search" />
+            <!-- <div class="error-code" *ngIf="isControlInvalid('name')">Name is required.</div> -->
+          </div>
         </div>
       </div>
       <ng-container *ngIf="loading">
