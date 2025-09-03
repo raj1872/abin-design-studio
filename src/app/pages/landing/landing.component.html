@@ -1,7 +1,12 @@
 <div class="landingpage-wrapper" #landingWrapper>
-  <div style="z-index: 1;">
-    <app-full-page-loader></app-full-page-loader>
+  <div class="loader-overlay">
+  <div class="loader-container">
+    <span *ngFor="let letter of words; let i = index" class="loader-letter">
+      {{ letter }}
+    </span>
   </div>
+</div>
+
   <section class="abin-design-studio-section landing-100vh section-padding relative" id="abin-design-studio-landing-1" style="z-index: 5;">
     <div class="mini-container">
       <div class="mini-container2">
