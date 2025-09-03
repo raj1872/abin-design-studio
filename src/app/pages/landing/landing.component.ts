@@ -36,7 +36,7 @@ export class LandingComponent implements AfterViewInit, OnDestroy {
       content: this.landingWrapper.nativeElement,
       duration: 1.2,
       easing: (t) => 1 - Math.pow(1 - t, 3),
-      wheelMultiplier: 2,
+      wheelMultiplier: 8,
       smoothWheel: true,
       touchMultiplier: 1.5,
     });
