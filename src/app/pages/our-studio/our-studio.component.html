@@ -29,11 +29,15 @@
   <section class="abin-design-studio-section section-padding-small relative" id="abin-design-studio-studio-2">
     <div class="team-flex-columns">
       <div class="main-container">
-        <div class="team-wrapper">
-          <div class="team-image">
-            <img src="./assets/images/about/team.jpg" alt="">
-            <img src="./assets/images/about/team.jpg" alt="">
-            <img src="./assets/images/about/team.jpg" alt="">
+        <div class="team-wrapper relative">
+          <div class="team-image relative" #teamWrapper>
+            <ng-container *ngFor="let _ of loopsGrid;let idx = index  ">
+              <div class="team-image-grid" [id]="'grid-' + idx">
+                <ng-container *ngFor="let _ of loops">
+                  <img *ngFor="let img of team_images[idx + 1]" [src]="img.src" [alt]="img.name">
+                </ng-container>
+              </div>
+            </ng-container>
           </div>
           <div class="team-detail-para section-paragraph inner-flex inner-flex-medium">
             <div class="section-subtitle2">

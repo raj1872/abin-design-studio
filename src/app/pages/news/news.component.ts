@@ -240,7 +240,7 @@ export class NewsComponent implements OnInit, AfterViewInit, OnDestroy {
         },
         992: {
           slidesPerView: 3,
-          spaceBetween: 84,
+          spaceBetween: 32,
           centeredSlides: true,
           pagination: false, // disable pagination from 992px upwards
         },

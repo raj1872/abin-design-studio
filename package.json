@@ -28,6 +28,7 @@
     "@studio-freight/lenis": "^1.0.42",
     "aos": "^2.3.4",
     "express": "^4.15.2",
+    "gsap": "^3.13.0",
     "js-beautify": "^1.15.4",
     "ng2-pdf-viewer": "^10.0.0",
     "node-fetch": "^2.7.0",

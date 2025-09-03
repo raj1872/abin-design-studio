@@ -10,6 +10,10 @@ import {
 import { Title, Meta } from '@angular/platform-browser';
 import { isPlatformBrowser } from '@angular/common';
 import Swiper, { Navigation, Pagination, Autoplay } from 'swiper';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 // install modules
 Swiper.use([Navigation, Pagination, Autoplay]);
@@ -21,6 +25,7 @@ Swiper.use([Navigation, Pagination, Autoplay]);
 })
 export class OurStudioComponent implements OnInit, AfterViewInit {
   @ViewChild('swiperContainer', { static: false }) swiperContainer!: ElementRef;
+  @ViewChild('teamWrapper', { static: true }) teamWrapper!: ElementRef;
   hoverName: string = "People Name";
 
   images: string[] = [
@@ -29,6 +34,45 @@ export class OurStudioComponent implements OnInit, AfterViewInit {
     'https://dummyimage.com/1080x926/C1C1C1/C1C1C1',
     'https://dummyimage.com/1080x926/1A1A1A/1A1A1A',
   ];
+
+  team_images: any = {
+    1: [
+      { src: "assets/images/studio/img-1.jpg", name: "People Name1" },
+      { src: "assets/images/studio/img-2.jpg", name: "People Name2" },
+      { src: "assets/images/studio/img-3.jpg", name: "People Name3" },
+      { src: "assets/images/studio/img-4.jpg", name: "People Name4" },
+      { src: "assets/images/studio/img-1.jpg", name: "People Name5" },
+      { src: "assets/images/studio/img-2.jpg", name: "People Name6" },
+    ],
+    2: [
+      { src: "assets/images/studio/img-2.jpg", name: "People Name1" },
+      { src: "assets/images/studio/img-3.jpg", name: "People Name2" },
+      { src: "assets/images/studio/img-2.jpg", name: "People Name3" },
+      { src: "assets/images/studio/img-4.jpg", name: "People Name4" },
+      { src: "assets/images/studio/img-1.jpg", name: "People Name5" },
+      { src: "assets/images/studio/img-1.jpg", name: "People Name6" },
+    ],
+    3: [
+      { src: "assets/images/studio/img-1.jpg", name: "People Name1" },
+      { src: "assets/images/studio/img-4.jpg", name: "People Name2" },
+      { src: "assets/images/studio/img-1.jpg", name: "People Name3" },
+      { src: "assets/images/studio/img-3.jpg", name: "People Name4" },
+      { src: "assets/images/studio/img-2.jpg", name: "People Name5" },
+      { src: "assets/images/studio/img-2.jpg", name: "People Name6" },
+    ]
+  };
+
+  loopCount = 5;
+  loopCountGrid = 3;
+
+  get loops() {
+    return Array(this.loopCount).fill(0);
+  }
+
+  get loopsGrid() {
+    return Array(this.loopCountGrid).fill(0);
+  }
+
 
   constructor(
     private titleService: Title,
@@ -52,6 +96,48 @@ export class OurStudioComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
+      let workInfoItems = document.querySelectorAll('.team-image-grid');
+      workInfoItems.forEach(function (item: any, index) {
+        item.style.zIndex = workInfoItems.length - index;
+      });
+
+      gsap.from('.team-image-grid', {
+        opacity: 0,
+        scale: 0.5,
+        scrollTrigger: {
+          trigger: '#page-3',
+          scroller: 'main',
+          // markers:true,
+          start: 'top 50%',
+          end: 'top 49%',
+          scrub: 1,
+          // pin:true
+        }
+      });
+
+      gsap.set('.team-image-grid', {
+        clipPath: function () {
+          return "inset(0px 0px 0px 0px)"
+        },
+      });
+
+      gsap.to('.team-image-grid:not(:last-child)', {
+        clipPath: function () {
+          return "inset(0px 0px 100% 0px)"
+        },
+        scrollTrigger: {
+          trigger: '#page-3',
+          scroller: 'main',
+          // markers:true,
+          start: 'top -2%',
+          end: 'top -400%',
+          scrub: 1,
+          // pin:true
+        },
+        stagger: .5,
+        ease: 'none'
+      });
+
       new Swiper(this.swiperContainer.nativeElement, {
         slidesPerView: 1,
         spaceBetween: 20,
@@ -71,5 +157,9 @@ export class OurStudioComponent implements OnInit, AfterViewInit {
         },
       });
     }
+  }
+
+  ngOnDestroy(): void {
+    ScrollTrigger.getAll().forEach((st) => st.kill());
   }
 }

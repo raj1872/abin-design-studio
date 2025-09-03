@@ -11,6 +11,7 @@
   position: relative;
   width: 100%;
   /* smooth scrolling */
+  min-height: 100vh;
 
   background-image: url('/assets/images/about/about-bg-banner.jpg');
   background-attachment: fixed;
@@ -69,7 +70,7 @@
   transform: scale(0.85);
 }
 
-::ng-deep .news-swiper .swiper-slide-active {
+::ng-deep .news-swiper:not(.home-swiper) .swiper-slide-active {
   transform: scale(1);
   opacity: 1;
   z-index: 2;
@@ -81,6 +82,16 @@
   z-index: 2;
 } */
 
+.home-swiper .news-card {
+  min-height: 46rem;
+}
+
+.abs-btn {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
 
 .news-title {
   min-height: 7.5vh;
