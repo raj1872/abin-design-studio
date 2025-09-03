@@ -37,28 +37,28 @@ export class OurStudioComponent implements OnInit, AfterViewInit {
 
   team_images: any = {
     1: [
-      { src: "assets/images/studio/img-1.jpg", name: "People Name1" },
-      { src: "assets/images/studio/img-2.jpg", name: "People Name2" },
-      { src: "assets/images/studio/img-3.jpg", name: "People Name3" },
-      { src: "assets/images/studio/img-4.jpg", name: "People Name4" },
-      { src: "assets/images/studio/img-1.jpg", name: "People Name5" },
-      { src: "assets/images/studio/img-2.jpg", name: "People Name6" },
+      { src: "assets/images/studio/img-1.jpg", name: "Person Name1" },
+      { src: "assets/images/studio/img-2.jpg", name: "Person Name2" },
+      { src: "assets/images/studio/img-3.jpg", name: "Person Name3" },
+      { src: "assets/images/studio/img-4.jpg", name: "Person Name4" },
+      { src: "assets/images/studio/img-1.jpg", name: "Person Name5" },
+      { src: "assets/images/studio/img-2.jpg", name: "Person Name6" },
     ],
     2: [
-      { src: "assets/images/studio/img-2.jpg", name: "People Name1" },
-      { src: "assets/images/studio/img-3.jpg", name: "People Name2" },
-      { src: "assets/images/studio/img-2.jpg", name: "People Name3" },
-      { src: "assets/images/studio/img-4.jpg", name: "People Name4" },
-      { src: "assets/images/studio/img-1.jpg", name: "People Name5" },
-      { src: "assets/images/studio/img-1.jpg", name: "People Name6" },
+      { src: "assets/images/studio/img-2.jpg", name: "Person Name1" },
+      { src: "assets/images/studio/img-3.jpg", name: "Person Name2" },
+      { src: "assets/images/studio/img-2.jpg", name: "Person Name3" },
+      { src: "assets/images/studio/img-4.jpg", name: "Person Name4" },
+      { src: "assets/images/studio/img-1.jpg", name: "Person Name5" },
+      { src: "assets/images/studio/img-1.jpg", name: "Person Name6" },
     ],
     3: [
-      { src: "assets/images/studio/img-1.jpg", name: "People Name1" },
-      { src: "assets/images/studio/img-4.jpg", name: "People Name2" },
-      { src: "assets/images/studio/img-1.jpg", name: "People Name3" },
-      { src: "assets/images/studio/img-3.jpg", name: "People Name4" },
-      { src: "assets/images/studio/img-2.jpg", name: "People Name5" },
-      { src: "assets/images/studio/img-2.jpg", name: "People Name6" },
+      { src: "assets/images/studio/img-1.jpg", name: "Person Name1" },
+      { src: "assets/images/studio/img-4.jpg", name: "Person Name2" },
+      { src: "assets/images/studio/img-1.jpg", name: "Person Name3" },
+      { src: "assets/images/studio/img-3.jpg", name: "Person Name4" },
+      { src: "assets/images/studio/img-2.jpg", name: "Person Name5" },
+      { src: "assets/images/studio/img-2.jpg", name: "Person Name6" },
     ]
   };
 
@@ -101,42 +101,25 @@ export class OurStudioComponent implements OnInit, AfterViewInit {
         item.style.zIndex = workInfoItems.length - index;
       });
 
-      gsap.from('.team-image-grid', {
-        opacity: 0,
-        scale: 0.5,
-        scrollTrigger: {
-          trigger: '#page-3',
-          scroller: 'main',
-          // markers:true,
-          start: 'top 50%',
-          end: 'top 49%',
-          scrub: 1,
-          // pin:true
+      const container = document.getElementById("abin-design-studio-studio-page-wrapper");
+      const sections = container?.querySelectorAll<HTMLElement>(".snap");
+      // const sec1 = document.getElementById('abin-design-studio-studio-1')
+      if (!container || !sections) return;
+
+      let currentIndex = 0;
+      container.addEventListener("wheel", (e) => {
+        e.preventDefault();
+        if (e.deltaY > 0 && currentIndex < sections.length - 1) {
+          currentIndex++;
+        } else if (e.deltaY < 0 && currentIndex > 0) {
+          currentIndex--;
         }
-      });
-
-      gsap.set('.team-image-grid', {
-        clipPath: function () {
-          return "inset(0px 0px 0px 0px)"
-        },
-      });
-
-      gsap.to('.team-image-grid:not(:last-child)', {
-        clipPath: function () {
-          return "inset(0px 0px 100% 0px)"
-        },
-        scrollTrigger: {
-          trigger: '#page-3',
-          scroller: 'main',
-          // markers:true,
-          start: 'top -2%',
-          end: 'top -400%',
-          scrub: 1,
-          // pin:true
-        },
-        stagger: .5,
-        ease: 'none'
-      });
+        if ((e.deltaY > 0 && currentIndex == 1) || (e.deltaY < 0 && currentIndex == 0)) {
+          sections[currentIndex].scrollIntoView({ behavior: "smooth" });
+        } else {
+          sections[currentIndex].scrollIntoView({ behavior: "instant" });
+        }
+      }, { passive: false });
 
       new Swiper(this.swiperContainer.nativeElement, {
         slidesPerView: 1,
@@ -157,6 +140,10 @@ export class OurStudioComponent implements OnInit, AfterViewInit {
         },
       });
     }
+  }
+
+  setName(name: any) {
+    this.hoverName = name
   }
 
   ngOnDestroy(): void {

@@ -1,6 +1,6 @@
 <div id="abin-design-studio-studio-page-wrapper" class="abin-design-studio-page-wrapper relative">
   <div class="overlay"></div>
-  <section class="abin-design-studio-section section-padding-2 relative" id="abin-design-studio-studio-1">
+  <section class="abin-design-studio-section section-padding-2 relative snap" id="abin-design-studio-studio-1">
     <div class="main-container">
       <div class="about-flex-wrapper">
         <div class="about-swiper-flex">
@@ -27,30 +27,30 @@
     </div>
   </section>
   <section class="abin-design-studio-section section-padding-small relative" id="abin-design-studio-studio-2">
-    <div class="team-flex-columns">
-      <div class="main-container">
-        <div class="team-wrapper relative">
-          <div class="team-image relative" #teamWrapper>
-            <ng-container *ngFor="let _ of loopsGrid;let idx = index  ">
-              <div class="team-image-grid" [id]="'grid-' + idx">
-                <ng-container *ngFor="let _ of loops">
-                  <img *ngFor="let img of team_images[idx + 1]" [src]="img.src" [alt]="img.name">
-                </ng-container>
+      <ng-container *ngFor="let _ of loopsGrid;let idx = index  ">
+        <div class="team-flex-columns snap">
+          <div class="main-container">
+            <div class="team-wrapper relative">
+              <div class="team-image relative" #teamWrapper>
+                <div class="team-image-grid" [id]="'grid-' + idx">
+                  <ng-container *ngFor="let _ of loops">
+                    <img (mouseenter)="setName(img.name)" *ngFor="let img of team_images[idx + 1]" [src]="img.src" [alt]="img.name">
+                  </ng-container>
+                </div>
               </div>
-            </ng-container>
-          </div>
-          <div class="team-detail-para section-paragraph inner-flex inner-flex-medium">
-            <div class="section-subtitle2">
-              <p class="medium-fonts white-color">{{ hoverName }}</p>
+              <div class="team-detail-para section-paragraph inner-flex inner-flex-medium">
+                <div class="section-subtitle2">
+                  <p class="medium-fonts white-color">{{ hoverName }}</p>
+                </div>
+                <p class="white-color">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corrupti enim optio voluptatibus eum, corporis
+                    dolor nemo quam vero eveniet suscipit excepturi error culpa quae labore cum velit? Alias, excepturi culpa?
+                </p>
+              </div>
             </div>
-            <p class="white-color">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corrupti enim optio voluptatibus eum, corporis
-              dolor nemo quam vero eveniet suscipit excepturi error culpa quae labore cum velit? Alias, excepturi culpa?
-            </p>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
+      </ng-container>
+    </section>
 </div>
 
