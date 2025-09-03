@@ -102,7 +102,10 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
     // ✅ Restart video on navigation back to home
     if (this.isBrowser) {
       this.router.events.subscribe((event) => {
-        if (event instanceof NavigationEnd && event.urlAfterRedirects === '/home') {
+        if (
+          event instanceof NavigationEnd &&
+          event.urlAfterRedirects === '/home'
+        ) {
           setTimeout(() => this.playBannerVideo(true), 200);
         }
       });
@@ -111,17 +114,17 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
 
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      this.setTab('all')
+      this.setTab('all');
       this.playBannerVideo();
-
 
       // ✅ Setup Lenis
       const lenis = new Lenis({
         wrapper: this.pageWrapper.nativeElement,
         content: this.pageWrapper.nativeElement,
-        duration: 1.8,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        duration: 2.5, // ⬅️ increase duration = slower
+        easing: (t) => 1 - Math.pow(1 - t, 4), // ⬅️ smoother at edges
         smoothWheel: true,
+        wheelMultiplier: 0.008, // ⬅️ smaller = slower response
       });
 
       const raf = (time: number) => {
@@ -327,7 +330,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
       'timeline-image-updated'
     ) as HTMLImageElement;
     if (updated) {
-      console.log("updated");
+      console.log('updated');
       updated.src = this.filteredImages[0];
     }
   }
@@ -345,7 +348,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
       const count =
         this.activeTab === 'all'
           ? (this.projects.architecture[year]?.length || 0) +
-          (this.projects.interior[year]?.length || 0)
+            (this.projects.interior[year]?.length || 0)
           : this.projects[this.activeTab]?.[year]?.length || 0;
       if (index < runningIndex + count) {
         if (this.activeYear !== year) {
@@ -365,7 +368,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
       targetIndex +=
         this.activeTab === 'all'
           ? (this.projects.architecture[y]?.length || 0) +
-          (this.projects.interior[y]?.length || 0)
+            (this.projects.interior[y]?.length || 0)
           : this.projects[this.activeTab]?.[y]?.length || 0;
     }
     const strip = this.imageStripRef.nativeElement as HTMLElement;

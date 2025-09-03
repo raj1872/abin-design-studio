@@ -1,10 +1,9 @@
 .abin-design-studio-page-wrapper {
   height: 100lvh;
   overflow-y: scroll;
-  scroll-snap-type: y mandatory;
-  /* scroll-behavior: smooth; */
+   scroll-snap-type: y mandatory;
   scroll-snap-stop: always;
-  /* scroll-padding: 10vh; */
+  scroll-behavior: smooth;
 }
 
 

@@ -83,14 +83,16 @@
 } */
 
 .home-swiper .news-card {
+  height: 46rem;
   min-height: 46rem;
 }
 
 .abs-btn {
   position: absolute;
-  bottom: 0;
+  bottom: 3%;
   left: 0;
   width: 100%;
+  z-index: 99;
 }
 
 .news-title {
