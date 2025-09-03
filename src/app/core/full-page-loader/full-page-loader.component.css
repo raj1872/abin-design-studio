@@ -15,6 +15,7 @@
   animation: gradientDrift 30s ease-in-out infinite;
   overflow: unset;
   scroll-snap-align: start;
+  filter: blur(10px);
 }
 
 .loader-container {

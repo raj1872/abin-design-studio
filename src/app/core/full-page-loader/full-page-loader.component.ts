@@ -33,6 +33,7 @@ export class FullPageLoaderComponent implements OnInit, AfterViewInit {
 
     const scroller = this.document.querySelector('.landingpage-wrapper'); // 👈 your custom scroll container
     const letters: NodeListOf<HTMLElement> = this.el.nativeElement.querySelectorAll('.loader-letter');
+    const overlay = this.el.nativeElement.querySelector('.loader-overlay');
 
     gsap.set(letters, {
       x: () => gsap.utils.random(-window.innerWidth / 5, window.innerWidth / 5),
@@ -49,6 +50,18 @@ export class FullPageLoaderComponent implements OnInit, AfterViewInit {
       stagger: 0.05,
       scrollTrigger: {
         trigger: this.el.nativeElement.querySelector('.loader-overlay'),
+        scroller: scroller,
+        start: "top top",
+        end: "center end",
+        scrub: true
+      }
+    });
+
+    gsap.to(overlay, {
+      filter: "blur(0px)",
+      ease: "none",
+      scrollTrigger: {
+        trigger: overlay,
         scroller: scroller,
         start: "top top",
         end: "center end",
