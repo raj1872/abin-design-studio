@@ -123,7 +123,8 @@
 #abin-design-studio-home-6 {
   position: relative;
   width: 100%;
-  /* height: 100vh; */
+  height: 100vh;
+  overflow: hidden;
   /* full screen */
   background-repeat: no-repeat;
   background-size: cover;
@@ -134,7 +135,7 @@
 .abs-btn {
   position: absolute;
   right: 2rem;
-  top: 25%;
+  bottom: 5%;
 }
 
 /* ✅ Background image (fixed for non-parallax sections) */

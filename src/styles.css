@@ -413,6 +413,18 @@ body {
   width: 100%;
 }
 
+html,
+body,
+* {
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, Edge */
+}
 
 body.no-scroll-body {
   overflow-y: hidden;

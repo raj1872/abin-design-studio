@@ -6,6 +6,10 @@
   justify-content: center;
 }
 
+.abin-footer-wrapper {
+  scroll-snap-align: start;
+}
+
 .footer-flex-wrapper {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
