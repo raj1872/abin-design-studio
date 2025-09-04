@@ -16,7 +16,8 @@
       <div class="detail-banner-abs">
         <div class="main-container">
           <!-- <div class="inner-flex inner-flex-big"> -->
-          <div class="w100" [ngClass]="isMobile ? 'inner-flex inner-flex-medium' : 'flex-row inner-flex-big'" [ngStyle]="isMobile ? {} : { 'align-items': 'center'}" style="justify-content: space-between;">
+          <div class="w100" [ngClass]="isMobile ? 'inner-flex inner-flex-medium' : 'flex-row inner-flex-big'"
+            [ngStyle]="isMobile ? {} : { 'align-items': 'center'}" style="justify-content: space-between;">
             <div class="inner-flex inner-flex-small">
               <div *ngIf="projectDetailObj.project">
                 <!-- *ngFor="let word of projectDetailObj?.project?.split(' '); let i = index"> -->
@@ -70,7 +71,8 @@
                 </p>
               </div>
             </div> -->
-            <div class="inner-row flex-row-smallest flex-col-mobile overflowdiv" [ngStyle]="isMobile ? {} : { 'text-align': 'right'}" data-aos="fade-up" data-aos-delay="550">
+            <div class="inner-row flex-row-smallest flex-col-mobile overflowdiv"
+              [ngStyle]="isMobile ? {} : { 'text-align': 'right'}" data-aos="fade-up" data-aos-delay="550">
               <div class="section-content" *ngIf="projectDetailObj.location">
                 <p class="white-color uppercase regular-fonts">
                   {{projectDetailObj.location}}
@@ -227,46 +229,50 @@
     </div>
     <section class="abin-design-studio-section relative" id="abin-design-studio-project-detail-8">
       <div class="nex-prev-grid">
-        <a routerLink="/{{projectDetailObj.previous_projects.slug}}/" routerLinkActive="active"
+        <a routerLink="/{{projectDetailObj?.previous_projects?.slug}}/" routerLinkActive="active"
           class="prev-div-wrapper relative">
           <div class="prev-nex-img-div">
-            <img src="{{projectDetailObj.previous_projects.featured_image_full}}&w=1080&h=1080&q=100" alt="">
+            <img src="{{projectDetailObj?.previous_projects?.featured_image_full}}&w=1080&h=1080&q=100" alt="">
             <div class="overlay-next-rev"></div>
           </div>
           <div class="prev-abs-wrapper prev-next-abs-wrapper">
             <div class="section-subtitle2">
-              <p class="semibold-fonts  lh1"
-                [ngStyle]="{'color': projectDetailObj.previous_projects.prev_next_text_color, 'important': true}">
-                {{projectDetailObj.previous_projects.project}}
+              <p class="semibold-fonts  lh1" [ngStyle]="{
+                  color: isMobile ? '#000000' : projectDetailObj?.previous_projects?.prev_next_text_color
+                }">
+                {{projectDetailObj?.previous_projects?.project}}
               </p>
             </div>
             <div class="section-content">
-              <p class=" lh1"
-                [ngStyle]="{'color': projectDetailObj.previous_projects.prev_next_text_color, 'important': true}">
+              <p class=" lh1" [ngStyle]="{
+                  color: isMobile ? '#000000' : projectDetailObj?.previous_projects?.prev_next_text_color
+                }">
                 Previous Project
               </p>
             </div>
           </div>
         </a>
-        <a [routerLink]="'/' + projectDetailObj.previous_projects.slug + '/'" routerLinkActive="active"
+        <a [routerLink]="'/' + projectDetailObj?.next_project?.slug + '/'" routerLinkActive="active"
           class="next-div-wrapper relative">
 
           <div class="prev-nex-img-div">
-            <img [src]="projectDetailObj.next_project.featured_image_full + '&w=1080&h=1080&q=100'" alt="">
+            <img [src]="projectDetailObj?.next_project?.featured_image_full + '&w=1080&h=1080&q=100'" alt="">
             <div class="overlay-next-rev"></div>
           </div>
 
           <div class="next-abs-wrapper prev-next-abs-wrapper">
             <div class="section-subtitle2">
-              <p class="semibold-fonts lh1"
-                [ngStyle]="{'color': projectDetailObj.next_project.prev_next_text_color, 'important': true}">
+              <p class="semibold-fonts lh1" [ngStyle]="{
+                  color: isMobile ? '#000000' : projectDetailObj?.next_project?.prev_next_text_color
+                }">
                 {{ projectDetailObj.next_project.project }}
               </p>
             </div>
 
             <div class="section-content">
-              <p class="lh1"
-                [ngStyle]="{'color': projectDetailObj.next_project.prev_next_text_color, 'important': true}">
+              <p class="lh1" [ngStyle]="{
+                  color: isMobile ? '#000000' : projectDetailObj?.next_project?.prev_next_text_color
+                }">
                 Next Project
               </p>
             </div>
