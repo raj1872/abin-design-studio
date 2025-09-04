@@ -306,4 +306,30 @@
   }
 
 
+  .swiper-pagination {
+    margin-top: 5rem;
+  }
+
+  .swiper-horizontal>.swiper-pagination-bullets,
+  .swiper-pagination-bullets.swiper-pagination-horizontal,
+  .swiper-pagination-custom,
+  .swiper-pagination-fraction {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+
+
+  .abs-btn {
+    bottom: 6%;
+  }
+
+
+
+}
+
+@media only screen and (max-height: 700px) {
+  .news-swiper {
+    margin-top: 0;
+  }
 }

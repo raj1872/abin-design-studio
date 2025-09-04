@@ -1367,6 +1367,15 @@ button:focus-visible {
     width: 100%;
     margin: 0 auto;
   }
+
+  .swiper-horizontal>.swiper-pagination-bullets,
+  .swiper-pagination-bullets.swiper-pagination-horizontal,
+  .swiper-pagination-custom,
+  .swiper-pagination-fraction {
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+  }
 }
 
 @media only screen and (max-width: 1024px) {
